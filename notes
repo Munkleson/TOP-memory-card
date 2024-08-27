@@ -1,0 +1,9 @@
+https://pokeapi.co/api/v2/pokemon?limit=151
+
+Thoughts:
+
+App.jsx will be a component that renders the home page, where you can select the mode of the game. Once the mode of the game is selected, the game will render with a sub-component.
+
+App.jsx will host an effect which retrieves the pokemon data from the API. First will be the first 151. This will store the data in a state.
+
+The game will start based on a true/false state. Name yet to be determined.
