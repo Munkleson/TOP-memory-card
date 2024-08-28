@@ -7,6 +7,7 @@ function App() {
     const [pokemonData, setPokemonData] = useState([]);
     const [gameActive, setGameActive] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
+    const currentVersion = "0.1";
     const effectRan = useRef(false);
 
     useEffect(() => {
@@ -39,6 +40,10 @@ function App() {
         setGameActive(false);
     }
 
+    function localStorageCheck() {
+        console.log(localStorage);
+    }
+
     return (
         <div id="wholeBodyDiv">
             {!gameActive ? (
@@ -53,8 +58,9 @@ function App() {
                 </>
             ) : (
                 <>
+                    <button onClick={localStorageCheck}>Local storage check</button>
                     <button onClick={resetGame}>Reset game</button>
-                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} />
+                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion}/>
                 </>
             )}
         </div>
