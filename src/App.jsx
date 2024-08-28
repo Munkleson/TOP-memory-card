@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import getAllPokemonNamesAndImages from "./components/retrievePokemonDetails";
-import { whichPokemon } from "./components/gameModeFunctions";
+import { InitializeGame } from "./components/gameFunctions";
 
 function App() {
     const [pokemonData, setPokemonData] = useState([]);
@@ -29,23 +29,34 @@ function App() {
     function gameStart(event) {
         event.preventDefault();
         const playerNumberInput = document.querySelector(".gameLimitNumberInput").value;
-        const pokemonSelection = whichCards(pokemonData, playerNumberInput);
+        // const pokemonSelection = whichCards(pokemonData, playerNumberInput); // This should be in the actual game start components. Saved as a state there, since it would change on every new game
 
         setNumberOfPokemon(playerNumberInput);
         setGameActive(true);
     }
 
+    function resetGame() {
+        setGameActive(false);
+    }
+
     return (
-        <div>
-            {/* {!gameActive && ( */}
-            <>
-            <p>Enter a number between 6 and 20</p>
-                <form action="" onSubmit={gameStart}>
-                    <input type="number" min={6} max={20} className="gameLimitNumberInput" style={{width: "50px", height: "50px"}}/>
-                    <input type="submit" value={"Submit"} />
-                </form>
-            </>
-            {/* )} */}
+        <div id="wholeBodyDiv">
+            {!gameActive ? (
+                <>
+                    <div id="centerBallDiv">
+                        <p>Enter a number between 6 and 20</p>
+                        <form action="" onSubmit={gameStart}>
+                            <input type="number" min={6} max={151} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
+                            <input type="submit" value={"Start game"} />
+                        </form>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <button onClick={resetGame}>Reset game</button>
+                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} />
+                </>
+            )}
         </div>
     );
 }

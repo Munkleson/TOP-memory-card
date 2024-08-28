@@ -11,9 +11,17 @@ function whichPokemon(arrayOfPokemon, howManyPokemon){
     return indexArray.map(index => arrayOfPokemon[index]);
 };
 
+function shuffleArray(arrayOfPokemon){
+    const shuffledArray = [...arrayOfPokemon];
+    for (let index = 0; index < shuffledArray.length; index++) {
+        let randomIndex = Math.floor(Math.random() * (index + 1));
+        let temporaryValue = shuffledArray[index];
+        shuffledArray[index] = shuffledArray[randomIndex];
+        shuffledArray[randomIndex] = temporaryValue;
+    }
+    return shuffledArray;
+};
 
 
 
-
-
-export { whichPokemon };
+export { whichPokemon, shuffleArray };

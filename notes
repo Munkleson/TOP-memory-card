@@ -7,3 +7,8 @@ App.jsx will be a component that renders the home page, where you can select the
 App.jsx will host an effect which retrieves the pokemon data from the API. First will be the first 151. This will store the data in a state.
 
 The game will start based on a true/false state. Name yet to be determined.
+
+Maybe a scoring function based on the max number of cards. i.e. if you have 20 cards max, remembering 5 will get a score of 100. If you get all 20, that's 400 points. Conversely, if you have 10 cards max, you can only ever get 100 points.
+
+-   Not very fair, considering if you remember 10 cards out of 20 you get more than 10/10. It's harder, but not that much harder maybe?
+-   Some form of scaling algorithm would be good

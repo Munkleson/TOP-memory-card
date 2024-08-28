@@ -9,6 +9,7 @@ export default function getAllPokemonNamesAndImages(arrayOfPokemonObjects){
         return data.map((pokemonData, index) => ({
             name: arrayOfPokemonObjects[index].name,
             imageUrl: pokemonData.sprites.front_default,
+            id: index
         }));
     });
 }

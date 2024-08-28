@@ -1,6 +1,6 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
+  max-width: 1920px;
+  /* margin: 0 auto; */
   padding: 2rem;
   text-align: center;
 }
@@ -51,4 +51,32 @@ input {
   margin: 10px;
   text-align: center;
   font-size: 30px;
+}
+
+#centerBallDiv {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  border: 10px solid grey;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+#wholeBodyDiv {
+  width: 100vw;
+  height: 100vh;
+} */
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#wholeBodyDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
