@@ -65,7 +65,7 @@
 
 .pokemonCardFront:active {
     /* transform: scale(1.0); */
-    transition: 0.2s;
+    /* transition: 0.2s; */
 }
 
 .pokemonNameOnCard {
