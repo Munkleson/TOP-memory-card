@@ -30,9 +30,7 @@ function App() {
     function gameStart(event) {
         event.preventDefault();
         const playerNumberInput = document.querySelector(".gameLimitNumberInput").value;
-        // const pokemonSelection = whichCards(pokemonData, playerNumberInput); // This should be in the actual game start components. Saved as a state there, since it would change on every new game
-
-        setNumberOfPokemon(playerNumberInput);
+        setNumberOfPokemon(playerNumberInput * 1);
         setGameActive(true);
     }
 
@@ -40,15 +38,12 @@ function App() {
         setGameActive(false);
     }
 
-    function localStorageCheck() {
-        console.log(localStorage);
-    }
-
     return (
         <div id="wholeBodyDiv">
             {!gameActive ? (
                 <>
                     <div id="centerBallDiv">
+                        <p>How many different Pokémon would you like to play with?</p>
                         <p>Enter a number between 6 and 20</p>
                         <form action="" onSubmit={gameStart}>
                             <input type="number" min={6} max={151} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
@@ -58,7 +53,6 @@ function App() {
                 </>
             ) : (
                 <>
-                    <button onClick={localStorageCheck}>Local storage check</button>
                     <button onClick={resetGame}>Reset game</button>
                     <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion}/>
                 </>

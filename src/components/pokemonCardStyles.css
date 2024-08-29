@@ -1,22 +1,71 @@
 .cardHolder {
     max-width: 100vw;
     width: fit-content;
-    height: 80vh;
+    height: 50vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
 
-.pokemonCard {
-    width: 120px;
-    height: 180px;
-    background: white;
-    border: 2px black solid;
+.cardDiv {
+    position: relative;
+}
+
+.pokemonCardFront, .pokemonCardBack, .pokemonCardFrontFlipped, .pokemonCardBackFlipped, .cardDiv{
+    width: 128px;
+    height: 177px;
     border-radius: 10px;
     margin: 10px;
+    transform-origin: center;
+}
+
+.pokemonCardFront, .pokemonCardBack {
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.7s ease;
+}
+
+.pokemonCardFront, .pokemonCardFrontFlipped {
+    background: white;
+    border: 2px black solid;
 
     background-repeat: no-repeat;
     background-position: center;
     background-size: 110%;
+    box-sizing: border-box;
+
+    /* transition: 0.3s ease-in-out; */
+
+}
+
+.pokemonCardBack, .pokemonCardBackFlipped {
+    background-image: url(./images/pokemonCardBack.webp);
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    transform: rotateY(180deg);
+}
+
+.pokemonCardFrontFlipped {
+    transform: rotateY(180deg);
+}
+
+.pokemonCardBackFlipped {
+    transform: rotateY(0deg);
+}
+
+.pokemonCardFront:hover {
+    background-color: grey;
+    /* transform: scale(1.2); */
+    /* transition: 0.3s; */
+}
+
+.pokemonCardFront:active {
+    /* transform: scale(1.0); */
+    transition: 0.2s;
+}
+
+.pokemonNameOnCard {
+    margin-top: 5px;
 }

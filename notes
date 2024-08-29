@@ -12,3 +12,21 @@ Maybe a scoring function based on the max number of cards. i.e. if you have 20 c
 
 -   Not very fair, considering if you remember 10 cards out of 20 you get more than 10/10. It's harder, but not that much harder maybe?
 -   Some form of scaling algorithm would be good
+-   Point scaling needs to be exponential. Random selection at higher number of cards means you are not likely to repeat, so it'll be easier to get points if it was just based off max number of cards. 
+-   Blitz mode, or just make every game timed. Gotta be careful with algorithm too to not make it imbalanced
+
+Difficulty levels
+-   Easy
+-   Medium
+-   Hard
+-   Insane
+-   Custom - No high scores for custom?
+etc.
+Maybe a really hard mode would be no names?
+
+Version control
+-   Updating to a new version should reset all high scores
+-   This should only be for if the scoring system or something similar changes
+-   Not much of a hurry to implement this
+
+High score section should be position absolute

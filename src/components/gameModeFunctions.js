@@ -22,6 +22,4 @@ function shuffleArray(arrayOfPokemon){
     return shuffledArray;
 };
 
-
-
 export { whichPokemon, shuffleArray };

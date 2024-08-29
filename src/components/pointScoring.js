@@ -1,10 +1,10 @@
-function storeInLocalStorage(points, version) {
-    localStorage.highScore ? (points > localStorage.highScore ? localStorage.highScore = points : null) : localStorage.highScore = points;
+function storeInLocalStorage(points, version, numberOfPokemon) {
+    localStorage[numberOfPokemon] ? (points > localStorage[numberOfPokemon] ? localStorage[numberOfPokemon] = points : null) : localStorage[numberOfPokemon] = points;
     localStorage.version = version;
 }
 
-function getHighScore() {
-    return localStorage.highScore ? localStorage.highScore : 0;
+function getHighScore(numberOfPokemon) {
+    return localStorage[numberOfPokemon] ? localStorage[numberOfPokemon] : 0;
 }
 
 export { storeInLocalStorage, getHighScore };
