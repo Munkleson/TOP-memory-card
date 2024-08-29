@@ -24,11 +24,13 @@ a:hover {
 
 body {
   margin: 0;
+  position: relative;
   display: flex;
+  flex-direction: column;
   place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #ff002b 50%, #ffffff 50%);
+  width: 100vw;
+  height: 100vh;
+  scrollbar-gutter: stable;
 }
 
 h1 {
@@ -66,4 +68,12 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+#backgroundColor {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #ff002b 50%, #ffffff 50%);
+  z-index: 0;
 }

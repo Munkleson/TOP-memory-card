@@ -1,0 +1,10 @@
+.pokemonLogo {
+    background-image: url(../images/pokemonLogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 0px;
+    z-index: 101;
+    width: 1024px;
+    height: 221px;
+}

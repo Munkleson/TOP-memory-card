@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import getAllPokemonNamesAndImages from "./components/retrievePokemonDetails";
+import getAllPokemonNamesAndImages from "./components/subcomponents/retrievePokemonDetails";
 import { InitializeGame } from "./components/gameFunctions";
+import "./components/css_files/miscStyling.css";
 
 function App() {
     const [pokemonData, setPokemonData] = useState([]);
@@ -30,8 +31,10 @@ function App() {
     function gameStart(event) {
         event.preventDefault();
         const playerNumberInput = document.querySelector(".gameLimitNumberInput").value;
-        setNumberOfPokemon(playerNumberInput * 1);
-        setGameActive(true);
+        if (playerNumberInput){
+            setNumberOfPokemon(playerNumberInput * 1);
+            setGameActive(true);
+        }
     }
 
     function resetGame() {
@@ -39,25 +42,29 @@ function App() {
     }
 
     return (
-        <div id="wholeBodyDiv">
+        <>
             {!gameActive ? (
                 <>
-                    <div id="centerBallDiv">
-                        <p>How many different Pokémon would you like to play with?</p>
-                        <p>Enter a number between 6 and 20</p>
-                        <form action="" onSubmit={gameStart}>
-                            <input type="number" min={6} max={151} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
-                            <input type="submit" value={"Start game"} />
-                        </form>
+                    <div id="wholeBodyDiv">
+                        <div className="pokemonLogo"></div>
+                        <div id="centerBallDiv">
+                            <p>How many different Pokémon would you like to play with?</p>
+                            <p>Enter a number between 6 and 20</p>
+                            <form action="" onSubmit={gameStart}>
+                                <input type="number" min={6} max={20} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
+                                <input type="submit" value={"Start game"}/>
+                            </form>
+                        </div>
                     </div>
                 </>
             ) : (
                 <>
-                    <button onClick={resetGame}>Reset game</button>
-                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion}/>
+                    <div id="gameBodyDiv">
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion} resetGame={resetGame} />
+                    </div>
                 </>
             )}
-        </div>
+        </>
     );
 }
 

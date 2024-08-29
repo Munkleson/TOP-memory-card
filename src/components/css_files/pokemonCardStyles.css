@@ -1,27 +1,33 @@
 .cardHolder {
-    max-width: 100vw;
+    max-width: 100%;
     width: fit-content;
-    height: 50vh;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
+    overflow: auto;
     justify-content: center;
     align-items: center;
 }
 
 .cardDiv {
     position: relative;
+    margin: 10px;
 }
 
 .pokemonCardFront, .pokemonCardBack, .pokemonCardFrontFlipped, .pokemonCardBackFlipped, .cardDiv{
-    width: 128px;
-    height: 177px;
+    /* base width 128 */
+    --cardWidth: 200px;
+    --cardHeight: calc(var(--cardWidth) * 1.3828125);
+    width: var(--cardWidth);
+    height: var(--cardHeight);
     border-radius: 10px;
-    margin: 10px;
     transform-origin: center;
 }
 
 .pokemonCardFront, .pokemonCardBack {
     position: absolute;
+    top: 0;
+    left: 0;
     backface-visibility: hidden;
     transition: transform 0.7s ease;
 }
@@ -29,18 +35,14 @@
 .pokemonCardFront, .pokemonCardFrontFlipped {
     background: white;
     border: 2px black solid;
-
     background-repeat: no-repeat;
     background-position: center;
     background-size: 110%;
     box-sizing: border-box;
-
-    /* transition: 0.3s ease-in-out; */
-
 }
 
 .pokemonCardBack, .pokemonCardBackFlipped {
-    background-image: url(./images/pokemonCardBack.webp);
+    background-image: url(../images/pokemonCardBack.webp);
     background-size: 100%;
     background-repeat: no-repeat;
 
@@ -68,4 +70,5 @@
 
 .pokemonNameOnCard {
     margin-top: 5px;
+    font-size: 20px;
 }

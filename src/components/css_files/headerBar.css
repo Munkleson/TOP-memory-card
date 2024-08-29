@@ -1,0 +1,36 @@
+#headerBar {
+    top: 0px;
+    position: absolute;
+    width: 100vw;
+    height: 50px;
+    background-color: blue;
+    z-index: 100;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    color: white;
+}
+
+.headerPokemonLogo {
+    --headerLogoWidth: calc(var(--headerLogoHeight) * 4.633484);
+    --headerLogoHeight: 50px;
+    background-image: url(../images/pokemonLogo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: var(--headerLogoWidth);
+    height: var(--headerLogoHeight);
+}
+
+.headerButtons {
+    padding: 5px;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.headerButtons:hover {
+    background-color: rgb(212, 208, 208);
+    transition: 0.3s;
+}

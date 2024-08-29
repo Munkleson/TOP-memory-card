@@ -1,0 +1,28 @@
+@keyframes grow {
+    from {
+        transform: scale(0.01);
+    }
+    to {
+        transform: scale(1.0);
+    }
+}
+
+#topRelativeBar {
+    width: 100vw;
+    position: relative;
+    top: 0px;
+}
+
+.endingScreen {
+    width: 1000px;
+    height: 500px;
+    position: fixed;
+    z-index: 101;
+    top: 25%;
+    left: 25%;
+    /* transform: translate(-50%, -50%); */
+    background-color: white;
+    color: black;
+    border: 10px black solid;
+    animation: grow 0.5s ease-out forwards;
+}
