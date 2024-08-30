@@ -15,6 +15,8 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     const [currentlyFlipping, setFlippingStatus] = useState(false)
     const [losingCard, setLosingCard] = useState(null);
     const [gameResult, setGameResult] = useState("");
+    const holderWidth = cardHolderWidth(numberOfPokemon);
+    console.log(holderWidth)
 
     function cardClick(id) {
         if (!gameOver) {
@@ -74,23 +76,26 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 <br />
             { 
             !currentlyFlipping ? 
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} losingCard={losingCard}/>
+            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} losingCard={losingCard} holderWidth={holderWidth}/>
             : 
-            <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick}/> 
+            <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
             }
         </>
     );
 }
 
-function GameDisplay({ currentGamePokemon, cardClick, losingCard }) {
+function GameDisplay({ currentGamePokemon, cardClick, losingCard, holderWidth }) {
     return (
-        <div className="cardHolder">
-            {currentGamePokemon.map((element) => {
-                return (
-                    <CardMap key={element.id} elementId={element.id} losingCard={losingCard} cardClick={cardClick} element={element}/>
-                );
-            })}
+        <div className="mainGameBodyDiv">
+            <div className="cardHolder" style={{paddingLeft: `${holderWidth}px`, paddingRight: `${holderWidth}px`}}>
+                {currentGamePokemon.map((element) => {
+                    return (
+                        <CardMap key={element.id} elementId={element.id} losingCard={losingCard} cardClick={cardClick} element={element}/>
+                    );
+                })}
+            </div>
         </div>
+
     );
 }
 
@@ -111,9 +116,9 @@ function CardMap ({ key, losingCard, cardClick, element }){
     );
 };
 
-function CardsInMotion({ currentGamePokemon, cardClick }){
+function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
     return (
-        <div className="cardHolder">
+        <div className="cardHolder" style={{paddingLeft: `${holderWidth}px`, paddingRight: `${holderWidth}px`}}>
             {currentGamePokemon.map((element) => {
                 return (
                     <div className="cardDiv" key={element.id}>
@@ -127,5 +132,14 @@ function CardsInMotion({ currentGamePokemon, cardClick }){
         </div>
     )
 }
+
+function cardHolderWidth(numberOfPokemon) {
+    const vw = window.innerWidth;
+    if (numberOfPokemon > 7){
+        return (vw - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2;
+    } else {
+        return 0;
+    }
+};
 
 export { InitializeGame };

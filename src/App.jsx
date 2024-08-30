@@ -48,12 +48,14 @@ function App() {
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
-                            <p>How many different Pokémon would you like to play with?</p>
-                            <p>Enter a number between 6 and 20</p>
+                            <br />
+                            <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice!</p>
+                            <p>You can choose between 6 and 21 different Pokémon to play with.</p>
                             <form action="" onSubmit={gameStart}>
-                                <input type="number" min={6} max={20} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
+                                <input type="number" min={6} max={21} className="gameLimitNumberInput" style={{ width: "50px", height: "50px" }} />
                                 <input type="submit" value={"Start game"}/>
                             </form>
+                            <p>How many will you be able to remember?</p>
                         </div>
                     </div>
                 </>
