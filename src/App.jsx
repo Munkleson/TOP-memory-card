@@ -8,6 +8,7 @@ function App() {
     const [pokemonData, setPokemonData] = useState([]);
     const [gameActive, setGameActive] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
+    const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
     const currentVersion = "0.1";
     const effectRan = useRef(false);
 
@@ -37,8 +38,13 @@ function App() {
         }
     }
 
+    function timedOrNot() {
+        !timedCheckBoxTicked ? setTimeCheckBoxState(true) : setTimeCheckBoxState(false);
+    }
+
     function resetGame() {
         setGameActive(false);
+        setTimeCheckBoxState(false);
     }
 
     return (
@@ -54,15 +60,20 @@ function App() {
                             <form action="" onSubmit={gameStart}>
                                 <input type="number" min={6} max={21} className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} />
                                 <input type="submit" value={"Start game"}/>
+                                <div className="timedModeDiv">
+                                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot}/>
+                                    <span className="timedModeText">Timed mode (Optional)</span>
+                                </div>
                             </form>
-                            <p>How many will you be able to remember?</p>
+                            <br />
+                            <strong>How many will you be able to remember?</strong>
                         </div>
                     </div>
                 </>
             ) : (
                 <>
                     <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion} resetGame={resetGame} />
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked}/>
                     </div>
                 </>
             )}

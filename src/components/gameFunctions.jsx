@@ -3,19 +3,22 @@ import { whichPokemon, shuffleArray } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { flipCards, flipCardsBackToNormal } from "./subcomponents/cardFlipping";
 import "./css_files/pokemonCardStyles.css";
-import HeaderBar from "./headerBar";
+import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
 
-function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGame }) {
+function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGame, timed }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon));
     const [gameOver, setGameOver] = useState(false);
     const [currentlyFlipping, setFlippingStatus] = useState(false)
-    const [losingCard, setLosingCard] = useState(null);
+    const [finalCard, setFinalCard] = useState(null); //// the card that ends the game, either in a win or a loss
     const [gameResult, setGameResult] = useState("");
-    const [viewWidth, setViewWidth] = useState(window.innerWidth)
+    const [gameActive, setGameActive] = useState(false);
+    const [cardClickedCheck, setCardClickedCheck] = useState(false);
+
+    const [viewWidth, setViewWidth] = useState(window.innerWidth);
     const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth);
 
     useEffect(() => { //// This is so the changes in window size will still evenly-ish distribute the amount of cards in each row. Edge case (like when opening console and restarting game then)
@@ -26,11 +29,13 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         return () => {
             window.removeEventListener("resize", windowSizeHandler);
         }
-    }, [])
+    }, []);
 
     function cardClick(id) {
         if (!gameOver) {
             //// checks if the same pokemon has been clicked already
+            setGameActive(true);
+            setCardClickedCheck(true);
             if (!clickedArray.includes(id)) {
                 setClickedArray([...clickedArray, id]);
                 const updatedPoints = currentScore + 1;
@@ -39,33 +44,34 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 if (updatedPoints > highScore) {
                     setHighScore(updatedPoints);
                     storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon);
-                }
+                };
                 //// flips cards only if the game is not over
                 if (updatedPoints !== numberOfPokemon){
                     flipCards();
-                }
-                //// this setTimeout is needed so it will rerender with a shuffled array of pokemon
+                };
+                //// victory function
+                if (updatedPoints === numberOfPokemon){
+                    setFinalCard(id);
+                    setGameResult("win");
+                    setGameOver(true);
+                    setFlippingStatus(false);
+                    setGameActive(false);
+                };
+                //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
                 setTimeout(() => {
-                    if (updatedPoints === numberOfPokemon){ /// Winning function - To be continued
-                        setGameOver(true);
-                        setFlippingStatus(false);
-                        setGameResult("win");
-                    } else {
+                    if (updatedPoints !== numberOfPokemon){
                         setFlippingStatus(true);
                         setCurrentGamePokemon(shuffleArray(currentGamePokemon))
                         //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
                         setTimeout(() => {
                             flipCardsBackToNormal();
                         }, 100);
-                    }
-                }, 600)
-            } else { //// game lose functionality - To be continued
-                setGameOver(true);
-                setFlippingStatus(false)
-                setLosingCard(id);
-                setGameResult("loss")
-            }
-        }
+                    };
+                }, 600) //// this value is based on the transition time set in the CSS files. A bit unsynced but works
+            } else { //// game lose functionality
+                gameOverFunction(id);
+            };
+        };
     };
 
     function replayGame() {
@@ -74,8 +80,20 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setCurrentScore(0);
         setGameOver(false);
         setFlippingStatus(false);
-        setLosingCard(null);
+        setFinalCard(null);
         setGameResult(false);
+    };
+
+    function gameOverFunction(id){
+        setGameOver(true);
+        setFlippingStatus(false);
+        setFinalCard(id);
+        setGameResult("loss");
+        setGameActive(false);
+    }
+
+    function setCardClickedCheckFunction(){
+        setCardClickedCheck(false);
     }
 
     return (
@@ -86,28 +104,29 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 <br />
             { 
             !currentlyFlipping ? 
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} losingCard={losingCard} holderWidth={holderWidth}/>
+            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} holderWidth={holderWidth} gameResult={gameResult}/>
             : 
             <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
             }
+            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction}/>
         </>
     );
 }
 
-function GameDisplay({ currentGamePokemon, cardClick, losingCard, holderWidth }) {
+function GameDisplay({ currentGamePokemon, cardClick, finalCard, holderWidth, gameResult }) {
     return (
         <div className="mainGameBodyDiv">
             <div className="cardHolder" style={{paddingLeft: `${holderWidth}px`, paddingRight: `${holderWidth}px`}}>
                 {currentGamePokemon.map((element) => {
                     return (
-                        <CardMap key={element.id} elementId={element.id} losingCard={losingCard} cardClick={cardClick} element={element}/>
+                        <CardMap key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult}/>
                     );
                 })}
             </div>
         </div>
 
     );
-}
+};
 
 function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
     return (
@@ -126,15 +145,21 @@ function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
             </div>
         </div>
     )
-}
+};
 
-function CardMap ({ key, losingCard, cardClick, element }){
+function CardMap ({ key, finalCard, cardClick, element, gameResult }){
     return (
         <div className="cardDiv" key={key}>
-            { losingCard === element.id ?
+            { finalCard === element.id ? (
+                gameResult === "win" ? 
+                <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`, backgroundColor: 'green'}}>
+                    <p className="pokemonNameOnCard">{element.name}</p> 
+                </div>
+                :
                 <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`, backgroundColor: 'red'}}>
                     <p className="pokemonNameOnCard">{element.name}</p> 
                 </div>
+            )
             : 
                 <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`}}>
                     <p className="pokemonNameOnCard">{element.name}</p> 

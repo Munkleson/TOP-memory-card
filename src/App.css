@@ -122,3 +122,18 @@ body {
   width: 200px;
   height: 40px;
 }
+
+.timedModeDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timedModeInput {
+  width: 20px;
+  height: 20px;
+}
+
+.timedModeText {
+  font-size: 20px;
+}
