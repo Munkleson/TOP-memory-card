@@ -10,7 +10,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
-    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon));
+    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed));
     const [gameOver, setGameOver] = useState(false);
     const [currentlyFlipping, setFlippingStatus] = useState(false)
     const [finalCard, setFinalCard] = useState(null); //// the card that ends the game, either in a win or a loss
@@ -43,7 +43,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 //// high score functionality
                 if (updatedPoints > highScore) {
                     setHighScore(updatedPoints);
-                    storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon);
+                    storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon, timed);
                 };
                 //// flips cards only if the game is not over
                 if (updatedPoints !== numberOfPokemon){
@@ -51,11 +51,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 };
                 //// victory function
                 if (updatedPoints === numberOfPokemon){
-                    setFinalCard(id);
-                    setGameResult("win");
-                    setGameOver(true);
-                    setFlippingStatus(false);
-                    setGameActive(false);
+                    victoryFunction(id);
                 };
                 //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
                 setTimeout(() => {
@@ -92,7 +88,15 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setGameActive(false);
     }
 
-    function setCardClickedCheckFunction(){
+    function victoryFunction(id){
+        setFinalCard(id);
+        setGameResult("win");
+        setGameOver(true);
+        setFlippingStatus(false);
+        setGameActive(false);
+    }
+
+    function setCardClickedCheckFunction(){ //// For the timer bar. Checks when the card has been clicked and makes it false after it has been clicked. Done this way for re-rendering purposes and passing down the clicked check as a prop to the timer bar.
         setCardClickedCheck(false);
     }
 
