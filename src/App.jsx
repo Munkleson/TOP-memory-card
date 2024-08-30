@@ -9,8 +9,13 @@ function App() {
     const [gameActive, setGameActive] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
-    const currentVersion = "0.1";
+    const currentVersion = "V0.1";
     const effectRan = useRef(false);
+
+    // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
+    //     localStorage.version !== currentVersion && localStorage.clear();
+    // }
+    // localStorageVersionControl();
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -32,7 +37,7 @@ function App() {
     function gameStart(event) {
         event.preventDefault();
         const playerNumberInput = document.querySelector(".gameLimitNumberInput").value;
-        if (playerNumberInput){
+        if (playerNumberInput) {
             setNumberOfPokemon(playerNumberInput * 1);
             setGameActive(true);
         }
@@ -59,9 +64,9 @@ function App() {
                             <p>You can choose between 6 and 21 different Pokémon to play with.</p>
                             <form action="" onSubmit={gameStart}>
                                 <input type="number" min={6} max={21} className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} />
-                                <input type="submit" value={"Start game"}/>
+                                <input type="submit" value={"Start game"} />
                                 <div className="timedModeDiv">
-                                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot}/>
+                                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot} />
                                     <span className="timedModeText">Timed mode (Optional)</span>
                                 </div>
                             </form>
@@ -73,7 +78,7 @@ function App() {
             ) : (
                 <>
                     <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked}/>
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} />
                     </div>
                 </>
             )}

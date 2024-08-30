@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import "./css_files/gameSystems.css"
 
@@ -13,7 +13,10 @@ function ConfettiComponent() {
 
 function EndingScreen({ gameResult, replayGame }){
     const [endScreenActive, setEndScreenActive] = useState(false);
-    const timeoutTime = (gameResult === "win") ? 1500 : 1000;
+    const [lossFlashActive, setLossFlashActiveState] = useState(false);
+    const [dummyCheck, setDummyCheck] = useState(false);
+
+    const timeoutTime = (gameResult === "win") ? 1500 : 2500;
     let result = "";
     switch (gameResult) {
         case "win":
@@ -28,9 +31,29 @@ function EndingScreen({ gameResult, replayGame }){
             setEndScreenActive(true);
         }, timeoutTime);
     }
+
+    useEffect(() => {
+        if (gameResult === "loss" && !lossFlashActive && !dummyCheck){
+            setLossFlashActiveState(true);
+            setDummyCheck(true);
+            setTimeout(() => {
+                setLossFlashActiveState(false);
+            }, 3000);
+        }
+    }, []);
+
+    // if (gameResult === "loss" && !lossFlashActive && !dummyCheck){
+    //     setLossFlashActiveState(true);
+    //     setDummyCheck(true);
+    //     setTimeout(() => {
+    //         setLossFlashActiveState(false);
+    //     }, 1500);
+    // }
+
     return (
         <>
-            { gameResult === "win" && <ConfettiComponent /> };
+            { gameResult === "win" && <ConfettiComponent /> }
+            { (gameResult === "loss" && lossFlashActive) && <div className="redFlashScreen"></div>}
             { endScreenActive && <EndScreen gameResult={result} replayGame={replayGame} />}
         </>
     )

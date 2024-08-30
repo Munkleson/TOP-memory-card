@@ -17,6 +17,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     const [gameResult, setGameResult] = useState("");
     const [gameActive, setGameActive] = useState(false);
     const [cardClickedCheck, setCardClickedCheck] = useState(false);
+    const [allowedToClick, setClickAllowance] = useState(true); /// Remove this if I want people to stop spamming click/autoclickers
 
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
     const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth);
@@ -32,42 +33,46 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     }, []);
 
     function cardClick(id) {
-        if (!gameOver) {
-            //// checks if the same pokemon has been clicked already
-            setGameActive(true);
-            setCardClickedCheck(true);
-            if (!clickedArray.includes(id)) {
-                setClickedArray([...clickedArray, id]);
-                const updatedPoints = currentScore + 1;
-                setCurrentScore(updatedPoints);
-                //// high score functionality
-                if (updatedPoints > highScore) {
-                    setHighScore(updatedPoints);
-                    storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon, timed);
-                };
-                //// flips cards only if the game is not over
-                if (updatedPoints !== numberOfPokemon){
-                    flipCards();
-                };
-                //// victory function
-                if (updatedPoints === numberOfPokemon){
-                    victoryFunction(id);
-                };
-                //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
-                setTimeout(() => {
-                    if (updatedPoints !== numberOfPokemon){
-                        setFlippingStatus(true);
-                        setCurrentGamePokemon(shuffleArray(currentGamePokemon))
-                        //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
-                        setTimeout(() => {
-                            flipCardsBackToNormal();
-                        }, 100);
+        if (allowedToClick){ /// Remove this if I want people to stop spamming click/autoclickers
+            if (!gameOver) {
+                //// checks if the same pokemon has been clicked already
+                setGameActive(true);
+                setCardClickedCheck(true);
+                setClickAllowance(false);
+                if (!clickedArray.includes(id)) {
+                    setClickedArray([...clickedArray, id]);
+                    const updatedPoints = currentScore + 1;
+                    setCurrentScore(updatedPoints);
+                    //// high score functionality
+                    if (updatedPoints > highScore) {
+                        setHighScore(updatedPoints);
+                        storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon, timed);
                     };
-                }, 600) //// this value is based on the transition time set in the CSS files. A bit unsynced but works
-            } else { //// game lose functionality
-                gameOverFunction(id);
+                    //// flips cards only if the game is not over
+                    if (updatedPoints !== numberOfPokemon){
+                        flipCards();
+                    };
+                    //// victory function
+                    if (updatedPoints === numberOfPokemon){
+                        victoryFunction(id);
+                    };
+                    //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
+                    setTimeout(() => {
+                        if (updatedPoints !== numberOfPokemon){
+                            setFlippingStatus(true);
+                            setCurrentGamePokemon(shuffleArray(currentGamePokemon))
+                            //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
+                            setTimeout(() => {
+                                flipCardsBackToNormal();
+                            }, 100);
+                        };
+                        setClickAllowance(true); //// This is done with a set timer so people can only click once the cards have turned sufficiently. Can set a setTimeout within this function to further extend that time so animations complete?
+                    }, 700) //// this value is based on the transition time set in the CSS files. A bit unsynced but works
+                } else { //// game lose functionality
+                    gameOverFunction(id);
+                };
             };
-        };
+        }
     };
 
     function replayGame() {
@@ -78,13 +83,15 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setFlippingStatus(false);
         setFinalCard(null);
         setGameResult(false);
+        setGameActive(false);
+        setClickAllowance(true); /// Remove this if I want people to stop spamming click/autoclickers
     };
 
     function gameOverFunction(id){
-        setGameOver(true);
-        setFlippingStatus(false);
         setFinalCard(id);
         setGameResult("loss");
+        setGameOver(true);
+        setFlippingStatus(false);
         setGameActive(false);
     }
 
@@ -96,7 +103,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setGameActive(false);
     }
 
-    function setCardClickedCheckFunction(){ //// For the timer bar. Checks when the card has been clicked and makes it false after it has been clicked. Done this way for re-rendering purposes and passing down the clicked check as a prop to the timer bar.
+    function setCardClickedCheckFunction() { //// For the timer bar. Checks when the card has been clicked and makes it false after it has been clicked. Done this way for re-rendering purposes and passing down the clicked check as a prop to the timer bar.
         setCardClickedCheck(false);
     }
 
@@ -107,12 +114,13 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
             { gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame}/> }
                 <br />
             { 
-            !currentlyFlipping ? 
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} holderWidth={holderWidth} gameResult={gameResult}/>
-            : 
-            <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
+                !currentlyFlipping ? 
+                <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} holderWidth={holderWidth} gameResult={gameResult}/>
+                : 
+                <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
             }
-            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction}/>
+    const [footerCardClick, setFooterClickCheck] = useState(false);
+    <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} />
         </>
     );
 }

@@ -18,7 +18,13 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
 }
 
 function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction }) {
-    return <div className="footerBar">{timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} />}</div>;
+    return (
+        <>
+            <div className="footerBar" style={{ backgroundColor: "white" }}>
+                {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction}/>}
+            </div>
+        </>
+    );
 }
 
 function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction }) {
@@ -75,7 +81,12 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
 
     return (
         <>
-            <div className="timerBar" style={{ marginRight: marginAmount }}></div>
+            { timerBarActive ? 
+                <div className="timerBar" style={{ marginRight: marginAmount, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div>
+                :
+                <div className="timerBar" style={{ marginRight: marginAmount }}></div>
+            }
+            
         </>
     );
 }
