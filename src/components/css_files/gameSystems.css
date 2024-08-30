@@ -14,15 +14,95 @@
 }
 
 .endingScreen {
-    width: 1000px;
-    height: 500px;
+    --endDimensions: 600px; 
+    width: var(--endDimensions);
+    height: var(--endDimensions);
     position: fixed;
     z-index: 101;
-    top: 25%;
-    left: 25%;
+    top: 50%;
+    left: 50%;
     /* transform: translate(-50%, -50%); */
+    /* margin-left: calc(-(var(--endDimensions) / 2)); */ 
+    /* margin-top: calc(-(var(--endDimensions) / 2)); */
+    margin-left: -300px;
+    margin-top: -300px;
     background-color: white;
     color: black;
-    border: 10px black solid;
+    border: 20px black solid;
+    box-shadow: 0px 0px 50px grey;
     animation: grow 0.5s ease-out forwards;
+    border-radius: 50%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.endBoxTop {
+    height: 47.5%;
+    width: 100%;
+    background-color: red;
+}
+
+.endBoxMiddle {
+    height: 5%;
+    width: 100%;
+    /* background-color: rgb(167, 165, 165) ; */
+    background-color: black;
+}
+
+.endBoxBottom {
+    height: 47.5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top: 25%;
+}
+
+.endBoxMiddleBall {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: white;
+    border: 20px black solid;
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 102;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultDiv {
+    font-size: 35px;
+}
+
+.playAgainButton {
+    /* position: fixed; */
+    /* top: 50%; */
+    /* left: 50%; */
+    height: 50px;
+    background-color: rgb(177, 175, 175);
+    transition: all 0.3s ease-in-out;
+    border: none;
+}
+
+.playAgainButton:hover {
+    background-color: rgb(148, 147, 147);
+    transform: scale(1.2, 1.2);
+    border: none;
+    font-size: 1.1em;
+    transition: all 0.3s ease-in-out;
+}
+
+.playAgainButton:focus {
+    outline: none;
+}
+
+.playAgainButton:active {
+    outline: none;
+    transform: translate(0px, 10px) scale(1.2, 1.2);
+    transition: all 0.05s ease-in-out;
 }

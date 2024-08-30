@@ -4,10 +4,11 @@ export default function HeaderBar({ resetGame, replayGame, highScore, currentSco
     return (
         <header id="headerBar">
             <button onClick={resetGame} className="headerButtons">Back to home</button>
-            <button onClick={replayGame} className="headerButtons">Play again</button>
+            <button onClick={replayGame} className="headerButtons">Restart game</button>
             <div className="headerPokemonLogo"></div>
-            <p>High score for current mode: {highScore}</p>
             <p>Current score: {currentScore}</p>
+            <p>High score for current mode: {highScore}</p>
         </header>
     );
 }
+ 

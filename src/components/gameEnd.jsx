@@ -11,9 +11,18 @@ function ConfettiComponent() {
     )
 };
 
-function EndingScreen({ gameResult }){
+function EndingScreen({ gameResult, replayGame }){
     const [endScreenActive, setEndScreenActive] = useState(false);
-    const timeoutTime = (gameResult === "win") ? 2500 : 1000;
+    const timeoutTime = (gameResult === "win") ? 1500 : 1000;
+    let result = "";
+    switch (gameResult) {
+        case "win":
+            result = "You win";
+            break;
+        case "loss":
+            result = "You lose";
+            break
+    }
     if (!endScreenActive){
         setTimeout(() => {
             setEndScreenActive(true);
@@ -22,29 +31,24 @@ function EndingScreen({ gameResult }){
     return (
         <>
             { gameResult === "win" && <ConfettiComponent /> };
-            { endScreenActive && ((gameResult === "win") ?
-                <VictoryScreen />
-                :
-                <LosingScreen />)
-            }
+            { endScreenActive && <EndScreen gameResult={result} replayGame={replayGame} />}
         </>
     )
 }
 
-function VictoryScreen(){
+function EndScreen({ gameResult, replayGame }) {
     return (
         <div className="endingScreen">
-            You win
+            <div className="endBoxTop"></div>
+            <div className="endBoxMiddle"></div>
+            <div className="endBoxBottom">
+                <button onClick={replayGame} className="playAgainButton">Play again</button>
+            </div>
+            <div className="endBoxMiddleBall">
+                <p className="resultDiv">{gameResult}</p>
+            </div>
         </div>
-    )
-}
-
-function LosingScreen(){
-    return (
-        <div className="endingScreen">
-            You lose
-        </div>
-    )
-}
+    );
+};
 
 export { EndingScreen }

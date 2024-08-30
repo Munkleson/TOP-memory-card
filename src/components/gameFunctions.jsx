@@ -70,7 +70,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         <>
             <div id="topRelativeBar"></div>
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} resetGame={resetGame}/>
-            { gameOver && <EndingScreen gameResult={gameResult} /> }
+            { gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame}/> }
                 <br />
             { 
             !currentlyFlipping ? 
