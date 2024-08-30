@@ -33,6 +33,7 @@
     left: 0;
     backface-visibility: hidden;
     transition: transform 0.7s ease;
+    box-sizing: border-box;
 }
 
 .pokemonCardFront, .pokemonCardFrontFlipped {
@@ -40,7 +41,7 @@
     border: 2px black solid;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 110%;
+    background-size: 100%;
     box-sizing: border-box;
 }
 
@@ -48,8 +49,8 @@
     background-image: url(../images/pokemonCardBack.webp);
     background-size: 100%;
     background-repeat: no-repeat;
-
     transform: rotateY(180deg);
+    box-sizing: border-box;
 }
 
 .pokemonCardFrontFlipped {

@@ -117,3 +117,8 @@ body {
 .ballInstructions {
   width: 350px;
 }
+
+.gameLimitNumberInput {
+  width: 200px;
+  height: 40px;
+}

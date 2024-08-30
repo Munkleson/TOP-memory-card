@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { whichPokemon, shuffleArray } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { flipCards, flipCardsBackToNormal } from "./subcomponents/cardFlipping";
@@ -15,8 +15,18 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     const [currentlyFlipping, setFlippingStatus] = useState(false)
     const [losingCard, setLosingCard] = useState(null);
     const [gameResult, setGameResult] = useState("");
-    const holderWidth = cardHolderWidth(numberOfPokemon);
-    console.log(holderWidth)
+    const [viewWidth, setViewWidth] = useState(window.innerWidth)
+    const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth);
+
+    useEffect(() => { //// This is so the changes in window size will still evenly-ish distribute the amount of cards in each row. Edge case (like when opening console and restarting game then)
+        const windowSizeHandler = () => {
+            setViewWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", windowSizeHandler);
+        return () => {
+            window.removeEventListener("resize", windowSizeHandler);
+        }
+    }, [])
 
     function cardClick(id) {
         if (!gameOver) {
@@ -99,6 +109,25 @@ function GameDisplay({ currentGamePokemon, cardClick, losingCard, holderWidth })
     );
 }
 
+function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
+    return (
+        <div className="mainGameBodyDiv">
+            <div className="cardHolder" style={{paddingLeft: `${holderWidth}px`, paddingRight: `${holderWidth}px`}}>
+                {currentGamePokemon.map((element) => {
+                    return (
+                        <div className="cardDiv" key={element.id}>
+                            <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront pokemonCardFrontFlipped" style={{ backgroundImage: `url(${element.imageUrl})` }}>
+                                <p className="pokemonNameOnCard">{element.name}</p>
+                            </div>
+                            <div className="pokemonCardBack pokemonCardBackFlipped"></div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}
+
 function CardMap ({ key, losingCard, cardClick, element }){
     return (
         <div className="cardDiv" key={key}>
@@ -116,27 +145,9 @@ function CardMap ({ key, losingCard, cardClick, element }){
     );
 };
 
-function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
-    return (
-        <div className="cardHolder" style={{paddingLeft: `${holderWidth}px`, paddingRight: `${holderWidth}px`}}>
-            {currentGamePokemon.map((element) => {
-                return (
-                    <div className="cardDiv" key={element.id}>
-                        <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront pokemonCardFrontFlipped" style={{ backgroundImage: `url(${element.imageUrl})` }}>
-                            <p className="pokemonNameOnCard">{element.name}</p>
-                        </div>
-                        <div className="pokemonCardBack pokemonCardBackFlipped"></div>
-                    </div>
-                );
-            })}
-        </div>
-    )
-}
-
-function cardHolderWidth(numberOfPokemon) {
-    const vw = window.innerWidth;
+function cardHolderWidth(numberOfPokemon, viewWidth) {
     if (numberOfPokemon > 7){
-        return (vw - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2;
+        return (viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2;
     } else {
         return 0;
     }
