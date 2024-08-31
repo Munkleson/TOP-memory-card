@@ -85,16 +85,19 @@
     /* left: 50%; */
     height: 50px;
     background-color: rgb(177, 175, 175);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     border: none;
+    font-size: 1em;
+    /* box-shadow: 1.5px 1.5px black; */
+    /* do I want a box shadow above, or will the assymmetry look bad? */
 }
 
 .playAgainButton:hover {
     background-color: rgb(148, 147, 147);
     transform: scale(1.2, 1.2);
     border: none;
-    font-size: 1.1em;
-    transition: all 0.3s ease-in-out;
+    font-size: 1.05em;
+    transition: all 0.2s ease-in-out;
 }
 
 .playAgainButton:focus {
