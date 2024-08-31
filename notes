@@ -36,23 +36,45 @@ Version control
 <a href="https://www.textstudio.com/">Font generator</a>
 
 Things to do (in priority): From 8/31 onwards
+
+-   Put a black bar in the middle of the background color
 -   Fill in my readme section
 -   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
 -   Style buttons better
--   Rainbow neon animation on background cards before the win pokeball pops up
 -   Different game modes
-
-
+        - Preset difficulty
+        - Custom
+        - Rapid
+        - Infinite
+        - Progress mode
+                - After you beat a 6 card game, it moves on to 7, and then 8, and so on.
+                - May need a timed mode for this
+-   Settings button top right with things like:
+        - Credits
+        - Instructions
+        - High scores screen for every mode
 
 
 Way down the line on priority
-- Make it work for mobiles too
+
+-   Make it work for mobiles too
+-   When the screen width is smaller, there's a white bar at the bottom that hides anything below it. Can't get rid of it because I can't figure out what is causing it
+-   Option to remove animations
+        - Particularly for the flash
+        - Can be for the wait time for victory and lose screen too, but that'll be later
+-   Option to make the timer faster
+        - This one is a lot harder as it would require complex changes to the scoring algorithm
+        - Could make timed custom ones just not scoreable?
+-   Rainbow neon animation on background cards before the win pokeball pops up
 
 
 Decision making:
-- Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is
+-   Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is
+        - Covering the header bar makes it so the buttons can't be clicked, which is intentional really
 
+Completed: From 8/31 onwards - Commits 8/31
 
-Completed: From 8/31 onwards
 -   Remove timer bar when the game is over and readd it when you press play again. A prop to pass down from the initalize component, and put as a state and modify in the reset game function.
 -   Change the input section form to be fully JSX controlled. Values should not be controlled by hardcoding attributes, but instead through functions
+-   Styling changes that affected how the game looked when the view width was smaller. Footer bar transparent when not timed as well
+-   Added ability to change the max and min number of pokemon without having to go back and change every hard-coded value

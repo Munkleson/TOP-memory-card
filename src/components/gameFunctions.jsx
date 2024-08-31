@@ -6,7 +6,7 @@ import "./css_files/pokemonCardStyles.css";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
 
-function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGame, timed }) {
+function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGame, timed, maxPokemonPerRow }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
@@ -20,11 +20,13 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
     const [allowedToClick, setClickAllowance] = useState(true); /// Remove this if I want people to stop spamming click/autoclickers
 
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
-    const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth);
+    // const [holderWidth, setHolderWidth] = useState(0)
+    const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow);
 
     useEffect(() => { //// This is so the changes in window size will still evenly-ish distribute the amount of cards in each row. Edge case (like when opening console and restarting game then)
         const windowSizeHandler = () => {
             setViewWidth(window.innerWidth);
+            // cardHolderWidth(numberOfPokemon, window.innerWidth, setHolderWidth)
         };
         window.addEventListener("resize", windowSizeHandler);
         return () => {
@@ -112,6 +114,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
             <div id="topRelativeBar"></div>
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} resetGame={resetGame}/>
             { gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame}/> }
+                {/* this br is needed otherwise the whole card div uncenters vertically due to the one below. Both could be removed though. They're just for visual buffers */}
                 <br />
             { 
                 !currentlyFlipping ? 
@@ -119,8 +122,9 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 : 
                 <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
             }
-    const [footerCardClick, setFooterClickCheck] = useState(false);
-    <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>
+                {/* this br is needed otherwise the whole card div uncenters vertically due to the one above. Both could be removed though. They're just for visual buffers */}
+                <br /> 
+            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>
         </>
     );
 }
@@ -164,7 +168,7 @@ function CardMap ({ key, finalCard, cardClick, element, gameResult }){
         <div className="cardDiv" key={key}>
             { finalCard === element.id ? (
                 gameResult === "win" ? 
-                <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`, backgroundColor: 'green'}}>
+                <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`, backgroundColor: 'rgb(90, 218, 90)'}}>
                     <p className="pokemonNameOnCard">{element.name}</p> 
                 </div>
                 :
@@ -182,10 +186,12 @@ function CardMap ({ key, finalCard, cardClick, element, gameResult }){
     );
 };
 
-function cardHolderWidth(numberOfPokemon, viewWidth) {
-    if (numberOfPokemon > 7){
-        return (viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2;
+function cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow) {
+    if (numberOfPokemon > maxPokemonPerRow){
+        // setHolderWidth((viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2);
+        return (viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / maxPokemonPerRow)) * 180 + 5)) / 2;
     } else {
+        // setHolderWidth(0);
         return 0;
     }
 };

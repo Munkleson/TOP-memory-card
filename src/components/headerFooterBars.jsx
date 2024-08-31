@@ -11,8 +11,8 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
                 Restart game
             </button>
             <div className="headerPokemonLogo"></div>
-            <p>Current score: {currentScore}</p>
-            <p>High score for current mode: {highScore}</p>
+            <p>Current score: <span className="currentScoreText">{currentScore}</span></p>
+            <p>High score for current mode: <span className="highScoreText">{highScore}</span></p>
         </header>
     );
 }
@@ -20,9 +20,12 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
 function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
     return (
         <>
-            <div className="footerBar" style={{ backgroundColor: "white" }}>
-                {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>}
-            </div>
+            {timed && 
+                    <div className="footerBar" style={{ backgroundColor: "white" }}>
+                        {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>}
+                    </div>
+            }
+
         </>
     );
 }
