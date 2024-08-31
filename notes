@@ -37,7 +37,8 @@ Version control
 
 Things to do (in priority):
 
--   Remove timer bar when the game is over and readd it when you press play again. A prop to pass down from the initalize component, and put as a state and modify in the reset game function. - Done
+
+-   Change the input section form to be fully JSX controlled. Values should not be controlled by hardcoding attributes, but instead through functions
 -   Fill in my readme section
 -   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
 -   Style buttons better
@@ -48,3 +49,11 @@ Things to do (in priority):
 
 Way down the line on priority
 - Make it work for mobiles too
+
+
+Decision making:
+- Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is
+
+
+Completed:
+-   Remove timer bar when the game is over and readd it when you press play again. A prop to pass down from the initalize component, and put as a state and modify in the reset game function.
