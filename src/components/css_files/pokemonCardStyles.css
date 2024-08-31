@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 25px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .cardDiv {
@@ -17,7 +17,11 @@
     transform: rotateY(0deg);
 }
 
-.pokemonCardFront, .pokemonCardBack, .pokemonCardFrontFlipped, .pokemonCardBackFlipped, .cardDiv{
+.pokemonCardFront,
+.pokemonCardBack,
+.pokemonCardFrontFlipped,
+.pokemonCardBackFlipped,
+.cardDiv {
     /* base width 128 */
     --cardWidth: 160px;
     --cardHeight: calc(var(--cardWidth) * 1.3828125);
@@ -30,7 +34,8 @@
     /* background-repeat: no-repeat; */
 }
 
-.pokemonCardFront, .pokemonCardBack {
+.pokemonCardFront,
+.pokemonCardBack {
     position: absolute;
     top: 0;
     left: 0;
@@ -66,7 +71,7 @@
 }
 
 .pokemonCardFront:hover {
-    background-color: grey;
+    background-color: #575a5e;
     transition: 0.5s;
 }
 

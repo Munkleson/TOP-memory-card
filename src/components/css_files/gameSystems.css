@@ -3,7 +3,7 @@
         transform: scale(0.01);
     }
     to {
-        transform: scale(1.0);
+        transform: scale(1);
     }
 }
 
@@ -14,7 +14,7 @@
 }
 
 .endingScreen {
-    --endDimensions: 600px; 
+    --endDimensions: 600px;
     width: var(--endDimensions);
     height: var(--endDimensions);
     position: fixed;
@@ -22,14 +22,14 @@
     top: 50%;
     left: 50%;
     /* transform: translate(-50%, -50%); */
-    /* margin-left: calc(-(var(--endDimensions) / 2)); */ 
+    /* margin-left: calc(-(var(--endDimensions) / 2)); */
     /* margin-top: calc(-(var(--endDimensions) / 2)); */
     margin-left: -300px;
     margin-top: -300px;
     background-color: white;
     color: black;
     border: 20px black solid;
-    box-shadow: 0px 0px 50px grey;
+    box-shadow: 0px 0px 50px #575a5e;
     animation: grow 0.5s ease-out forwards;
     border-radius: 50%;
     overflow: hidden;

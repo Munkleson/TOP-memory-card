@@ -17,17 +17,17 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
     );
 }
 
-function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction }) {
+function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
     return (
         <>
             <div className="footerBar" style={{ backgroundColor: "white" }}>
-                {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction}/>}
+                {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>}
             </div>
         </>
     );
 }
 
-function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction }) {
+function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
     const [timerBarSizeElement, setTimerBarSizeElement] = useState(0);
     const [timerBarActive, setTimerBarState] = useState(false);
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
@@ -81,12 +81,12 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
 
     return (
         <>
-            { timerBarActive ? 
-                <div className="timerBar" style={{ marginRight: marginAmount, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div>
-                :
-                <div className="timerBar" style={{ marginRight: marginAmount }}></div>
-            }
-            
+        { !gameOver && (
+            timerBarActive ? 
+            <div className="timerBar" style={{ marginRight: marginAmount, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div>
+            :
+            <div className="timerBar" style={{ marginRight: marginAmount }}></div>
+        )} 
         </>
     );
 }

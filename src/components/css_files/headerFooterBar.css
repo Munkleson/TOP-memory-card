@@ -3,7 +3,7 @@
     position: absolute;
     width: 100vw;
     height: 50px;
-    background-color: blue;
+    background-color: #575A5E;
     z-index: 100;
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@
     background-size: contain;
     width: var(--headerLogoWidth);
     height: var(--headerLogoHeight);
-    background-color: rgb(255, 255, 255, 0.2);
+    background-color: rgb(255, 255, 255, 0);
 }
 
 .headerButtons {

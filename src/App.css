@@ -1,72 +1,72 @@
 #root {
-  width: 100vw;
-  height: 100vh;
-  /* padding-top: 2rem; */
-  /* margin: 0 auto; */
-  /* padding: 2rem; */
-  text-align: center;
-  z-index: 1;
-  box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    /* padding-top: 2rem; */
+    /* margin: 0 auto; */
+    /* padding: 2rem; */
+    text-align: center;
+    z-index: 1;
+    box-sizing: border-box;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input {
-  margin: 10px;
-  text-align: center;
-  font-size: 30px;
+    margin: 10px;
+    text-align: center;
+    font-size: 30px;
 }
 
 #centerBallDiv {
-  width: 500px;
-  height: 500px;
-  background-color: white;
-  border: 10px solid grey;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border: 10px solid #575a5e;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 /* 
 #wholeBodyDiv {
@@ -75,65 +75,65 @@ input {
 } */
 
 body {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 #wholeBodyDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .mainGameBodyDiv {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  flex-direction: column;
-  scrollbar-gutter: stable;
-  /* overflow-y: scroll; */
-  overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    scrollbar-gutter: stable;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
 }
 
 #gameBodyDiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100vw;
-  height: 100%;
-  /* padding-top: 2rem; */
-  box-sizing: border-box;
-  /* overflow-y: scroll; */
-  overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+    /* padding-top: 2rem; */
+    box-sizing: border-box;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
 }
 
 .ballInstructions {
-  width: 350px;
+    width: 350px;
 }
 
 .gameLimitNumberInput {
-  width: 200px;
-  height: 40px;
+    width: 200px;
+    height: 40px;
 }
 
 .timedModeDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timedModeInput {
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .timedModeText {
-  font-size: 20px;
+    font-size: 20px;
 }

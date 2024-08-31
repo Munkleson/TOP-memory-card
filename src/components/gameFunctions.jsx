@@ -120,7 +120,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                 <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} holderWidth={holderWidth}/> 
             }
     const [footerCardClick, setFooterClickCheck] = useState(false);
-    <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} />
+    <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>
         </>
     );
 }
