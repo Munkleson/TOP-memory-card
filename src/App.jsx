@@ -3,6 +3,7 @@ import "./App.css";
 import getAllPokemonNamesAndImages from "./components/subcomponents/retrievePokemonDetails";
 import { InitializeGame } from "./components/gameFunctions";
 import "./components/css_files/miscStyling.css";
+import { numberInput } from "./components/subcomponents/numberInputLogic";
 
 function App() {
     const [pokemonData, setPokemonData] = useState([]);
@@ -64,43 +65,6 @@ function App() {
         setTimeCheckBoxState(false);
     }
 
-    function numberInput(target) { //// This whole place is a mess. The logic probably doesn't need to be this complicated for what I wanted to do, but it works, so *shrug*
-        const value = Number(target.value); //// I'll need to refactor this whole section later maybe. Having to switch between several types is a mess and maybe not needed
-        const input = document.querySelector(".gameLimitNumberInput");
-        const valueToString = target.value;
-        input.setCustomValidity("");
-
-        if (valueToString.length > 3 && valueToString[0] === "0" && valueToString[1] === "0" && valueToString[2] === "0" && value < 6) {
-            input.setCustomValidity("The number must be between 6 and 21");
-            input.reportValidity();
-            setInputValue(valueToString.slice(1));
-        } else if ((value > 21 || value < 6) && valueToString.length === 3) {
-            input.setCustomValidity("You must enter a number between 6 and 21");
-            input.reportValidity();
-            setInputValue(value);
-        } else if (valueToString.length > 3 && valueToString[0] === "0" && valueToString[1] === "0") {
-            if ((value > 21 || value < 6)){
-                input.setCustomValidity("You must enter a number between 6 and 21");
-                input.reportValidity(); 
-            }
-            setInputValue(valueToString.slice(1));
-        } else if (valueToString.length > 3 && valueToString[1] === "0" && value > 21) {
-            input.setCustomValidity("The number must be between 6 and 21");
-            input.reportValidity();
-            setInputValue(valueToString.slice(1));
-        } else if (valueToString.length > 3 && valueToString[0] === "0" && value > 21) {
-            input.setCustomValidity("The number must be between 6 and 21");
-            input.reportValidity();
-            setInputValue(valueToString.slice(1));
-        } else if (valueToString.length >= 3 && (value > 21 || value < 6)) {
-            input.setCustomValidity("You must enter a number between 6 and 21");
-            input.reportValidity();
-            setInputValue(valueToString.slice(0, 3));
-        } else {
-            setInputValue(value);
-        }
-    }
-
     return (
         <>
             {!gameActive ? (
@@ -112,7 +76,7 @@ function App() {
                             <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice!</p>
                             <p>You can choose between 6 and 21 different Pokémon to play with.</p>
                             <form action="" onSubmit={gameStart}>
-                                <input type="number" className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} onChange={(event) => numberInput(event.target)} value={inputValue} />
+                                <input type="number" className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} onChange={(event) => numberInput(event.target, setInputValue)} value={inputValue} />
                                 <input type="submit" value={"Start game"} />
                                 <div className="timedModeDiv">
                                     <input type="checkbox" className="timedModeInput" onChange={timedOrNot} />

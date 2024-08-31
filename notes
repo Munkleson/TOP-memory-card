@@ -35,14 +35,12 @@ Version control
 
 <a href="https://www.textstudio.com/">Font generator</a>
 
-Things to do (in priority):
-
-
--   Change the input section form to be fully JSX controlled. Values should not be controlled by hardcoding attributes, but instead through functions
+Things to do (in priority): From 8/31 onwards
 -   Fill in my readme section
 -   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
 -   Style buttons better
 -   Rainbow neon animation on background cards before the win pokeball pops up
+-   Different game modes
 
 
 
@@ -55,5 +53,6 @@ Decision making:
 - Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is
 
 
-Completed:
+Completed: From 8/31 onwards
 -   Remove timer bar when the game is over and readd it when you press play again. A prop to pass down from the initalize component, and put as a state and modify in the reset game function.
+-   Change the input section form to be fully JSX controlled. Values should not be controlled by hardcoding attributes, but instead through functions
