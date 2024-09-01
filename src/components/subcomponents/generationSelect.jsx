@@ -1,13 +1,10 @@
 import { useState } from "react";
 import "../css_files/dropdownMenu.css";
 
-function GenerationSelect({ pokemonData, allGens, genReady, setPokemonGeneration }) {
-    const [selectedGen, setSelectedGen] = useState("Generation 1");
-
-    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3"];
+function GenerationSelect({setPokemonGeneration, selectedGenForReturn, pokemonGenerations }) {
+    const [selectedGen, setSelectedGen] = useState(selectedGenForReturn);
 
     function selectGeneration(event) {
-        console.log(event.target.innerText);
         setSelectedGen(event.target.innerText); //// For changing the selected option in the menu
         setPokemonGeneration(event.target.innerText);  //// For changing the selected generation for the game
     }
@@ -32,6 +29,8 @@ function DropDownList({ pokemonGenerations, selectedGen, selectGeneration }) {
             { pokemonGenerations.map((element) => {
                 if (element !== selectedGen) {
                     return <li onClick={selectGeneration} key={element}>{element}</li>;
+                } else {
+                    return <li onClick={selectGeneration} key={element}>{element}</li>
                 }
             })}
         </>

@@ -8,6 +8,7 @@ import { gameSettings } from "./gameSettingsVariables";
 import { GenerationSelect } from "./components/subcomponents/generationSelect";
 
 function App() {
+    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3"];
     const [genOnePokemon, setGenOnePokemon] = useState([]);
     const [genOneReady, setGenOneReady] = useState(false);
     const [genTwoPokemon, setGenTwoPokemon] = useState([]);
@@ -15,6 +16,7 @@ function App() {
     const [genThreePokemon, setGenThreePokemon] = useState([]);
     const [genThreeReady, setGenThreeReady] = useState(false);
     const [pokemonData, setPokemonData] = useState([]);
+    const [selectedGenForReturn, setSelectedGenForReturn] = useState("Generation 1"); //// For when you start a game, and return to the home screen, your generation should still be selected
 
     const [gameActive, setGameActive] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
@@ -37,12 +39,15 @@ function App() {
         switch(generation) {
             case "Generation 1":
                 setPokemonData(genOnePokemon);
+                setSelectedGenForReturn(pokemonGenerations[0]);
                 break;
             case "Generation 2":
                 setPokemonData(genTwoPokemon);
+                setSelectedGenForReturn(pokemonGenerations[1]);
                 break;
             case "Generation 3":
                 setPokemonData(genThreePokemon);
+                setSelectedGenForReturn(pokemonGenerations[2]);
                 break;
         }
     }
@@ -114,7 +119,7 @@ function App() {
         <>
             {!gameActive ? (
                 <>
-                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} allGens={{genOnePokemon, genTwoPokemon, genThreePokemon}} genReady={{genOneReady,   genTwoReady, genThreeReady}}/>
+                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} allGens={{genOnePokemon, genTwoPokemon, genThreePokemon}} genReady={{genOneReady,   genTwoReady, genThreeReady}} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations}/>
                     <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot}/>
                 </>
             ) : (
