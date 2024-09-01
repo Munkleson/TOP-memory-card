@@ -69,6 +69,7 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 /* 
 #wholeBodyDiv {
@@ -143,5 +144,29 @@ body {
 }
 
 .timedModeText {
+    font-size: 20px;
+}
+
+.pokeBallLoading{
+    width: 75px;
+    height: 75px;
+    background-image: url(./components/images/Pokeball.png);
+    background-size: 100%;
+    animation: pokeBallSpinning 1.5s infinite linear;
+    position: relative;
+}
+
+@keyframes pokeBallSpinning {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingText {
+    position: absolute;
+    bottom: 150px;
     font-size: 20px;
 }

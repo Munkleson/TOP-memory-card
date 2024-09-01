@@ -1,0 +1,35 @@
+App.jsx
+
+            // const fetchGenOneDataFunction = async () => {
+            //     const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) => response.json());
+            //     if (!ignore) {
+            //         getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => {
+            //             setFullPokemonData(pokemonData);
+            //             setPokemonGameData(pokemonData); //// Initial setting for the pokemon
+            //         });
+            //         setPokemonDataReadyState(true);
+            //     }
+            // };
+            // fetchGenOneDataFunction();
+
+            // const fetchGenTwoFunction = async () => {
+            //     const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100&offset=152").then((response) => response.json());
+            //     if (!ignore) {
+            //         getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => setGenTwoPokemon(pokemonData));
+            //         setGenTwoReady(true);
+            //     }
+            // };
+            // fetchGenTwoFunction();
+
+            // const fetchGenThreeFunction = async () => {
+            //     const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=135&offset=252").then((response) => response.json());
+            //     if (!ignore) {
+            //         getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => setGenThreePokemon(pokemonData));
+            //         setGenThreeReady(true);
+            //     }
+            // };
+            // fetchGenThreeFunction();
+
+    // "api/v2/pokemon?limit=251&offset=151"
+    // "api/v2/pokemon?limit=251"
+    //// Pokemon api works like this. Offset is the pokemon id you start at, and the limit goes from there. I.e. gen 2 of pokemon 152-251 would be limit=100&offset=151

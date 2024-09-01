@@ -8,23 +8,17 @@ import { gameSettings } from "./gameSettingsVariables";
 import { GenerationSelect } from "./components/subcomponents/generationSelect";
 
 function App() {
-    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3"];
-    const [genOnePokemon, setGenOnePokemon] = useState([]);
-    const [genOneReady, setGenOneReady] = useState(false);
-    const [genTwoPokemon, setGenTwoPokemon] = useState([]);
-    const [genTwoReady, setGenTwoReady] = useState(false);
-    const [genThreePokemon, setGenThreePokemon] = useState([]);
-    const [genThreeReady, setGenThreeReady] = useState(false);
-    const [pokemonData, setPokemonData] = useState([]);
+    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3", "Generation 4", "Generation 5", "Generation 6", "Generation 7", "Generation 8", "Generation 9"];
+    const [allGenPokemon, setFullPokemonData] = useState([]);
+    const [pokemonData, setPokemonGameData] = useState([]);
+
+    const [pokemonDataReady, setPokemonDataReadyState] = useState(false);
     const [selectedGenForReturn, setSelectedGenForReturn] = useState("Generation 1"); //// For when you start a game, and return to the home screen, your generation should still be selected
 
     const [gameActive, setGameActive] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
     const [inputValue, setInputValue] = useState("");
-    // "api/v2/pokemon?limit=251&offset=151"
-    // "api/v2/pokemon?limit=251"
-    //// Pokemon api works like this. Offset is the pokemon id you start at, and the limit goes from there. I.e. gen 2 of pokemon 152-251 would be limit=100&offset=151
 
     const effectRan = useRef(false);
 
@@ -36,18 +30,42 @@ function App() {
     // localStorageVersionControl();
 
     function setPokemonGeneration(generation) {
-        switch(generation) {
-            case "Generation 1":
-                setPokemonData(genOnePokemon);
+        switch (generation) {
+            case pokemonGenerations[0]:
+                setPokemonGameData(allGenPokemon.slice(0, 151));
                 setSelectedGenForReturn(pokemonGenerations[0]);
                 break;
-            case "Generation 2":
-                setPokemonData(genTwoPokemon);
+            case pokemonGenerations[1]:
+                setPokemonGameData(allGenPokemon.slice(151, 251));
                 setSelectedGenForReturn(pokemonGenerations[1]);
                 break;
-            case "Generation 3":
-                setPokemonData(genThreePokemon);
+            case pokemonGenerations[2]:
+                setPokemonGameData(allGenPokemon.slice(251, 386))
                 setSelectedGenForReturn(pokemonGenerations[2]);
+                break;
+            case pokemonGenerations[3]:
+                setPokemonGameData(allGenPokemon.slice(386, 493))
+                setSelectedGenForReturn(pokemonGenerations[3]);
+                break;
+            case pokemonGenerations[4]:
+                setPokemonGameData(allGenPokemon.slice(493, 649))
+                setSelectedGenForReturn(pokemonGenerations[4]);
+                break;
+            case pokemonGenerations[5]:
+                setPokemonGameData(allGenPokemon.slice(649, 721))
+                setSelectedGenForReturn(pokemonGenerations[5]);
+                break;
+            case pokemonGenerations[6]:
+                setPokemonGameData(allGenPokemon.slice(721, 809))
+                setSelectedGenForReturn(pokemonGenerations[6]);
+                break;
+            case pokemonGenerations[7]:
+                setPokemonGameData(allGenPokemon.slice(809, 905))
+                setSelectedGenForReturn(pokemonGenerations[7]);
+                break;
+            case pokemonGenerations[8]:
+                setPokemonGameData(allGenPokemon.slice(905, 1025))
+                setSelectedGenForReturn(pokemonGenerations[8]);
                 break;
         }
     }
@@ -55,36 +73,19 @@ function App() {
     useEffect(() => {
         if (!effectRan.current) {
             let ignore = false;
-            const fetchGenOneDataFunction = async () => {
-                const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151").then((response) => response.json());
+            const fetchPokemonData = async () => {
+                const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025").then((response) => response.json());
                 if (!ignore) {
                     getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => {
-                        setGenOnePokemon(pokemonData);
-                        setPokemonData(pokemonData); //// Initial setting for the pokemon
+                        setFullPokemonData(pokemonData);
+                        setPokemonGameData(pokemonData.slice(0, 152)); //// Initial setting for the pokemon
+                        setTimeout(() => {
+                            setPokemonDataReadyState(true);
+                        }, 1000); //// Timeout to not make it so jarring for when the loading finishes too quickly. Can put in an animation at a later time
                     });
-                    setGenOneReady(true);
                 }
             };
-            fetchGenOneDataFunction();
-
-            const fetchGenTwoFunction = async () => {
-                const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100&offset=152").then((response) => response.json());
-                if (!ignore) {
-                    getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => setGenTwoPokemon(pokemonData));
-                    setGenTwoReady(true);
-                }
-            };
-            fetchGenTwoFunction();
-
-            const fetchGenThreeFunction = async () => {
-                const fetchData = await fetch("https://pokeapi.co/api/v2/pokemon?limit=135&offset=252").then((response) => response.json());
-                if (!ignore) {
-                    getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => setGenThreePokemon(pokemonData));
-                    setGenThreeReady(true);
-                }
-            };
-            fetchGenThreeFunction();
-
+            fetchPokemonData();
             return () => {
                 ignore = true;
             };
@@ -112,15 +113,23 @@ function App() {
 
     function resetGame() {
         setGameActive(false);
-        setTimeCheckBoxState(false);
     }
 
     return (
         <>
             {!gameActive ? (
                 <>
-                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} allGens={{genOnePokemon, genTwoPokemon, genThreePokemon}} genReady={{genOneReady,   genTwoReady, genThreeReady}} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations}/>
-                    <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot}/>
+                    <div id="wholeBodyDiv">
+                        <div className="pokemonLogo"></div>
+                        {!pokemonDataReady ? (
+                            <HomePageLoadingAnimation />
+                        ) : (
+                            <>
+                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations} />
+                                <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked}/>
+                            </>
+                        )}
+                    </div>
                 </>
             ) : (
                 <>
@@ -133,10 +142,10 @@ function App() {
     );
 }
 
-function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue }) {
+function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue, timedCheckBoxTicked }) {
+    console.log(timedCheckBoxTicked)
     return (
-        <div id="wholeBodyDiv">
-            <div className="pokemonLogo"></div>
+        <>
             <div id="centerBallDiv">
                 <br />
                 <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
@@ -147,13 +156,22 @@ function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputVa
                     <input type="number" className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
                     <input type="submit" value={"Start game"} />
                     <div className="timedModeDiv">
-                        <input type="checkbox" className="timedModeInput" onChange={timedOrNot} />
+                        <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked}/>
                         <span className="timedModeText">Timed mode (Optional)</span>
                     </div>
                 </form>
                 <br />
                 <strong>How many will you be able to remember?</strong>
             </div>
+        </>
+    );
+}
+
+function HomePageLoadingAnimation() {
+    return (
+        <div id="centerBallDiv">
+            <div className="pokeBallLoading"></div>
+            <p className="loadingText">Loading...</p>
         </div>
     );
 }

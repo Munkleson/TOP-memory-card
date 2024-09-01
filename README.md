@@ -22,6 +22,7 @@ Things this project helped me with learning/practicing:
     -   Learning how to keep scaling in mind was important, and completely new to me, so it is a learning process
 -   Keeping code clean/code style
     -   While it is still a heavy mess, it was in a much worse state originally for a lot of it, and a lot less components were used compared to now
+-   The most minor thing, but that I did not need to disable button pressing at a time when I did not want them to be pressed. An animation (or any element really) that has the highest z index covering everything will already disalbe them by default even if transparent
 
 
 Future features planned:

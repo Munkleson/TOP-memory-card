@@ -37,13 +37,15 @@ Version control
 
 Things to do (in priority): From 8/31 onwards
 
--   Put a black bar in the middle of the background color
--   Fill in my readme section
--   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
--   Style buttons better
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
 -   Settings button top right with things like: - Credits - Instructions - High scores screen for every mode
 -   Pokemon generations - Issue is right now if you try start the game without the generation being loaded in, it crashes, because pokemon data is technically completely empty - Maybe have a loading animation in the drop down selection menu that can only be clicked when it is ready - **\*** Could just do a loading screen while the api is being fetched
+        - Loading screen is the way to go
+        - Create an animation for the loading screen. Like a pokeball opening up
+        - At the very least a flash after loading with a fading out white screen to 0 opaqueness so the transition from loading to game select screen is more smooth
+-   Remove anything after a hyphen
+        - Make a new array with the correct names of all pokemon and map it onto the current lists
+
 
 Way down the line on priority
 
@@ -52,6 +54,7 @@ Way down the line on priority
 -   Option to remove animations - Particularly for the flash - Can be for the wait time for victory and lose screen too, but that'll be later
 -   Option to make the timer faster - This one is a lot harder as it would require complex changes to the scoring algorithm - Could make timed custom ones just not scoreable?
 -   Rainbow neon animation on background cards before the win pokeball pops up
+-   Custom pokemon set option. i.e. selectable indexes of pokemon
 
 Decision making:
 
@@ -64,3 +67,13 @@ Completed: From 8/31 onwards - Commits 8/31
 -   Change the input section form to be fully JSX controlled. Values should not be controlled by hardcoding attributes, but instead through functions
 -   Styling changes that affected how the game looked when the view width was smaller. Footer bar transparent when not timed as well
 -   Added ability to change the max and min number of pokemon without having to go back and change every hard-coded value
+-   Put a black bar in the middle of the background color
+-   Fill in my readme section
+-   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
+-   Style buttons better
+
+9/1
+-       Started on having pokemon generations. 
+                - Currently a small drop down window works
+                - Making it so all pokemon generations can be selected now
+-   Time check is now saved
