@@ -132,6 +132,10 @@ body {
     height: 40px;
 }
 
+.startGameButton:hover {
+    cursor: pointer;
+}
+
 .timedModeDiv {
     display: flex;
     justify-content: center;
@@ -141,6 +145,10 @@ body {
 .timedModeInput {
     width: 20px;
     height: 20px;
+}
+
+.timedModeInput:hover {
+    cursor: pointer;
 }
 
 .timedModeText {

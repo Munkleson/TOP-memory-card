@@ -143,7 +143,6 @@ function App() {
 }
 
 function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue, timedCheckBoxTicked }) {
-    console.log(timedCheckBoxTicked)
     return (
         <>
             <div id="centerBallDiv">
@@ -154,7 +153,7 @@ function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputVa
                 </p>
                 <form action="" onSubmit={gameStart}>
                     <input type="number" className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
-                    <input type="submit" value={"Start game"} />
+                    <input type="submit" value={"Start game"} className="startGameButton"/>
                     <div className="timedModeDiv">
                         <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked}/>
                         <span className="timedModeText">Timed mode (Optional)</span>

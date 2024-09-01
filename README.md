@@ -49,5 +49,6 @@ Any suggestions for improvement or feedback you can send to me at munkleson@gmai
 Credits:
 - The Odin Project for such a fantastic course and the basis of this project
 - PokeAPI for the Pokemon API
+- QuickCodingTuts on Youtube for a video on making a drop down menu and their code
 - All my friends who either helped me out with testing or with code
 https://munkleson.github.io/TOP-memory-card/

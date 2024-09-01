@@ -83,6 +83,7 @@
     /* background-color: #575a5e; */
     background-color: #3590F3;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .pokemonNameOnCard {
