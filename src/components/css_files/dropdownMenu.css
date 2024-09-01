@@ -1,0 +1,11 @@
+.generationSelectDiv {
+    position: fixed;
+    left: 10px;
+    top: 10px;
+    width: 200px;
+    height: 30px;
+}
+
+.selectedGeneration {
+    
+}

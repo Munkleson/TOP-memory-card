@@ -163,9 +163,9 @@ function CardsInMotion({ currentGamePokemon, cardClick, holderWidth }){
     )
 };
 
-function CardMap ({ key, finalCard, cardClick, element, gameResult }){
+function CardMap ({ keyValue, finalCard, cardClick, element, gameResult }){
     return (
-        <div className="cardDiv" key={key}>
+        <div className="cardDiv" key={keyValue}>
             { finalCard === element.id ? (
                 gameResult === "win" ? 
                 <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront" style={{ backgroundImage: `url(${element.imageUrl})`, backgroundColor: 'rgb(90, 218, 90)'}}>

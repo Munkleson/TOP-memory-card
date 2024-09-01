@@ -41,36 +41,22 @@ Things to do (in priority): From 8/31 onwards
 -   Fill in my readme section
 -   Style the header bar better. Use Adam's suggestions for sourcing colour palettes
 -   Style buttons better
--   Different game modes
-        - Preset difficulty
-        - Custom
-        - Rapid
-        - Infinite
-        - Progress mode
-                - After you beat a 6 card game, it moves on to 7, and then 8, and so on.
-                - May need a timed mode for this
--   Settings button top right with things like:
-        - Credits
-        - Instructions
-        - High scores screen for every mode
-
+-   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
+-   Settings button top right with things like: - Credits - Instructions - High scores screen for every mode
+-   Pokemon generations - Issue is right now if you try start the game without the generation being loaded in, it crashes, because pokemon data is technically completely empty - Maybe have a loading animation in the drop down selection menu that can only be clicked when it is ready - **\*** Could just do a loading screen while the api is being fetched
 
 Way down the line on priority
 
 -   Make it work for mobiles too
 -   When the screen width is smaller, there's a white bar at the bottom that hides anything below it. Can't get rid of it because I can't figure out what is causing it
--   Option to remove animations
-        - Particularly for the flash
-        - Can be for the wait time for victory and lose screen too, but that'll be later
--   Option to make the timer faster
-        - This one is a lot harder as it would require complex changes to the scoring algorithm
-        - Could make timed custom ones just not scoreable?
+-   Option to remove animations - Particularly for the flash - Can be for the wait time for victory and lose screen too, but that'll be later
+-   Option to make the timer faster - This one is a lot harder as it would require complex changes to the scoring algorithm - Could make timed custom ones just not scoreable?
 -   Rainbow neon animation on background cards before the win pokeball pops up
 
-
 Decision making:
--   Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is
-        - Covering the header bar makes it so the buttons can't be clicked, which is intentional really
+
+-   Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is - Covering the header bar makes it so the buttons can't be clicked, which is intentional really
+-   Increase the timed game mode? Seems a bit too fast if it includes the turning animation which takes about 1.2-1.4 seconds
 
 Completed: From 8/31 onwards - Commits 8/31
 
