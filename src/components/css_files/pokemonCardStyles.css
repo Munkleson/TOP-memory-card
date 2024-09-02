@@ -21,6 +21,12 @@
     /* overflow: visible; */
 }
 
+@media only screen and (max-width: 1440px) {
+    .cardHolder {
+        --cardWidth: 140px;
+    }
+}
+
 .cardDiv {
     position: relative;
     margin: 10px;

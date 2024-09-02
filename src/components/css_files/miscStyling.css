@@ -1,10 +1,24 @@
+
 .pokemonLogo {
     background-image: url(../images/pokemonLogo.png);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100%;
+
     position: absolute;
-    top: 0px;
-    z-index: 101;
-    width: 1024px;
-    height: 221px;
+    top: -200px;
+
+    height: calc(100vw / 5);
+    width: 100vw;
+
+    max-height: 221px;
+    max-width: 1024px;
+
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 1024px) {
+    .pokemonLogo {
+        top: calc(-207.5px + (221px - 100vw / 5) / 2);
+    }
 }

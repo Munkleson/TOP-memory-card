@@ -124,7 +124,9 @@ function App() {
             {!gameActive ? (
                 <>
                     <div id="wholeBodyDiv">
-                        <div className="pokemonLogo"></div>
+
+                        <div id="centerBallDiv">
+                                <div className="pokemonLogo"></div>
                         {!pokemonDataReady ? (
                             <HomePageLoadingAnimation />
                         ) : (
@@ -133,6 +135,7 @@ function App() {
                                 <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked}/>
                             </>
                         )}
+                        </div>
                     </div>
                 </>
             ) : (
@@ -149,7 +152,6 @@ function App() {
 function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue, timedCheckBoxTicked }) {
     return (
         <>
-            <div id="centerBallDiv">
                 <br />
                 <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
                 <p>
@@ -165,17 +167,18 @@ function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputVa
                 </form>
                 <br />
                 <strong>How many will you be able to remember?</strong>
-            </div>
         </>
     );
 }
 
 function HomePageLoadingAnimation() {
     return (
-        <div id="centerBallDiv">
+        <>
+        {/* <div id="centerBallDiv"> */}
             <div className="pokeBallLoading"></div>
             <p className="loadingText">Loading...</p>
-        </div>
+        {/* </div> */}
+        </>
     );
 }
 
