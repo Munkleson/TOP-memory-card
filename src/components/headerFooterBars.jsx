@@ -21,8 +21,8 @@ function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setC
     return (
         <>
             {timed && 
-                    <div className="footerBar" style={{ backgroundColor: "white" }}>
-                        {timed && <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>}
+                    <div className="footerBar" style={{ backgroundColor: "rgb(255, 255, 255, 0)" }}>
+                        <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver}/>
                     </div>
             }
 

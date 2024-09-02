@@ -3,8 +3,8 @@ import Confetti from "react-confetti";
 import "./css_files/gameSystems.css"
 
 function ConfettiComponent() {
-    const width = "1800";
-    const height = "900";
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     const gravity = 0.2;
     return (
         <Confetti width={width} height={height} gravity={gravity}/>
