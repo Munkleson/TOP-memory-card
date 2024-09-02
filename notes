@@ -36,6 +36,8 @@ Version control
 <a href="https://www.textstudio.com/">Font generator</a>
 
 Things to do (in priority): From 8/31 onwards
+- MOST IMPORTANT
+    - Configure for different resolution (like mac is 1440 x 900)
 
 -   Get Lin to help with the dropdown menu styling
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
@@ -44,9 +46,14 @@ Things to do (in priority): From 8/31 onwards
 -   Remove anything after a hyphen - Make a new array with the correct names of all pokemon and map it onto the current lists
 -   Show pokemon game pictures for each generation in the dropdown menu(i.e. picture of red and blue for gen 1, ruby sapphire for 3, etc.)
 -   Show current and high score in the game win/lose popup div
+-   Put a message in the home screen easily seen like "beat certain levels to unlock further generations"
+    -   So not all are available at the start
+-
 
 Way down the line on priority
 
+-   Japanese language (maybe others, but that's way down the line)
+    -   Would have to only be able to be changed on the home screen, so it can rerender everything easily (more for me). Maybe even further down the line it can be changed anytime. Localstorage for this might be good
 -   Make it work for mobiles too
 -   When the screen width is smaller, there's a white bar at the bottom that hides anything below it. Can't get rid of it because I can't figure out what is causing it
 -   Option to remove animations - Particularly for the flash - Can be for the wait time for victory and lose screen too, but that'll be later
@@ -76,4 +83,4 @@ Completed: From 8/31 onwards - Commits 8/31
 -   Time check is now saved
 -   Pokemon generations - Issue is right now if you try start the game without the generation being loaded in, it crashes, because pokemon data is technically completely empty - Maybe have a loading animation in the drop down selection menu that can only be clicked when it is ready - **\*** Could just do a loading screen while the api is being fetched - Loading screen is the way to go
 -   Dropdown menu for the generation selection fully completed bar maybe a bit of styling
--       
+-

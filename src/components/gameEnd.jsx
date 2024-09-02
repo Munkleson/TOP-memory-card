@@ -40,7 +40,7 @@ function EndingScreen({ gameResult, replayGame }){
                 setLossFlashActiveState(false);
             }, 3000);
         }
-    }, []);
+    }, []); //// I believe a dependency array is absolutely needed here, because if I don't have it, the setTimeout is going to go haywire and not work as intended?
 
     // if (gameResult === "loss" && !lossFlashActive && !dummyCheck){
     //     setLossFlashActiveState(true);

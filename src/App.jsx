@@ -8,7 +8,7 @@ import { gameSettings } from "./gameSettingsVariables";
 import { GenerationSelect } from "./components/subcomponents/generationSelect";
 
 function App() {
-    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3", "Generation 4", "Generation 5", "Generation 6", "Generation 7", "Generation 8", "Generation 9"];
+    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3", "Generation 4", "Generation 5", "Generation 6", "Generation 7", "Generation 8", "Generation 9", "All Generations"];
     const [allGenPokemon, setFullPokemonData] = useState([]);
     const [pokemonData, setPokemonGameData] = useState([]);
 
@@ -40,32 +40,36 @@ function App() {
                 setSelectedGenForReturn(pokemonGenerations[1]);
                 break;
             case pokemonGenerations[2]:
-                setPokemonGameData(allGenPokemon.slice(251, 386))
+                setPokemonGameData(allGenPokemon.slice(251, 386));
                 setSelectedGenForReturn(pokemonGenerations[2]);
                 break;
             case pokemonGenerations[3]:
-                setPokemonGameData(allGenPokemon.slice(386, 493))
+                setPokemonGameData(allGenPokemon.slice(386, 493));
                 setSelectedGenForReturn(pokemonGenerations[3]);
                 break;
             case pokemonGenerations[4]:
-                setPokemonGameData(allGenPokemon.slice(493, 649))
+                setPokemonGameData(allGenPokemon.slice(493, 649));
                 setSelectedGenForReturn(pokemonGenerations[4]);
                 break;
             case pokemonGenerations[5]:
-                setPokemonGameData(allGenPokemon.slice(649, 721))
+                setPokemonGameData(allGenPokemon.slice(649, 721));
                 setSelectedGenForReturn(pokemonGenerations[5]);
                 break;
             case pokemonGenerations[6]:
-                setPokemonGameData(allGenPokemon.slice(721, 809))
+                setPokemonGameData(allGenPokemon.slice(721, 809));
                 setSelectedGenForReturn(pokemonGenerations[6]);
                 break;
             case pokemonGenerations[7]:
-                setPokemonGameData(allGenPokemon.slice(809, 905))
+                setPokemonGameData(allGenPokemon.slice(809, 905));
                 setSelectedGenForReturn(pokemonGenerations[7]);
                 break;
             case pokemonGenerations[8]:
-                setPokemonGameData(allGenPokemon.slice(905, 1025))
+                setPokemonGameData(allGenPokemon.slice(905, 1025));
                 setSelectedGenForReturn(pokemonGenerations[8]);
+                break;
+            case pokemonGenerations[9]: /// all generations
+                setPokemonGameData(allGenPokemon);
+                setSelectedGenForReturn(pokemonGenerations[9]);
                 break;
         }
     }
