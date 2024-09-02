@@ -95,6 +95,8 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setGameOver(true);
         setFlippingStatus(false);
         setGameActive(false);
+
+        setCardClickedCheckFunction();
     }
 
     function victoryFunction(id){
@@ -103,6 +105,8 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setGameOver(true);
         setFlippingStatus(false);
         setGameActive(false);
+
+        setCardClickedCheckFunction();
     }
 
     function setCardClickedCheckFunction() { //// For the timer bar. Checks when the card has been clicked and makes it false after it has been clicked. Done this way for re-rendering purposes and passing down the clicked check as a prop to the timer bar.

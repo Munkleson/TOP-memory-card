@@ -44,11 +44,19 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
         setGameActiveState(true);
     }
 
-    if (cardClickedCheck) {
-        //// reset the bar on a card being clicked
-        setCardClickedCheckFunction();
-        setTimerBarSizeElement(0);
-    }
+    // if (cardClickedCheck) {
+    //     //// reset the bar on a card being clicked
+    //     setCardClickedCheckFunction();
+    //     setTimerBarSizeElement(0);
+    // }
+
+    //// Resets the timer whenever a card is clicked
+    useEffect(() => { //// Why does this need to be an effect and not a state update like above? Getting an error with the above one where it causes an error because it re-renders too many times
+        if (cardClickedCheck){
+            setCardClickedCheckFunction();
+            setTimerBarSizeElement(0);
+        }
+    }, [cardClickedCheck, setCardClickedCheckFunction]);
 
     if (!gameActive && isGameActive) {
         //// Victory function
