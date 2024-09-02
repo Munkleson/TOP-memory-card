@@ -154,19 +154,18 @@ function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputVa
         <>
                 <br />
                 <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
-                <p>
+                <p className="ballSecondaryInstructions">
                     You can choose between {minNumberOfPokemon} and {maxNumberOfPokemon} different Pokémon to play with.
                 </p>
-                <form action="" onSubmit={gameStart}>
-                    <input type="number" className="gameLimitNumberInput" placeholder="#" style={{ width: "50px", height: "50px" }} onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
+                <form action="" onSubmit={gameStart} className="ballFormDiv">
+                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
                     <input type="submit" value={"Start game"} className="startGameButton"/>
                     <div className="timedModeDiv">
                         <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked}/>
-                        <span className="timedModeText">Timed mode (Optional)</span>
+                        <span className="timedModeText" onClick={timedOrNot}>Timed mode (Optional)</span>
                     </div>
                 </form>
-                <br />
-                <strong>How many will you be able to remember?</strong>
+                <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>
         </>
     );
 }

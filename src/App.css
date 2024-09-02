@@ -7,6 +7,7 @@
     text-align: center;
     z-index: 1;
     box-sizing: border-box;
+    background-color: rgb(255,255,255,0);
 }
 
 .logo {
@@ -58,28 +59,10 @@ input {
     font-size: 30px;
 }
 
-#centerBallDiv {
-    width: 500px;
-    height: 500px;
-    background-color: white;
-    /* border: 10px solid #575a5e; */
-    border: 30px solid black;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-/* 
-#wholeBodyDiv {
-  width: 100vw;
-  height: 100vh;
-} */
-
 body {
     display: flex;
     justify-content: center;
+    background-color: rgb(255,255,255,0);
 }
 
 #wholeBodyDiv {
@@ -102,6 +85,8 @@ body {
     /* padding-top: 2rem; */
     box-sizing: border-box;
     overflow-y: visible;
+    background-color: rgb(255,255,255,0);
+    
 }
 
 .mainGameBodyDiv {
@@ -117,19 +102,58 @@ body {
     overflow-x: hidden;
     overflow-y: visible;
 
-    padding-top: 25px;
-    padding-bottom: 25px;
+    /* padding-top: 25px; */
+    /* padding-bottom: 25px; */
     box-sizing: border-box;
+    background-color: rgb(255,255,255,0);
+    
 }
 
+#centerBallDiv {
+    --ballDimensions: 54.4vh;
+    width: var(--ballDimensions);
+    height: var(--ballDimensions);
+    background-color: white;
+    /* border: 10px solid #575a5e; */
+    border: 30px solid black;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    font-size: calc(var(--ballDimensions) * 0.032);
+}
+
+#centerBallDiv * {
+    margin-top: calc(var(--ballDimensions) * 0.02);
+    margin-bottom: calc(var(--ballDimensions) * 0.02);
+}
+
+@media only screen and (max-height: 760px) {
+    #centerBallDiv {
+        height: var(--ballDimensions);
+        width: var(--ballDimensions);
+    }
+}
 
 .ballInstructions {
-    width: 350px;
+    max-width: calc(var(--ballDimensions) * 0.8);
+}
+
+.ballFormDiv {
+    margin: 0 !important;
 }
 
 .gameLimitNumberInput {
-    width: 200px;
-    height: 40px;
+    width: calc(var(--ballDimensions) * 0.15);
+    height: calc(var(--ballDimensions) * 0.1);
+    font-size: calc(var(--ballDimensions) * 0.06);
+}
+
+.startGameButton {
+    font-size: calc(var(--ballDimensions) * 0.05);
 }
 
 .startGameButton:hover {
@@ -143,8 +167,8 @@ body {
 }
 
 .timedModeInput {
-    width: 20px;
-    height: 20px;
+    width: calc(var(--ballDimensions) * 0.04);
+    height: calc(var(--ballDimensions) * 0.04);
 }
 
 .timedModeInput:hover {
@@ -152,12 +176,22 @@ body {
 }
 
 .timedModeText {
-    font-size: 20px;
+    /* font-size: 20em; */
+    font-size: calc(var(--ballDimensions) * 0.04);
+}
+
+.timedModeText:hover {
+    cursor: pointer;
+}
+
+.ballBottomStrongTag {
+    font-weight: bold;
+    margin-bottom: calc(var(--ballDimensions) * 0.05)!important;
 }
 
 .pokeBallLoading{
-    width: 75px;
-    height: 75px;
+    width: calc(var(--ballDimensions) * 0.15);
+    height: calc(var(--ballDimensions) * 0.15);
     background-image: url(./components/images/Pokeball.png);
     background-size: 100%;
     animation: pokeBallSpinning 1.5s infinite linear;
@@ -175,6 +209,6 @@ body {
 
 .loadingText {
     position: absolute;
-    bottom: 150px;
-    font-size: 20px;
+    bottom: calc(var(--ballDimensions) * 0.3);
+    font-size: 1.25em;
 }
