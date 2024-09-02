@@ -110,18 +110,20 @@ body {
 }
 
 #centerBallDiv {
+    /* --ballDimensions: 60.93vh; */
     --ballDimensions: 54.4vh;
     width: var(--ballDimensions);
     height: var(--ballDimensions);
     background-color: white;
     /* border: 10px solid #575a5e; */
-    border: 30px solid black;
+    border: calc(var(--ballDimensions) * 0.06) solid black;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    /* box-sizing: border-box; */
 
     font-size: calc(var(--ballDimensions) * 0.032);
 }
@@ -131,10 +133,16 @@ body {
     margin-bottom: calc(var(--ballDimensions) * 0.02);
 }
 
-@media only screen and (max-height: 760px) {
+/* @media only screen and (max-height: 760px) {
     #centerBallDiv {
         height: var(--ballDimensions);
         width: var(--ballDimensions);
+    }
+} */
+
+@media only screen and (max-width: 560px) {
+    #centerBallDiv {
+        --ballDimensions: 88vw;
     }
 }
 
