@@ -14,26 +14,25 @@
 }
 
 .endingScreen {
-    --endDimensions: 600px;
+    --endDimensions: 65.3vh;
+    --endMargins: -32.65vh;
     width: var(--endDimensions);
     height: var(--endDimensions);
     position: fixed;
     z-index: 101;
     top: 50%;
     left: 50%;
-    /* transform: translate(-50%, -50%); */
-    /* margin-left: calc(-(var(--endDimensions) / 2)); */
-    /* margin-top: calc(-(var(--endDimensions) / 2)); */
-    margin-left: -300px;
-    margin-top: -300px;
+    margin-left: var(--endMargins);
+    margin-top: var(--endMargins);
     background-color: white;
     color: black;
-    border: 20px black solid;
+    border: 2.176vh black solid;
     box-shadow: 0px 0px 50px #575a5e;
     animation: grow 0.5s ease-out forwards;
     border-radius: 50%;
     overflow: hidden;
     box-sizing: border-box;
+    font-size: 1.74vh;
 }
 
 .endBoxTop {
@@ -45,7 +44,6 @@
 .endBoxMiddle {
     height: 5%;
     width: 100%;
-    /* background-color: rgb(167, 165, 165) ; */
     background-color: black;
 }
 
@@ -54,16 +52,15 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     padding-top: 25%;
 }
 
 .endBoxMiddleBall {
-    width: 200px;
-    height: 200px;
+    width: calc(var(--endDimensions) / 3);
+    height: calc(var(--endDimensions) / 3);
     border-radius: 50%;
     background-color: white;
-    border: 20px black solid;
+    border: 2.176vh black solid;
     box-sizing: border-box;
     position: fixed;
     z-index: 102;
@@ -76,20 +73,15 @@
 }
 
 .resultDiv {
-    font-size: 35px;
+    font-size: 3.8vh;
 }
 
 .playAgainButton {
-    /* position: fixed; */
-    /* top: 50%; */
-    /* left: 50%; */
-    height: 50px;
+    height: 5.44vh;
     background-color: rgb(177, 175, 175);
     transition: all 0.2s ease-in-out;
     border: none;
     font-size: 1em;
-    /* box-shadow: 1.5px 1.5px black; */
-    /* do I want a box shadow above, or will the assymmetry look bad? */
 }
 
 .playAgainButton:hover {
@@ -127,10 +119,6 @@
     width: 100vw;
     opacity: 0;
     left: 0;
-
-    /* The below can be interchanged as a couple. The top couple will not include the header bar in the animation. Still deciding what is better */
-    /* height: calc(100vh - 50px);
-    bottom: 0; */
     top: 0;
     height: 100vh;
 }
