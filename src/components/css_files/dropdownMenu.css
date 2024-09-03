@@ -1,11 +1,12 @@
 .generationSelectDropdown {
+    --height: 3.2644vh;
+    width: calc(var(--height) * 6.667);
+    height: var(--height);
     position: fixed;
     left: 10px;
     top: -5px;
-    width: 200px;
-    height: 30px;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 1.74vh;
 }
 
 @media only screen and (max-width: 1230px) {
@@ -47,9 +48,9 @@
     right: 1em;
     width: 0;
     height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid white;
+    border-left: 0.3125em solid transparent;
+    border-right: 0.3125em solid transparent;
+    border-top: 0.375em solid white;
     transition: 0.3s;
 }
 

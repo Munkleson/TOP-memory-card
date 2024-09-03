@@ -22,8 +22,6 @@ function App() {
 
     const effectRan = useRef(false);
 
-    // const validityTimeoutLength = 5000; //// Don't use this for now. It functions weird with overlapping validities. Validity is only cleared by normal means i.e. clicking anywhere, inputting another number. Would likely need to use states and maybe effects to make it look ok for very minor gain
-
     // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
     //     localStorage.version !== currentVersion && localStorage.clear();
     // }
@@ -124,9 +122,9 @@ function App() {
             {!gameActive ? (
                 <>
                     <div id="wholeBodyDiv">
-
+                    <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
-                                <div className="pokemonLogo"></div>
+                                {/* <div className="pokemonLogo"></div> */}
                         {!pokemonDataReady ? (
                             <HomePageLoadingAnimation />
                         ) : (
@@ -141,7 +139,7 @@ function App() {
             ) : (
                 <>
                     <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow} />
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow}/>
                     </div>
                 </>
             )}
@@ -155,7 +153,7 @@ function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputVa
                 <br />
                 <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
                 <p className="ballSecondaryInstructions">
-                    You can choose between {minNumberOfPokemon} and {maxNumberOfPokemon} different Pokémon to play with.
+                    You can choose between {minNumberOfPokemon} and {maxNumberOfPokemon} different Pokémon to play with
                 </p>
                 <form action="" onSubmit={gameStart} className="ballFormDiv">
                     <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />

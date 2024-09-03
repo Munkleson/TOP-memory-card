@@ -1,9 +1,29 @@
-.cardHolder {
-    /* For passing down to Pokemon card divs*/
+.mainGameBodyDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    scrollbar-gutter: stable;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+    overflow-y: visible;
 
+    /* padding-top: 25px; */
+    /* padding-bottom: 25px; */
+    box-sizing: border-box;
+    background-color: rgb(255,255,255,0);
+}
 
+.separatorDiv {
+    width: 100%;
+    height: 0;
+}
+
+.container {
     max-width: 100vw;
-
     /* Apparently all it needed for the div to be centered vertically on the screen is the height at 100%. Removing this and making it auto un-centers it */
     /* height: 100%;  */
     display: flex;
@@ -14,13 +34,7 @@
     margin-bottom: 50px;
 }
 
-/* @media only screen and (max-width: 1440px) {
-    .cardHolder {
-        --cardWidth: 100px;
-    }
-} */
-
-.cardDiv {
+.card {
     /* --cardWidth: 8.33vw; */
     /* --cardHeight: calc(var(--cardWidth) * 1.3828125); */
     --cardWidth: calc(var(--cardHeight) / 1.3828125);
@@ -34,10 +48,10 @@
     box-sizing: border-box;
 }
 
-.pokemonCardFront,
-.pokemonCardBack,
-.pokemonCardFrontFlipped,
-.pokemonCardBackFlipped {
+.front,
+.back,
+.frontFlipped,
+.backFlipped {
     /* base width 128 */
     /* Need to consider not hard coding the width into css, and instead make it in jsx if I need them to be edited more than a few times. This affects the algorithm for how many pokemon on screen based on view screen size (in gameFunctions) */
     /* width: var(--cardWidth); */
@@ -55,8 +69,8 @@
     /* background-repeat: no-repeat; */
 }
 
-.pokemonCardFront,
-.pokemonCardBack {
+.front,
+.back {
     position: absolute;
     /* top: 0; */
     /* left: 0; */
@@ -66,7 +80,7 @@
     /* box-sizing: border-box; */
 }
 
-.pokemonCardFront {
+.front {
     background: white;
     border: 2px black solid;
     background-repeat: no-repeat;
@@ -75,30 +89,30 @@
     transform: rotateY(0deg);
 }
 
-.pokemonCardBack {
-    background-image: url(../images/pokemonCardBack.webp);
+.back {
+    background-image: url(./images/pokemonCardBack.webp);
     background-size: 100%;
     /* background-repeat: no-repeat; */
     transform: rotateY(180deg);
     /* box-sizing: border-box; */
 }
 
-.pokemonCardFrontFlipped {
+.frontFlipped {
     transform: rotateY(180deg);
 }
 
-.pokemonCardBackFlipped {
+.backFlipped {
     transform: rotateY(0deg);
 }
 
-.pokemonCardFront:hover {
+.front:hover {
     /* background-color: #575a5e; */
     background-color: #3590F3;
     transition: 0.5s;
     cursor: pointer;
 }
 
-.pokemonNameOnCard {
+.pokemonName {
     margin-top: .6vh;
     font-size: 2.2vh;
 }

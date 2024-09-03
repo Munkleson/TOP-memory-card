@@ -89,26 +89,6 @@ body {
     
 }
 
-.mainGameBodyDiv {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    box-sizing: border-box;
-    flex-direction: column;
-    scrollbar-gutter: stable;
-    /* overflow-y: scroll; */
-    overflow-x: hidden;
-    overflow-y: visible;
-
-    /* padding-top: 25px; */
-    /* padding-bottom: 25px; */
-    box-sizing: border-box;
-    background-color: rgb(255,255,255,0);
-    
-}
-
 #centerBallDiv {
     /* --ballDimensions: 60.93vh; */
     --ballDimensions: 54.4vh;
@@ -148,6 +128,10 @@ body {
 
 .ballInstructions {
     max-width: calc(var(--ballDimensions) * 0.8);
+}
+
+.ballSecondaryInstructions {
+    max-width: calc(var(--ballDimensions) * 0.95);
 }
 
 .ballFormDiv {

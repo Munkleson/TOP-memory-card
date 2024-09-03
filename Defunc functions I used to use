@@ -33,3 +33,96 @@ App.jsx
     // "api/v2/pokemon?limit=251&offset=151"
     // "api/v2/pokemon?limit=251"
     //// Pokemon api works like this. Offset is the pokemon id you start at, and the limit goes from there. I.e. gen 2 of pokemon 152-251 would be limit=100&offset=151
+
+    
+// function cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow) {
+//         if (numberOfPokemon > maxPokemonPerRow){
+//             // setHolderWidth((viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2);
+//             return Math.abs((viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / maxPokemonPerRow)) * 180 + 5)) / 2);
+//         } else {
+//             // setHolderWidth(0);
+//             return 0;
+//         }
+//     };
+
+
+gameFunction.jsx
+
+        // const [holderWidth, setHolderWidth] = useState(padding);
+
+    // const [viewWidth, setViewWidth] = useState(window.innerWidth);
+    // const [holderWidth, setHolderWidth] = useState(0)
+    // const holderWidth = cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow);
+    
+    // useEffect(() => { //// This is so the changes in window size will still evenly-ish distribute the amount of cards in each row. Edge case (like when opening console and restarting game then)
+    //     const windowSizeHandler = () => {
+    //         setViewWidth(window.innerWidth);
+    //         // cardHolderWidth(numberOfPokemon, window.innerWidth, setHolderWidth)
+    //         setHolderWidth(cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow));
+    //     };
+    //     window.addEventListener("resize", windowSizeHandler);
+    //     return () => {
+    //         window.removeEventListener("resize", windowSizeHandler);
+    //     }
+    // }, []);
+
+                {/* {!currentlyFlipping ? <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} padding={padding} gameResult={gameResult} numberOfPokemon={numberOfPokemon}/> : <CardsInMotion currentGamePokemon={currentGamePokemon} cardClick={cardClick} numberOfPokemon={numberOfPokemon}/>} */}
+
+// function CardsInMotion({ currentGamePokemon, cardClick, padding }) {
+//     return (
+//         <div className="mainGameBodyDiv">
+//             {/* <div className="cardHolder" style={{ paddingLeft: `${padding}px`, paddingRight: `${padding}px` }}> */}
+//             <div className="cardHolder">
+//                 {currentGamePokemon.map((element) => {
+//                     return (
+//                         <div className="cardDiv" key={element.id}>
+//                             <div onClick={(event) => cardClick(element.id, event.target)} className="pokemonCardFront pokemonCardFrontFlipped" style={{ backgroundImage: `url(${element.imageUrl})` }}>
+//                                 <p className="pokemonNameOnCard">{element.name}</p>
+//                             </div>
+//                             <div className="pokemonCardBack pokemonCardBackFlipped"></div>
+//                         </div>
+//                     );
+//                 })}
+//             </div>
+//         </div>
+//     );
+// }
+
+
+
+// function cardHolderWidth(numberOfPokemon, viewWidth, maxPokemonPerRow) {
+//     if (numberOfPokemon > maxPokemonPerRow){
+//         // setHolderWidth((viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / 7)) * 200 + 5)) / 2);
+//         return Math.abs((viewWidth - 20 - (Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / maxPokemonPerRow)) * 180 + 5)) / 2);
+//     } else {
+//         // setHolderWidth(0);
+//         return 0;
+//     }
+// };
+
+
+cardFunction.js
+
+// function flipCards() {
+//         const cardsFront = document.querySelectorAll(".pokemonCardFront")
+//         const cardsBack = document.querySelectorAll(".pokemonCardBack")
+//         cardsFront.forEach(element => {
+//             element.classList.add('pokemonCardFrontFlipped')
+//         })
+//         cardsBack.forEach(element => {
+//             element.classList.add('pokemonCardBackFlipped');
+//         })
+//     }
+    
+//     function flipCardsBackToNormal() {
+//         const cardsFront = document.querySelectorAll(".pokemonCardFront")
+//         const cardsBack = document.querySelectorAll(".pokemonCardBack")
+//         cardsFront.forEach(element => {
+//             element.classList.remove('pokemonCardFrontFlipped')
+//         })
+//         cardsBack.forEach(element => {
+//             element.classList.remove('pokemonCardBackFlipped');
+//         }) 
+//     }
+    
+//     export { flipCards, flipCardsBackToNormal }

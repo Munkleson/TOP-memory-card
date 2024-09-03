@@ -38,6 +38,9 @@ Version control
 Things to do (in priority): From 8/31 onwards
 - MOST IMPORTANT
     - Configure for different resolution (like mac is 1440 x 900)
+    - Move the padding setting all the way up to app.jsx. It shouldn't be in gameFunction.jsx
+        - Will have to set the padding algorithm further for different types of aspect ratio and resolutions
+    - Make the card size dependent on resolution too
 
 -   Get Lin to help with the dropdown menu styling
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
