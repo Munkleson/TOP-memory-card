@@ -96,12 +96,6 @@
     outline: none;
 }
 
-.playAgainButton:active {
-    outline: none;
-    transform: translate(0px, 10px) scale(1.2, 1.2);
-    transition: all 0.05s ease-in-out;
-}
-
 @keyframes losingBlink {
     50% {
         opacity: 0.3;
@@ -138,5 +132,13 @@
         height: 3.5vh;
         font-size: 0.8em;
         padding: 0;
+    }
+}
+
+@media only screen and (min-aspect-ratio: 1/1){
+    .playAgainButton:active {
+        outline: none;
+        transform: translate(0px, 10px) scale(1.2, 1.2);
+        transition: all 0.05s ease-in-out;
     }
 }

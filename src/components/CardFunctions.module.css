@@ -73,15 +73,10 @@
     transform: rotateY(0deg);
 }
 
-.front:hover {
-    background-color: #3590F3;
-    transition: 0.5s;
-    cursor: pointer;
-}
-
 .pokemonName {
     margin-top: .6vh;
     font-size: 2.2vh;
+    width: 99%;
 }
 
 
@@ -93,6 +88,11 @@
     }
     .mainGameBodyDiv {
         justify-content: center;
+    }
+    .front:hover {
+        background-color: #3590F3;
+        transition: 0.5s;
+        cursor: pointer;
     }
 }
 

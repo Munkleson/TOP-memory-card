@@ -8,14 +8,14 @@ function GameDisplay({ currentGamePokemon, cardClick, finalCard, gameResult, num
         <div className={styles.mainGameBodyDiv}>
             <div className={styles.container}>
                 {currentGamePokemon.map((element, index) => {
-                    return <CardMap key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult} index={index} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} />;
+                    return <DisplayCards key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult} index={index} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} />;
                 })}
             </div>
         </div>
     );
 }
 
-function CardMap({ finalCard, cardClick, element, gameResult, index, numberOfPokemon, currentlyFlipping }) {
+function DisplayCards({ finalCard, cardClick, element, gameResult, index, numberOfPokemon, currentlyFlipping }) {
     const indexToInsertSeparatorDiv = Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / gameSettings.maxPokemonPerRow));
     return (
         <>
