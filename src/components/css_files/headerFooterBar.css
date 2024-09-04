@@ -1,6 +1,7 @@
 #headerBar {
     top: 0px;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     width: 100vw;
     height: 5.44vh;
     /* background-color: #575A5E; */
@@ -63,7 +64,8 @@
 
 .footerBar {
     bottom: 0px;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     width: 100vw;
     height: 5.44vh;
     background-color: rgb(255, 255, 255, 0);
