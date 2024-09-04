@@ -23,7 +23,7 @@ function EndingScreen({ gameResult, replayGame }){
             result = "You win";
             break;
         case "loss":
-            result = "You lose";
+            result = "Try again!";
             break
     }
     if (!endScreenActive){

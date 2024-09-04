@@ -23,7 +23,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         if (allowedToClick) {
             /// Remove this if I want people to be able to spam click/autoclickers
             if (!gameOver) {
-                target.style.backgroundColor ='#3590F3';
+                target.style.backgroundColor = "#3590F3"; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
                 //// checks if the same pokemon has been clicked already
                 setGameActive(true);
                 setCardClickedCheck(true);
@@ -48,7 +48,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                     //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
                     setTimeout(() => {
                         if (updatedPoints !== numberOfPokemon) {
-                            target.style.backgroundColor = "";
+                            target.style.backgroundColor = ""; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
                             // setFlippingStatus(true);
                             setCurrentGamePokemon(shuffleArray(currentGamePokemon));
                             //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
@@ -106,12 +106,10 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         <>
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} resetGame={resetGame} />
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping}/>
+            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} />
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>
     );
 }
-
-
 
 export { InitializeGame };
