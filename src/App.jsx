@@ -22,26 +22,18 @@ function App() {
 
     const effectRan = useRef(false);
 
-    // document.addEventListener("gesturestart", function (e) {
-    //     e.preventDefault();
-    //     document.body.style.zoom = 0.99;
-    // });
-    
-    // document.addEventListener("gesturechange", function (e) {
-    //     e.preventDefault();
-    
-    //   document.body.style.zoom = 0.99;
-    // });
-    // document.addEventListener("gestureend", function (e) {
-    //       e.preventDefault();
-    //     document.body.style.zoom = 1;
-    // });
-
-    document.addEventListener('touchmove', (event) => {
+    document.addEventListener('touchmove', (event) => { //// disable scrolling on mobile, as it can be easily done and affect the game
         event.preventDefault();
         event.stopPropagation();
         return false;
     }, {passive: false});
+
+    // screen.orientation.lock("portrait");
+    screen.orientation.lock('natural').then(() => {
+        console.log('Orientation locked');
+    }).catch((error) => {
+        console.log(error);
+    })
 
     // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
     //     localStorage.version !== gameSettings.currentVersion && localStorage.clear();
