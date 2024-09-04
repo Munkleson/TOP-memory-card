@@ -110,11 +110,11 @@
         left: 10px;
         top: -5px;
         box-sizing: border-box;
-        font-size: 3vw;
+        font-size: 2.7vw;
     }
 
-    .generationMenu {
-        /* width: 100vw; */
+    .caret {
+        right: 0.7em;
     }
 
     .selectedGeneration {

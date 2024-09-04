@@ -42,14 +42,6 @@ function EndingScreen({ gameResult, replayGame }){
         }
     }, []); //// I believe a dependency array is absolutely needed here, because if I don't have it, the setTimeout is going to go haywire and not work as intended?
 
-    // if (gameResult === "loss" && !lossFlashActive && !dummyCheck){
-    //     setLossFlashActiveState(true);
-    //     setDummyCheck(true);
-    //     setTimeout(() => {
-    //         setLossFlashActiveState(false);
-    //     }, 1500);
-    // }
-
     return (
         <>
             { gameResult === "win" && <ConfettiComponent /> }

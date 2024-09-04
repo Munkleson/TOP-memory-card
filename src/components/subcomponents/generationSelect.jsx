@@ -61,7 +61,6 @@ function DropDownList({ pokemonGenerations, selectedGen, selectGeneration }) {
 }
 
 function setPokemonGenerationModule(selectedGeneration, pokemonGenerations, setPokemonGameData, setSelectedGenForReturn, allGenPokemon){
-    console.log("hi")
     switch (selectedGeneration) {
         case pokemonGenerations[0]:
             setPokemonGameData(allGenPokemon.slice(0, 151));
