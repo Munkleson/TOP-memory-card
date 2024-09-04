@@ -98,9 +98,9 @@
 
 /* For iphone XR + on 9/19.5 resolution*/
 /* the taller the screen, the more the sizes should be based on width, and vice versa */
-@media only screen and (max-aspect-ratio: 9/16){ 
+@media only screen and (max-aspect-ratio: 9/15){ 
     .card {
-        --cardWidth: 16vw;
+        --cardWidth: 13vw;
         width: var(--cardWidth);
     }
     .pokemonName {
@@ -109,7 +109,7 @@
 }
 
 /* For iphone 8 and under on 9/16 resolution */
-@media only screen and (min-aspect-ratio: 9/16) and (max-aspect-ratio: 1/1){
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
     .card {
         /* --cardWidth: 15vw; */
         /* width: var(--cardWidth); */
