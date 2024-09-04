@@ -1,7 +1,7 @@
 
 const gameSettings = {
     currentVersion: "V0.1",
-    maxNumberOfPokemon: 27,
+    maxNumberOfPokemon: 30,
     minNumberOfPokemon: 6,
     mobileOrNot: (window.innerWidth / window.innerHeight) < 1, //// To check if div separators are needed because mobile. Essentially a mobile check
 

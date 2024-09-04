@@ -37,7 +37,7 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
     const [isGameActive, setGameActiveState] = useState(gameActive);
 
-    const timerLength = 5000; //// How long the timer is in milliseconds
+    const timerLength = 4500; //// How long the timer is. Currently 4500 = 5 seconds. 1 second is 900, but I'm not sure why, but it works
     const marginAmount = (timerBarSizeElement / timerLength) * viewWidth;
 
     if (gameActive && !isGameActive) {
