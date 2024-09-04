@@ -93,7 +93,7 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
     //     };
     // }, []);
 
-    return <>{!gameOver && (timerBarActive ? <div className="timerBar" style={{ marginRight: marginAmount, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div> : <div className="timerBar" style={{ marginRight: marginAmount }}></div>)}</>;
+    return <>{!gameOver && (timerBarActive ? <div className="timerBar" style={{ marginRight: `${marginAmount}px`, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div> : <div className="timerBar" style={{ marginRight: marginAmount }}></div>)}</>;
 }
 
 export { HeaderBar, FooterBar };
