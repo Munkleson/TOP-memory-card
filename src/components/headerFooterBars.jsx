@@ -56,7 +56,8 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
             setCardClickedCheckFunction();
             setTimerBarSizeElement(0);
         }
-    }, [cardClickedCheck, setCardClickedCheckFunction]);
+        !gameActive && setTimerBarSizeElement(0);
+    }, [cardClickedCheck, setCardClickedCheckFunction, gameActive]);
 
     if (!gameActive && isGameActive) {
         //// Victory function

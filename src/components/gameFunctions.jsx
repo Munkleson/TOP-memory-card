@@ -23,7 +23,6 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         if (allowedToClick) {
             /// Remove this if I want people to be able to spam click/autoclickers
             if (!gameOver) {
-                console.log(target)
                 target.style.backgroundColor ='#3590F3';
                 //// checks if the same pokemon has been clicked already
                 setGameActive(true);
