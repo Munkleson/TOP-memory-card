@@ -29,10 +29,12 @@ Things this project helped me with learning/practicing:
 -   The most minor thing, but that I did not need to disable button pressing at a time when I did not want them to be pressed. An animation (or any element really) that has the highest z index covering everything will already disalbe them by default even if transparent
 -   Responsive design
     -   Previously I hardcoded most css properties in usually px. Changing to a vh/vw/em style was initially difficult, but was necessary when testing it on a PC with a different resolution, it had copious amounts of overlapping elements, elements missing, etc.
+    -   Getting my head around using media queries with aspect ratios was difficult at first
+    -   Design for mobile first
 
 Future features planned:
 
--   Mobile support
+-   Mobile support - Completed
     -   Currently as of v0.1 while it can work on mobile, it really doesn't well, and things do not scale properly. Currently there are no real @media queries used for this purpose
 -   More settings
     -   Such as removing animations

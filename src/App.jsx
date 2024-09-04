@@ -28,13 +28,6 @@ function App() {
         return false;
     }, {passive: false});
 
-    // screen.orientation.lock("portrait");
-    screen.orientation.lock('natural').then(() => {
-        console.log('Orientation locked');
-    }).catch((error) => {
-        console.log(error);
-    })
-
     // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
     //     localStorage.version !== gameSettings.currentVersion && localStorage.clear();
     // }
