@@ -97,24 +97,25 @@
 }
 
 /* For iphone XR + on 9/19.5 resolution*/
-/* @media only screen and (max-aspect-ratio: 9/16){ 
+/* the taller the screen, the more the sizes should be based on width, and vice versa */
+@media only screen and (max-aspect-ratio: 9/16){ 
     .card {
-        --cardWidth: 13.5vw;
-        height: var(--cardWidth);
+        --cardWidth: 16vw;
+        width: var(--cardWidth);
     }
     .pokemonName {
-        font-size: 2.2vw;
+        font-size: 2.0vw;
     }
-} */
+}
 
 /* For iphone 8 and under on 9/16 resolution */
-@media only screen and (min-aspect-ratio: 9/19.5) and (max-aspect-ratio: 1/1){
+@media only screen and (min-aspect-ratio: 9/16) and (max-aspect-ratio: 1/1){
     .card {
         /* --cardWidth: 15vw; */
         /* width: var(--cardWidth); */
         height: 13.5vh;
     }
     .pokemonName {
-        font-size: 2.2vw;
+        font-size: 2.0vw;
     }
 }
