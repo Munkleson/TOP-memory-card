@@ -48,7 +48,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
                     //// this setTimeout is needed so it will rerender with a shuffled array of pokemon to work with the flipping functions
                     setTimeout(() => {
                         if (updatedPoints !== numberOfPokemon) {
-                            target.style.backgroundColor ='white';
+                            target.style.backgroundColor = "";
                             // setFlippingStatus(true);
                             setCurrentGamePokemon(shuffleArray(currentGamePokemon));
                             //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
