@@ -35,7 +35,7 @@ function CardMap({ finalCard, cardClick, element, gameResult, index, numberOfPok
             { !gameSettings.mobileOrNot && 
                 ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1) && <div className={styles.separatorDiv}></div>)}
             { gameSettings.mobileOrNot && 
-                ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1 || index === indexToInsertSeparatorDiv * 3 - 1 || index === indexToInsertSeparatorDiv * 4 - 1) && <div className={styles.separatorDiv}></div>)}
+                ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1 || index === indexToInsertSeparatorDiv * 3 - 1 || index === indexToInsertSeparatorDiv * 4 - 1 || index === indexToInsertSeparatorDiv * 5 - 1) && <div className={styles.separatorDiv}></div>)}
         </>
     );
 }
