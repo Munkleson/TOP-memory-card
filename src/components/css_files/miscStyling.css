@@ -7,7 +7,7 @@
     position: absolute;
 
     top: 00px;
-    
+
     --height: 19.6vh;
     height: var(--height);
     width: calc(var(--height) * 5);
@@ -24,8 +24,16 @@
     }
 }
 
+/* For iphone XR + on 9/19.5 resolution*/
 @media only screen and (max-aspect-ratio: 9/15){
     .pokemonLogo {
         top: 50px;
+    }
+}
+
+/* For iphone 8 and under on 9/16 resolution */
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
+    .pokemonLogo {
+        top: 26px;
     }
 }

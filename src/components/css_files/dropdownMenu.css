@@ -99,7 +99,7 @@
     }
 }
 
-@media only screen and (max-aspect-ratio: 9/15){
+@media only screen and (max-aspect-ratio: 1/1){
     .generationSelectDropdown {
         opacity: 1;
         --height: 3.2644vh;
@@ -121,5 +121,6 @@
         padding: 0.1em;
         padding-right: 0.5em;
         padding-left: 0.5em;
+        margin-top: 2px !important;
     }
 }

@@ -52,6 +52,12 @@
     font-size: calc(var(--font-size) * 1.05);
 }
 
+@media only screen and(max-aspect-ratio: 1/1) {
+    .headerButtons{
+        
+    }
+}
+
 .currentScoreText {
     font-weight: bold;
     color: white;
