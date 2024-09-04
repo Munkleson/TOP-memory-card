@@ -15,7 +15,7 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
             <p>
                 Current score: <span className="currentScoreText">{currentScore}</span>
             </p>
-            <p>
+            <p className="highScoreTextHolder">
                 High score for current mode: <span className="highScoreText">{highScore}</span>
             </p>
         </header>
@@ -43,9 +43,6 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
 
     const timerLength = 4500; //// How long the timer is. Currently 4500 = 5 seconds. 1 second is 900, but I'm not sure why, but it works
     const marginAmount = (timerBarSizeElement / timerLength) * viewWidth;
-
-    console.log(timerBarSizeElement);
-    console.log(marginAmount);
 
     if (gameActive && !isGameActive) {
         setTimerBarState(true);

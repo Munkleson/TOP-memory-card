@@ -29,17 +29,20 @@
 .headerButtons {
     --headerButtonHeight: 4.35vh;
     /* padding: calc(var(--headerButtonHeight) * 0.00544); */
-    width: calc(var(--headerButtonHeight) * 3.75);
+    width: calc(var(--headerButtonHeight) * 3.5);
     height: var(--headerButtonHeight);
     text-align: center;
     transition: all 0.15s ease-in-out;
     border: none;
 
-    --font-size: 1.74vh;
+    --font-size: 1.5vh;
     font-size: var(--font-size);
     display: flex;
     align-items: center;
     justify-content: center;
+
+    margin-left: 5px;
+    padding: 2px
 }
 
 .headerButtons:hover {
@@ -52,11 +55,7 @@
     font-size: calc(var(--font-size) * 1.05);
 }
 
-@media only screen and(max-aspect-ratio: 1/1) {
-    .headerButtons{
-        
-    }
-}
+
 
 .currentScoreText {
     font-weight: bold;
@@ -97,3 +96,13 @@
         height: 2.5vh;
     }
 } */
+
+@media only screen and (max-aspect-ratio: 1/1) {
+    /* .headerButtons{
+        font-size: 1px;
+    } */
+    
+    .highScoreTextHolder {
+        margin-right: 3px;
+    }
+}
