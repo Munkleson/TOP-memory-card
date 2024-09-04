@@ -25,27 +25,25 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* margin-top: 5.44vh; */
-    /* margin-bottom: 5.44vh; */
+    margin-top: 5.44vh;
+    margin-bottom: 5.44vh;
 }
 
 .card {
     /* --cardWidth: calc(var(--cardHeight) / 1.3828125); */
     aspect-ratio: 1/1.3828125;
-    --cardHeight: 26vh;
+    /* --cardHeight: 26vh; */
     /* width: var(--cardWidth); */
-    height: var(--cardHeight);
+    /* height: var(--cardHeight); */
     position: relative;
     transform: rotateY(0deg);
     box-sizing: border-box;
     border-radius: 10px;
     /* overflow: hidden; */
-
     margin-top: 1.1vh;
     margin-bottom: 1.1vh;
     margin-left: 0.55vh;
     margin-right: 0.55vh;
-
 }
 
 .front,
@@ -102,4 +100,22 @@
 .pokemonName {
     margin-top: .6vh;
     font-size: 2.2vh;
+}
+
+
+@media only screen and (min-aspect-ratio: 1/1){
+    .card {
+        --cardHeight: 26vh;
+        height: var(--cardHeight);
+    }
+}
+
+@media only screen and (max-aspect-ratio: 9/15){
+    .card {
+        --cardWidth: 16vw;
+        width: var(--cardWidth);
+    }
+    .pokemonName {
+        font-size: 2.2vw;
+    }
 }

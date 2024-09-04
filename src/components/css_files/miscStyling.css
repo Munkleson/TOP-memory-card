@@ -5,11 +5,9 @@
     background-size: 100%;
 
     position: absolute;
-    /* top: -200px; */
-    top: 00px;
 
-    /* height: calc(53.333vw / 5);
-    width: 53.333vw; */
+    top: 00px;
+    
     --height: 19.6vh;
     height: var(--height);
     width: calc(var(--height) * 5);
@@ -23,5 +21,11 @@
     .pokemonLogo {
         width: 96.77vw;
         height: 19.355vw;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 9/15){
+    .pokemonLogo {
+        top: 50px;
     }
 }

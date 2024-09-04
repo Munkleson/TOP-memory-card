@@ -17,6 +17,8 @@ function GameDisplay({ currentGamePokemon, cardClick, finalCard, gameResult, num
 
 function CardMap({ finalCard, cardClick, element, gameResult, index, numberOfPokemon, currentlyFlipping }) {
     const indexToInsertSeparatorDiv = Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / gameSettings.maxPokemonPerRow));
+    const mobileIndexToInsertSeparatorDiv = Math.ceil(numberOfPokemon / Math.ceil(numberOfPokemon / gameSettings.maxPokemonPerRow));
+    console.log(mobileIndexToInsertSeparatorDiv);
     return (
         <>
             <div className={styles.card}>
@@ -32,7 +34,8 @@ function CardMap({ finalCard, cardClick, element, gameResult, index, numberOfPok
                 </div>
                 <div className={currentlyFlipping ? `${styles.back} ${styles.backFlipped}` : styles.back}></div>
             </div>
-            {(index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1) && <div className={styles.separatorDiv}></div>}
+            { !gameSettings.mobileOrNot && ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1) && <div className={styles.separatorDiv}></div>)}
+            { gameSettings.mobileOrNot && ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1 || index === indexToInsertSeparatorDiv * 3 - 1 || index === indexToInsertSeparatorDiv * 4 - 1) && <div className={styles.separatorDiv}></div>)}
         </>
     );
 }

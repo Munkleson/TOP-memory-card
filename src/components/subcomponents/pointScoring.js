@@ -13,7 +13,6 @@ function getHighScore(numberOfPokemon, timedCheck) {
     } else {
         return localStorage[numberOfPokemon] ? localStorage[numberOfPokemon] : 0;
     }
-
 }
 
 export { storeInLocalStorage, getHighScore };

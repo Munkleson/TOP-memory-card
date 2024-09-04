@@ -9,11 +9,7 @@
     font-size: 1.74vh;
 }
 
-@media only screen and (max-width: 1230px) {
-    .generationSelectDropdown {
-        opacity: 0;
-    }
-}
+
 
 .generationSelectDropdown * {
     box-sizing: border-box;
@@ -95,4 +91,35 @@
 .generationMenu-open {
     display: block;
     opacity: 1;
+}
+
+@media only screen and (max-width: 1230px) {
+    .generationSelectDropdown {
+        opacity: 0;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 9/15){
+    .generationSelectDropdown {
+        opacity: 1;
+        --height: 3.2644vh;
+        width: 30vw;
+        /* width: calc(var(--height) * 6.667); */
+        height: var(--height);
+        position: fixed;
+        left: 10px;
+        top: -5px;
+        box-sizing: border-box;
+        font-size: 3vw;
+    }
+
+    .generationMenu {
+        /* width: 100vw; */
+    }
+
+    .selectedGeneration {
+        padding: 0.1em;
+        padding-right: 0.5em;
+        padding-left: 0.5em;
+    }
 }

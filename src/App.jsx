@@ -23,14 +23,16 @@ function App() {
     const effectRan = useRef(false);
 
     // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
-    //     localStorage.version !== currentVersion && localStorage.clear();
+    //     localStorage.version !== gameSettings.currentVersion && localStorage.clear();
     // }
     // localStorageVersionControl();
+
     function setPokemonGeneration(selectedGeneration) {
         return setPokemonGenerationModule(selectedGeneration, pokemonGenerations, setPokemonGameData, setSelectedGenForReturn, allGenPokemon);
     }
 
-    useEffect(() => { //// Fetches the data from the Pokemon API and sets the home screen when the loading is finished
+    useEffect(() => {
+        //// Fetches the data from the Pokemon API and sets the home screen when the loading is finished
         if (!effectRan.current) {
             let ignore = false;
             const fetchPokemonData = async () => {
@@ -58,10 +60,12 @@ function App() {
         const playerCustomInput = document.querySelector(".gameLimitNumberInput");
         const playerCustomInputValue = playerCustomInput.value;
 
-        if (playerCustomInputValue > gameSettings.maxNumberOfPokemon || playerCustomInputValue < gameSettings.minNumberOfPokemon) { //// Controlling the custom validity
+        if (playerCustomInputValue > gameSettings.maxNumberOfPokemon || playerCustomInputValue < gameSettings.minNumberOfPokemon) {
+            //// Controlling the custom validity
             playerCustomInput.setCustomValidity(`You must enter a number between ${gameSettings.minNumberOfPokemon} and ${gameSettings.maxNumberOfPokemon}`);
             playerCustomInput.reportValidity();
-        } else { //// 
+        } else {
+            ////
             setNumberOfPokemon(playerCustomInputValue * 1);
             setGameState(true);
         }
@@ -80,24 +84,24 @@ function App() {
             {!gameStarted ? (
                 <>
                     <div id="wholeBodyDiv">
-                    <div className="pokemonLogo"></div>
+                        <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
-                                {/* <div className="pokemonLogo"></div> */}
-                        {!pokemonDataReady ? (
-                            <HomePageLoadingAnimation />
-                        ) : (
-                            <>
-                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations} />
-                                <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked}/>
-                            </>
-                        )}
+                            {/* <div className="pokemonLogo"></div> */}
+                            {!pokemonDataReady ? (
+                                <HomePageLoadingAnimation />
+                            ) : (
+                                <>
+                                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations} />
+                                    <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked} />
+                                </>
+                            )}
                         </div>
                     </div>
                 </>
             ) : (
                 <>
                     <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow}/>
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow} />
                     </div>
                 </>
             )}
@@ -108,17 +112,19 @@ function App() {
 function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue, timedCheckBoxTicked }) {
     return (
         <>
-        <br />
+            <br />
             <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
             <p className="ballSecondaryInstructions">
                 You can choose between {minNumberOfPokemon} and {maxNumberOfPokemon} different Pokémon to play with
             </p>
             <form action="" onSubmit={gameStart} className="ballFormDiv">
                 <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
-                <input type="submit" value={"Start game"} className="startGameButton"/>
+                <input type="submit" value={"Start game"} className="startGameButton" />
                 <div className="timedModeDiv">
-                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked}/>
-                    <span className="timedModeText" onClick={timedOrNot}>Timed mode (Optional)</span>
+                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked} />
+                    <span className="timedModeText" onClick={timedOrNot}>
+                        Timed mode (Optional)
+                    </span>
                 </div>
             </form>
             <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>

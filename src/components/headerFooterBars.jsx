@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./css_files/headerFooterBar.css";
+import { gameSettings } from "../gameSettingsVariables";
 
 function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
     return (
@@ -10,7 +11,7 @@ function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
             <button onClick={replayGame} className="headerButtons">
                 Restart game
             </button>
-            <div className="headerPokemonLogo"></div>
+            {!gameSettings.mobileOrNot && <div className="headerPokemonLogo"></div>}
             <p>Current score: <span className="currentScoreText">{currentScore}</span></p>
             <p>High score for current mode: <span className="highScoreText">{highScore}</span></p>
         </header>
