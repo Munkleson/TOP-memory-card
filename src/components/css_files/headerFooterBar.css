@@ -86,6 +86,8 @@
     z-index: 1000;
 }
 
-@media only screen and (min-aspect-ratio: 9/16){
-
+@media only screen and (max-aspect-ratio: 9/15){
+    .footerBar {
+        height: 2.5vh;
+    }
 }

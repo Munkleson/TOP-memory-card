@@ -108,9 +108,15 @@
         --cardHeight: 26vh;
         height: var(--cardHeight);
     }
+    .mainGameBodyDiv {
+        justify-content: center;
+    }
 }
 
 @media only screen and (max-aspect-ratio: 9/15){
+    .mainGameBodyDiv {
+        /* padding-top: 0.44vh; */
+    }
     .card {
         --cardWidth: 16vw;
         width: var(--cardWidth);
