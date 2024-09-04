@@ -40,10 +40,12 @@
     box-sizing: border-box;
     border-radius: 10px;
     /* overflow: hidden; */
-    margin-top: 1.1vh;
+
+    /* margin-top: 1.1vh;
     margin-bottom: 1.1vh;
     margin-left: 0.55vh;
-    margin-right: 0.55vh;
+    margin-right: 0.55vh; */
+    margin: 0.55vh;
 }
 
 .front,
