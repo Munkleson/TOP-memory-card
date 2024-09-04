@@ -100,7 +100,7 @@
 /* the taller the screen, the more the sizes should be based on width, and vice versa */
 @media only screen and (max-aspect-ratio: 9/15){ 
     .card {
-        --cardWidth: 13vw;
+        --cardWidth: 16vw;
         width: var(--cardWidth);
     }
     .pokemonName {
