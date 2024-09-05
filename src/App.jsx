@@ -5,10 +5,10 @@ import { InitializeGame } from "./components/gameFunctions";
 import "./components/css_files/miscStyling.css";
 import { numberInput } from "./components/subcomponents/numberInputLogic";
 import { gameSettings } from "./gameSettingsVariables";
-import { GenerationSelect, setPokemonGenerationModule } from "./components/subcomponents/generationSelect";
+import { GenerationSelect } from "./components/subcomponents/generationSelectDisplayComponents.jsx";
+import setPokemonGenerationModule from "./components/subcomponents/generationSelectLogic.js";
 
 function App() {
-    const pokemonGenerations = ["Generation 1", "Generation 2", "Generation 3", "Generation 4", "Generation 5", "Generation 6", "Generation 7", "Generation 8", "Generation 9", "All Generations"];
     const [allGenPokemon, setFullPokemonData] = useState([]);
     const [pokemonData, setPokemonGameData] = useState([]);
 
@@ -19,6 +19,8 @@ function App() {
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
     const [inputValue, setInputValue] = useState("");
+
+    const [gameMode, setGameMode] = useState("classic");
 
     const effectRan = useRef(false);
 
@@ -34,7 +36,7 @@ function App() {
     // localStorageVersionControl();
 
     function setPokemonGeneration(selectedGeneration) {
-        return setPokemonGenerationModule(selectedGeneration, pokemonGenerations, setPokemonGameData, setSelectedGenForReturn, allGenPokemon);
+        return setPokemonGenerationModule(selectedGeneration, gameSettings.pokemonGenerations, setPokemonGameData, setSelectedGenForReturn, allGenPokemon);
     }
 
     useEffect(() => {
@@ -49,7 +51,7 @@ function App() {
                         setPokemonGameData(pokemonData.slice(0, 152)); //// Initial setting for the pokemon
                         setTimeout(() => {
                             setPokemonDataReadyState(true);
-                        }, 1000); //// Timeout to not make it so jarring for when the loading finishes too quickly. Can put in an animation at a later time
+                        }, 1500); //// Timeout to not make it so jarring for when the loading finishes too quickly. Can put in an animation at a later time
                     });
                 }
             };
@@ -71,7 +73,6 @@ function App() {
             playerCustomInput.setCustomValidity(`You must enter a number between ${gameSettings.minNumberOfPokemon} and ${gameSettings.maxNumberOfPokemon}`);
             playerCustomInput.reportValidity();
         } else {
-            ////
             setNumberOfPokemon(playerCustomInputValue * 1);
             setGameState(true);
         }
@@ -81,35 +82,35 @@ function App() {
         !timedCheckBoxTicked ? setTimeCheckBoxState(true) : setTimeCheckBoxState(false);
     }
 
-    function resetGame() {
+    function backToHomePage() {
         setGameState(false);
+    }
+
+    function setGameModeFunction(selectedMode){
+        setGameMode(selectedMode);
     }
 
     return (
         <>
-            {!gameStarted ? (
-                <>
-                    <div id="wholeBodyDiv">
-                        <div className="pokemonLogo"></div>
-                        <div id="centerBallDiv">
-                            {/* <div className="pokemonLogo"></div> */}
-                            {!pokemonDataReady ? (
-                                <HomePageLoadingAnimation />
-                            ) : (
-                                <>
-                                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={pokemonGenerations} />
-                                    <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked} />
-                                </>
-                            )}
-                        </div>
+            {!gameStarted ? (               
+                <div id="wholeBodyDiv">
+                    <div className="pokemonLogo"></div>
+                    <div id="centerBallDiv">
+                        {/* <div className="pokemonLogo"></div> */}
+                        {!pokemonDataReady ? (
+                            <HomePageLoadingAnimation />
+                        ) : (
+                            <>
+                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} />
+                                <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked} />
+                            </>
+                        )}
                     </div>
-                </>
-            ) : (
-                <>
-                    <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} resetGame={resetGame} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow} />
-                    </div>
-                </>
+                </div>               
+            ) : (               
+                <div id="gameBodyDiv">
+                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow} />
+                </div>               
             )}
         </>
     );

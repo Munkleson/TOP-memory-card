@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import "./css_files/headerFooterBar.css";
 import { gameSettings } from "../gameSettingsVariables";
 
-function HeaderBar({ resetGame, replayGame, highScore, currentScore }) {
+let timeWhenTimerStarted; //// global object for checking 
+
+function HeaderBar({ backToHomePage, replayGame, highScore, currentScore }) {
     return (
         <header id="headerBar">
-            <button onClick={resetGame} className="headerButtons">
+            <button onClick={backToHomePage} className="headerButtons">
                 Back to home
             </button>
             <button onClick={replayGame} className="headerButtons">
@@ -37,24 +39,25 @@ function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setC
 function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
     const [timerBarSizeElement, setTimerBarSizeElement] = useState(0);
     const [timerBarActive, setTimerBarState] = useState(false);
-    // const [viewWidth, setViewWidth] = useState(window.innerWidth);
-    const viewWidth = window.innerWidth;
+    const [viewWidth, setViewWidth] = useState(window.innerWidth);
+    // const viewWidth = window.innerWidth;
     const [isGameActive, setGameActiveState] = useState(gameActive);
 
-    const timerLength = 4500; //// How long the timer is. Currently 4500 = 5 seconds. 1 second is 900, but I'm not sure why, but it works
+    const timerLength = 5000; //// How long I want the timed mode to last
     const marginAmount = (timerBarSizeElement / timerLength) * viewWidth;
 
     if (gameActive && !isGameActive) {
         setTimerBarState(true);
         setGameActiveState(true);
     }
-
+    
     //// Resets the timer whenever a card is clicked
     useEffect(() => {
         //// Why does this need to be an effect and not a state update like above? Getting an error with the above one where it causes an error because it re-renders too many times
         if (cardClickedCheck) {
             setCardClickedCheckFunction();
             setTimerBarSizeElement(0);
+            timeWhenTimerStarted = Date.now();
         }
         !gameActive && setTimerBarSizeElement(0);
     }, [cardClickedCheck, setCardClickedCheckFunction, gameActive]);
@@ -69,7 +72,8 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
     useEffect(() => {
         const interval = setInterval(() => {
             if (timerBarActive && !(marginAmount >= viewWidth)) {
-                setTimerBarSizeElement((timerBarSizeElement) => timerBarSizeElement + 10);
+                // setTimerBarSizeElement((timerBarSizeElement) => timerBarSizeElement + 10);
+                setTimerBarSizeElement(Date.now() - timeWhenTimerStarted);
             } else if (marginAmount >= viewWidth) {
                 setTimerBarState(false);
                 setGameActiveState(false);
@@ -80,16 +84,16 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
         return () => clearInterval(interval);
     }, [timerBarActive, marginAmount, viewWidth, gameOverFunction]);
 
-    // useEffect(() => {
-    //     //// edge case for if someone makes the window smaller. There is a potential issue in that it would trigger another setTimeout though
-    //     const windowSizeHandler = () => {
-    //         setViewWidth(window.innerWidth);
-    //     };
-    //     window.addEventListener("resize", windowSizeHandler);
-    //     return () => {
-    //         window.removeEventListener("resize", windowSizeHandler);
-    //     };
-    // }, []);
+    useEffect(() => {
+        //// edge case for if someone makes the window smaller. There is a potential issue in that it would trigger another setTimeout though
+        const windowSizeHandler = () => {
+            setViewWidth(window.innerWidth);
+        };
+        window.addEventListener("resize", windowSizeHandler);
+        return () => {
+            window.removeEventListener("resize", windowSizeHandler);
+        };
+    }, []);
 
     return <>{!gameOver && (timerBarActive ? <div className="timerBar" style={{ marginRight: `${marginAmount}px`, borderTopRightRadius: "20px", borderBottomRightRadius: "20px" }}></div> : <div className="timerBar" style={{ marginRight: marginAmount }}></div>)}</>;
 }

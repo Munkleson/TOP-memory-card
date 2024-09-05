@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { whichPokemon, shuffleArray } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
-import "./css_files/pokemonCardStyles.css";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
 import { GameDisplay } from "./CardFunctions";
 
-function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGame, timed }) {
+function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, backToHomePage, timed }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
@@ -77,6 +76,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
         setGameResult(false);
         setGameActive(false);
         setClickAllowance(true); /// Remove this if I want people to be able to spam click/autoclickers
+        setCardClickedCheckFunction()
     }
 
     function gameOverFunction(id) {
@@ -104,7 +104,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, resetGam
 
     return (
         <>
-            <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} resetGame={resetGame} />
+            <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} />
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
             <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} />
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />

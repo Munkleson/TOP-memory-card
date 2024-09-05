@@ -40,8 +40,6 @@ Things to do (in priority): From 8/31 onwards
 -   MOST IMPORTANT
 
 -   Music
--   Disable scroll
--   Lock screen orientation
 -   Refactor the code to make the timer bar actually reflect the time I have set
 -   Get Lin to help with the dropdown menu styling
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
@@ -52,18 +50,19 @@ Things to do (in priority): From 8/31 onwards
 -   Show current and high score in the game win/lose popup div
 -   Put a message in the home screen easily seen like "beat certain levels to unlock further generations"
     -   So not all are available at the start
--
+-   Style the "You win" or "Try again!" better
 
 Way down the line on priority
 
 -   Japanese language (maybe others, but that's way down the line)
     -   Would have to only be able to be changed on the home screen, so it can rerender everything easily (more for me). Maybe even further down the line it can be changed anytime. Localstorage for this might be good
--   Make it work for mobiles too
 -   When the screen width is smaller, there's a white bar at the bottom that hides anything below it. Can't get rid of it because I can't figure out what is causing it
 -   Option to remove animations - Particularly for the flash - Can be for the wait time for victory and lose screen too, but that'll be later
 -   Option to make the timer faster - This one is a lot harder as it would require complex changes to the scoring algorithm - Could make timed custom ones just not scoreable?
 -   Rainbow neon animation on background cards before the win pokeball pops up
 -   Custom pokemon set option. i.e. selectable indexes of pokemon
+-   Store pokemon arrays in localStorage rather than fetching every time. Currently fetching just to make sure it works, and also shows I can figure out how to do loading
+-   Achievements
 
 Decision making:
 
@@ -88,8 +87,10 @@ Completed: From 8/31 onwards - Commits 8/31
 -   Pokemon generations - Issue is right now if you try start the game without the generation being loaded in, it crashes, because pokemon data is technically completely empty - Maybe have a loading animation in the drop down selection menu that can only be clicked when it is ready - **\*** Could just do a loading screen while the api is being fetched - Loading screen is the way to go
 -   Dropdown menu for the generation selection fully completed bar maybe a bit of styling
 
-9/4 
-- Configure for different resolution (like mac is 1440 x 900) - Move the padding setting all the way up to app.jsx. It shouldn't be in gameFunction.jsx - Will have to set the padding algorithm further for different types of aspect ratio and resolutions - Make the card size dependent on resolution too
+9/4
+
+-   Configure for different resolution (like mac is 1440 x 900) - Move the padding setting all the way up to app.jsx. It shouldn't be in gameFunction.jsx - Will have to set the padding algorithm further for different types of aspect ratio and resolutions - Make the card size dependent on resolution too
 -   Take away "you lose" and put in something in place.
     -   Not show something so negative, since you lose far more often than you win
-
+-   Disable scroll and zoom
+-   Make it work for mobiles too

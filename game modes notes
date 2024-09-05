@@ -1,0 +1,42 @@
+Game modes:
+
+Classic
+
+-   The current one
+-   Not friendly for mobiles, as it has a large number of cards for a small screen
+-   Up to 30 cards displayed at a time
+-   Custom or set difficulty, i.e:
+    -   Easy: 6 cards only
+    -   Normal: 12 cards
+    -   Hard: 20 cards
+    -   Nightmare: 30 cards
+
+Normal
+
+-   Shows up to 6 cards at once
+    -   Rotates cards shown out of the deck until all have been clicked
+    -   Easy: Shows 3 cards at once out of 6
+    -   Normal: Shows 4 cards at once out of 12
+    -   Hard: Shows 5 cards at once out of 20
+    -   Nightmare: Shows 6 cards at once out of 30
+-   Friendly for mobiles as it has only 6 cards max on the screen
+-   Have to be careful with coding this as to make sure there is always at least 1 valid card on screen
+    -   Could use an object to store this?
+    -   While function to check how many objects in the shuffled array are valid >= 1
+
+Timed
+- Every game mode has a timed option
+- Different scoring storage
+- Better for "prestige"
+- Have to hold off on making this a pushed thing/faster until the time mechanism is fixed
+
+useEffect with a setTimeout, and cancel setTimeout and restart it if a card is clicked
+
+Generation of pokemon: Unown
+
+-   Only unown pokemon are shown
+-   Hardest difficulty?
+-   Unlocked only after every other one has been completed on timed
+-   Show that it can be unlocked, but not what it is yet
+-   Maybe show via achievements as "?????"
+-   Only timed
