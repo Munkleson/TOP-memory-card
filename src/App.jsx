@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import getAllPokemonNamesAndImages from "./components/subcomponents/retrievePokemonDetails";
-import { InitializeGame } from "./components/gameFunctions";
+import { InitializeGame } from "./components/gameInitialization.jsx";
 import "./components/css_files/miscStyling.css";
-import { numberInput } from "./components/subcomponents/numberInputLogic";
 import { gameSettings } from "./gameSettingsVariables";
 import { GenerationSelect } from "./components/subcomponents/generationSelectDisplayComponents.jsx";
 import setPokemonGenerationModule from "./components/subcomponents/generationSelectLogic.js";
+import { SelectGameMode } from "./components/GameModes.jsx";
+import GameModeSettings from "./components/GameModeSettings.js";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -18,22 +19,59 @@ function App() {
     const [gameStarted, setGameState] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+    const [classicCustomInputValue, setClassicCustomInputValue] = useState("");
 
-    const [gameMode, setGameMode] = useState("classic");
+    const [selectedMenuGameMode, setSelectedMenuGameMode] = useState("");
+    const [gameMode, setGameMode] = useState("");
+
+    const [enteredModeSelect, setEnteredModeSelectStatus] = useState(false);
+    const [isMenuModeSelected, setIsMenuModeSelected] = useState(false);
+    const [insideCustomGameMenu, setCustomGameMenuModeSelected] = useState(false); //// This is needed because if you start a game and go home, it doesn't go back to the custom game menu, but instead takes you back to the classic game mode selection screen
+
+    function setGameModeFunction(selectedButton) {
+        //// for the actual game mode to pass down to gameInitialization
+        setGameMode(`${selectedMenuGameMode.toLowerCase()}${selectedButton.target.innerText}`);
+    }
+
+    function setMenuGameModeFunction(selectedButton) {
+        //// For menu navigation purposes
+        setSelectedMenuGameMode(selectedButton.target.innerText);
+        setIsMenuModeSelected(true);
+    }
+    function leaveSelectedMenuMode() {
+        setIsMenuModeSelected(false);
+    }
+
+    function enterAndLeaveGameModeSelectScreen() {
+        setEnteredModeSelectStatus(!enteredModeSelect);
+    }
+
+    function setInCustomGameMenuOrNot() {
+        setCustomGameMenuModeSelected(!insideCustomGameMenu);
+    }
 
     const effectRan = useRef(false);
 
-    document.addEventListener('touchmove', (event) => { //// disable scrolling on mobile, as it can be easily done and affect the game
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    }, {passive: false});
+    document.addEventListener(
+        "touchmove",
+        (event) => {
+            //// disable scrolling on mobile, as it can be easily done and affect the game - Based off feedback
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        },
+        { passive: false }
+    );
 
-    // function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
-    //     localStorage.version !== gameSettings.currentVersion && localStorage.clear();
-    // }
-    // localStorageVersionControl();
+    console.log(localStorage)
+
+    useEffect(() => {
+        function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
+            localStorage.version !== gameSettings.currentVersion && localStorage.clear();
+            localStorage.version = gameSettings.currentVersion;
+        }
+        localStorageVersionControl();
+    }, []);
 
     function setPokemonGeneration(selectedGeneration) {
         return setPokemonGenerationModule(selectedGeneration, gameSettings.pokemonGenerations, setPokemonGameData, setSelectedGenForReturn, allGenPokemon);
@@ -48,10 +86,10 @@ function App() {
                 if (!ignore) {
                     getAllPokemonNamesAndImages(fetchData.results).then((pokemonData) => {
                         setFullPokemonData(pokemonData);
-                        setPokemonGameData(pokemonData.slice(0, 152)); //// Initial setting for the pokemon
+                        setPokemonGameData(pokemonData.slice(0, 151)); //// Initial setting for the pokemon
                         setTimeout(() => {
                             setPokemonDataReadyState(true);
-                        }, 1500); //// Timeout to not make it so jarring for when the loading finishes too quickly. Can put in an animation at a later time
+                        }, 0); //// Timeout to not make it so jarring for when the loading finishes too quickly. Can put in an animation at a later time
                     });
                 }
             };
@@ -63,7 +101,7 @@ function App() {
         effectRan.current = true;
     }, []);
 
-    function gameStart(event) {
+    function customGameStart(event) {
         event.preventDefault();
         const playerCustomInput = document.querySelector(".gameLimitNumberInput");
         const playerCustomInputValue = playerCustomInput.value;
@@ -78,6 +116,11 @@ function App() {
         }
     }
 
+    function gameStart(event) { //// For non-custom games
+        setNumberOfPokemon(GameModeSettings[`${selectedMenuGameMode.toLowerCase()}${event.target.innerText}`]);         
+        setGameState(true);
+    }
+
     function timedOrNot() {
         !timedCheckBoxTicked ? setTimeCheckBoxState(true) : setTimeCheckBoxState(false);
     }
@@ -86,13 +129,26 @@ function App() {
         setGameState(false);
     }
 
-    function setGameModeFunction(selectedMode){
-        setGameMode(selectedMode);
-    }
+    const selectGameModeProps = {
+        timedOrNot: timedOrNot,
+        classicCustomInputValue: classicCustomInputValue,
+        gameStart: gameStart,
+        customGameStart: customGameStart,
+        setClassicCustomInputValue: setClassicCustomInputValue,
+        timedCheckBoxTicked: timedCheckBoxTicked,
+        setMenuGameModeFunction: setMenuGameModeFunction,
+        isMenuModeSelected: isMenuModeSelected,
+        selectedMenuGameMode: selectedMenuGameMode,
+        leaveSelectedMenuMode: leaveSelectedMenuMode,
+        enterAndLeaveGameModeSelectScreen: enterAndLeaveGameModeSelectScreen,
+        setInCustomGameMenuOrNot: setInCustomGameMenuOrNot,
+        insideCustomGameMenu: insideCustomGameMenu,
+        setGameModeFunction: setGameModeFunction,
+    };
 
     return (
         <>
-            {!gameStarted ? (               
+            {!gameStarted ? (
                 <div id="wholeBodyDiv">
                     <div className="pokemonLogo"></div>
                     <div id="centerBallDiv">
@@ -102,39 +158,27 @@ function App() {
                         ) : (
                             <>
                                 <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} />
-                                <CustomGame minNumberOfPokemon={gameSettings.minNumberOfPokemon} maxNumberOfPokemon={gameSettings.maxNumberOfPokemon} gameStart={gameStart} setInputValue={setInputValue} inputValue={inputValue} timedOrNot={timedOrNot} timedCheckBoxTicked={timedCheckBoxTicked} />
+                                {enteredModeSelect ? (
+                                    <SelectGameMode props={selectGameModeProps} />
+                                ) : (
+                                    <>
+                                        <br />
+                                        <p className="ballInstructions">This is a memory game where the goal is to click all the cards without selecting the same Pokémon twice!</p>
+                                        <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>
+                                        <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
+                                            Select game mode
+                                        </button>
+                                    </>
+                                )}
                             </>
                         )}
                     </div>
-                </div>               
-            ) : (               
-                <div id="gameBodyDiv">
-                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} currentVersion={gameSettings.currentVersion} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} maxPokemonPerRow={gameSettings.maxPokemonPerRow} />
-                </div>               
-            )}
-        </>
-    );
-}
-
-function CustomGame({ minNumberOfPokemon, maxNumberOfPokemon, gameStart, inputValue, timedOrNot, setInputValue, timedCheckBoxTicked }) {
-    return (
-        <>
-            <br />
-            <p className="ballInstructions">This is a memory game where the goal is to not click the same Pokémon twice in a round!</p>
-            <p className="ballSecondaryInstructions">
-                You can choose between {minNumberOfPokemon} and {maxNumberOfPokemon} different Pokémon to play with
-            </p>
-            <form action="" onSubmit={gameStart} className="ballFormDiv">
-                <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, setInputValue, minNumberOfPokemon, maxNumberOfPokemon)} value={inputValue} />
-                <input type="submit" value={"Start game"} className="startGameButton" />
-                <div className="timedModeDiv">
-                    <input type="checkbox" className="timedModeInput" onChange={timedOrNot} checked={timedCheckBoxTicked} />
-                    <span className="timedModeText" onClick={timedOrNot}>
-                        Timed mode (Optional)
-                    </span>
                 </div>
-            </form>
-            <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>
+            ) : (
+                <div id="gameBodyDiv">
+                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} gameMode={gameMode} />
+                </div>
+            )}
         </>
     );
 }

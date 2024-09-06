@@ -1,0 +1,33 @@
+
+
+.buttons {
+    height: 5vh;
+    background-color: rgb(209, 207, 207);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    font-size: 1em;
+}
+
+.buttons:hover {
+    background-color: rgb(177, 174, 174);
+    /* transform: scale(1.1, 1.1); */
+    border: none;
+    font-size: 1.05em;
+    transition: all 0.2s ease-in-out;
+}
+
+.buttons:active {
+    outline: none;
+}
+
+.classicModesContainer {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.classicDifficultyButtons {
+    width: 150px;
+    margin: 10px;
+}

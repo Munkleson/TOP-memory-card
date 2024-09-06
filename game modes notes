@@ -32,8 +32,10 @@ Timed
 
 useEffect with a setTimeout, and cancel setTimeout and restart it if a card is clicked
 
-Generation of pokemon: Unown
 
+Secret levels:
+
+Unown mode
 -   Only unown pokemon are shown
 -   Hardest difficulty?
 -   Unlocked only after every other one has been completed on timed

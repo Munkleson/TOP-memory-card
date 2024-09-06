@@ -31,6 +31,8 @@ Things this project helped me with learning/practicing:
     -   Previously I hardcoded most css properties in usually px. Changing to a vh/vw/em style was initially difficult, but was necessary when testing it on a PC with a different resolution, it had copious amounts of overlapping elements, elements missing, etc.
     -   Getting my head around using media queries with aspect ratios was difficult at first
     -   Design for mobile first
+-   Realising that not everything had to be in states, and that states should only be used when the variable should trigger a re-render
+    -   This is part of refactoring, but a much more complicated one for me due to how interlinked files were with passed-down states
 
 Future features planned:
 

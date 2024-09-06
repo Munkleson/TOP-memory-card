@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { whichPokemon, shuffleArray } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
 import { GameDisplay } from "./CardFunctions";
 
-function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, backToHomePage, timed }) {
+function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameMode }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
-    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed));
+    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed, gameMode));
     const [gameOver, setGameOver] = useState(false);
     const [currentlyFlipping, setFlippingStatus] = useState(false);
     const [finalCard, setFinalCard] = useState(null); //// the card that ends the game, either in a win or a loss
@@ -17,6 +17,10 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, backToHo
     const [gameActive, setGameActive] = useState(false);
     const [cardClickedCheck, setCardClickedCheck] = useState(false);
     const [allowedToClick, setClickAllowance] = useState(true); /// Remove this if I want people to stop spamming click/autoclickers
+
+    useEffect(() => { //// For determining which gameMode is used
+
+    }, [])
 
     function cardClick(id, target) {
         if (allowedToClick) {
@@ -34,7 +38,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, backToHo
                     //// high score functionality
                     if (updatedPoints > highScore) {
                         setHighScore(updatedPoints);
-                        storeInLocalStorage(updatedPoints, currentVersion, numberOfPokemon, timed);
+                        storeInLocalStorage(updatedPoints, numberOfPokemon, timed, gameMode);
                     }
                     //// flips cards only if the game is not over
                     if (updatedPoints !== numberOfPokemon) {
@@ -106,7 +110,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, currentVersion, backToHo
         <>
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} />
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} />
+            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode}/>
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>
     );

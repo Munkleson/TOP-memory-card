@@ -3,6 +3,7 @@ export default function setPokemonGenerationModule(selectedGeneration, pokemonGe
         case pokemonGenerations[0]:
             setPokemonGameData(allGenPokemon.slice(0, 151));
             setSelectedGenForReturn(pokemonGenerations[0]);
+            console.log(allGenPokemon.slice(0, 151))
             break;
         case pokemonGenerations[1]:
             setPokemonGameData(allGenPokemon.slice(151, 251));

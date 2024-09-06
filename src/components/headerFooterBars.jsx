@@ -8,7 +8,7 @@ function HeaderBar({ backToHomePage, replayGame, highScore, currentScore }) {
     return (
         <header id="headerBar">
             <button onClick={backToHomePage} className="headerButtons">
-                Back to home
+                Back
             </button>
             <button onClick={replayGame} className="headerButtons">
                 Restart game

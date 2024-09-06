@@ -1,17 +1,43 @@
-function storeInLocalStorage(points, version, numberOfPokemon, timedCheck) {
-    if (timedCheck){
-        localStorage[`timed${numberOfPokemon}`] ? (points > localStorage[`timed${numberOfPokemon}`] ? localStorage[`timed${numberOfPokemon}`] = points : null) : localStorage[`timed${numberOfPokemon}`] = points;
+function storeInLocalStorage(points, numberOfPokemon, timedCheck, gameMode) {
+    if (timedCheck) {
+        if (gameMode !== "classicCustom") {
+            if (points > localStorage[`${gameMode}Timed`] || !localStorage[`${gameMode}Timed`]) {
+                localStorage[`${gameMode}Timed`] = points;
+            }
+        } else {
+            if (points > localStorage[`${gameMode}${numberOfPokemon}Timed`] || !localStorage[`${gameMode}${numberOfPokemon}Timed`]) {
+                //// For custom games
+                localStorage[`${gameMode}${numberOfPokemon}Timed`] = points;
+            }
+        }
     } else {
-        localStorage[numberOfPokemon] ? (points > localStorage[numberOfPokemon] ? localStorage[numberOfPokemon] = points : null) : localStorage[numberOfPokemon] = points;
+        if (gameMode !== "classicCustom") {
+            if (points > localStorage[`${gameMode}`] || !localStorage[`${gameMode}`]) {
+                localStorage[`${gameMode}`] = points;
+            }
+        } else {
+            if (points > localStorage[`${gameMode}${numberOfPokemon}`] || !localStorage[`${gameMode}${numberOfPokemon}`]) {
+                //// For custom games
+                localStorage[`${gameMode}${numberOfPokemon}`] = points;
+            }
+        }
     }
-    localStorage.version = version;
 }
 
-function getHighScore(numberOfPokemon, timedCheck) {
-    if (timedCheck){
-        return localStorage[`timed${numberOfPokemon}`] ? localStorage[`timed${numberOfPokemon}`] : 0;
+function getHighScore(numberOfPokemon, timedCheck, gameMode) {
+    if (timedCheck) {
+        if (gameMode !== "classicCustom"){
+            return localStorage[`${gameMode}Timed`] ? localStorage[`${gameMode}Timed`] : 0;
+        } else {
+            return localStorage[`${gameMode}${numberOfPokemon}Timed`] ? localStorage[`${gameMode}${numberOfPokemon}Timed`] : 0; //// For custom games
+        }
     } else {
-        return localStorage[numberOfPokemon] ? localStorage[numberOfPokemon] : 0;
+        if (gameMode !== "classicCustom"){
+            return localStorage[`${gameMode}`] ? localStorage[`${gameMode}`] : 0; 
+        } else {
+            return localStorage[`${gameMode}${numberOfPokemon}`] ? localStorage[`${gameMode}${numberOfPokemon}`] : 0; //// For custom games
+        }
+
     }
 }
 
