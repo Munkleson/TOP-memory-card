@@ -48,7 +48,7 @@ function ModeSelectDisplay({ props }) {
                 </button>
             </div>
 
-            <button className={styles.buttons} onClick={props.enterAndLeaveGameModeSelectScreen}>
+            <button className={`${styles.buttons} ${styles.backButton}`} onClick={props.enterAndLeaveGameModeSelectScreen}>
                 Back
             </button>
         </>
@@ -93,7 +93,7 @@ function DifficultySelect({ props }){
                 <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
                 <span className="timedModeText" onClick={props.timedOrNot}>Timed mode (Optional)</span>
             </div>
-            <button onClick={props.leaveSelectedMenuMode} className={styles.buttons}>Back</button>
+            <button onClick={props.leaveSelectedMenuMode} className={`${styles.buttons} ${styles.backButton}`}>Back</button>
         </>
     )
 }
