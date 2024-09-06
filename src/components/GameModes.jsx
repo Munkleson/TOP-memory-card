@@ -38,7 +38,7 @@ function SelectGameMode({ props }) {
 function ModeSelectDisplay({ props }) {
     return (
         <>
-            <p>Which game mode would you like to play?</p>
+            <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
                 <button className={styles.buttons} onClick={props.setMenuGameModeFunction}>
                     {gameModeData.classic.name}

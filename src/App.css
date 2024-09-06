@@ -112,6 +112,7 @@ body {
     margin-bottom: calc(var(--ballDimensions) * 0.02);
 }
 
+
 /* @media only screen and (max-height: 760px) {
     #centerBallDiv {
         height: var(--ballDimensions);
@@ -127,10 +128,12 @@ body {
 
 .ballInstructions {
     max-width: calc(var(--ballDimensions) * 0.8);
+    font-size: 2.2vh;
 }
 
 .ballSecondaryInstructions {
-    max-width: calc(var(--ballDimensions) * 0.95);
+    max-width: calc(var(--ballDimensions) * 0.8);
+    font-size: 2.2vh;
 }
 
 .ballFormDiv {
@@ -201,11 +204,10 @@ body {
     cursor: pointer;
 }
 
-
-
 .ballBottomStrongTag {
     font-weight: bold;
     margin-bottom: calc(var(--ballDimensions) * 0.05)!important;
+    font-size: 2.2vh;
 }
 
 .pokeBallLoading{
@@ -253,6 +255,13 @@ body {
         border: none;
         font-size: 1.05em;
         transition: all 0.2s ease-in-out;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1){
+    .enterModeSelectButton {
+        font-size: 1.3em;
+        height: 6vh;
     }
 }
 

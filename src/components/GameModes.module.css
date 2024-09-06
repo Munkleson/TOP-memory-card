@@ -5,8 +5,10 @@
     transition: all 0.2s ease-in-out;
     border: none;
     font-size: 1em;
-    width: 35%;
+    width: 38%;
     margin: 2%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .buttons:hover {
@@ -31,22 +33,33 @@
 
 
 @media only screen and (min-aspect-ratio: 1/1){
+    .buttons {
 
+    }
 }
 
 /* For iphone XR + on 9/19.5 resolution*/
 /* the taller the screen, the more the sizes should be based on width, and vice versa */
 @media only screen and (max-aspect-ratio: 9/15){ 
-    
+    .buttons {
+        font-size: 2vh;
+    }
 }
 
 /* For iphone 8 and under on 9/16 resolution */
 @media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
-
+    .buttons {
+        font-size: 2vh;
+    }
 }
 
 .difficultyText {
-    font-size: 2.2vh;
+    font-size: 2.1vh;
+}
+
+.whichGameModeText {
+    width: 80%;
+    font-size: 2.5vh;
 }
 
 .inputAndButtonHolder {
