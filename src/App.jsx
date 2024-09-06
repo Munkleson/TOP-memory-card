@@ -19,7 +19,7 @@ function App() {
     const [gameStarted, setGameState] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
-    const [classicCustomInputValue, setClassicCustomInputValue] = useState("");
+    const [customInputValue, setcustomInputValue] = useState("0");
 
     const [selectedMenuGameMode, setSelectedMenuGameMode] = useState("");
     const [gameMode, setGameMode] = useState("");
@@ -30,12 +30,12 @@ function App() {
 
     function setGameModeFunction(selectedButton) {
         //// for the actual game mode to pass down to gameInitialization
-        setGameMode(`${selectedMenuGameMode.toLowerCase()}${selectedButton.target.innerText}`);
+        setGameMode(`${selectedMenuGameMode}${selectedButton.target.innerText}`);
     }
 
     function setMenuGameModeFunction(selectedButton) {
         //// For menu navigation purposes
-        setSelectedMenuGameMode(selectedButton.target.innerText);
+        setSelectedMenuGameMode(selectedButton.target.innerText.toLowerCase());
         setIsMenuModeSelected(true);
     }
     function leaveSelectedMenuMode() {
@@ -63,10 +63,9 @@ function App() {
         { passive: false }
     );
 
-    console.log(localStorage)
-
     useEffect(() => {
-        function localStorageVersionControl(){ //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
+        function localStorageVersionControl() {
+            //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
             localStorage.version !== gameSettings.currentVersion && localStorage.clear();
             localStorage.version = gameSettings.currentVersion;
         }
@@ -116,8 +115,9 @@ function App() {
         }
     }
 
-    function gameStart(event) { //// For non-custom games
-        setNumberOfPokemon(GameModeSettings[`${selectedMenuGameMode.toLowerCase()}${event.target.innerText}`]);         
+    function gameStart(event) {
+        //// For non-custom games
+        setNumberOfPokemon(GameModeSettings[event.target.innerText].numberOfCards);
         setGameState(true);
     }
 
@@ -131,10 +131,10 @@ function App() {
 
     const selectGameModeProps = {
         timedOrNot: timedOrNot,
-        classicCustomInputValue: classicCustomInputValue,
+        customInputValue: customInputValue,
         gameStart: gameStart,
         customGameStart: customGameStart,
-        setClassicCustomInputValue: setClassicCustomInputValue,
+        setcustomInputValue: setcustomInputValue,
         timedCheckBoxTicked: timedCheckBoxTicked,
         setMenuGameModeFunction: setMenuGameModeFunction,
         isMenuModeSelected: isMenuModeSelected,

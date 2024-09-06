@@ -32,6 +32,11 @@ Timed
 
 useEffect with a setTimeout, and cancel setTimeout and restart it if a card is clicked
 
+Fifty-Fifty
+- Only two cards shown
+- One will always be valid
+- The more you click, the more you randomization in the invalid card
+
 
 Secret levels:
 
@@ -42,3 +47,10 @@ Unown mode
 -   Show that it can be unlocked, but not what it is yet
 -   Maybe show via achievements as "?????"
 -   Only timed
+
+
+Achievements
+
+- Click on every single Pokemon across all games
+- Finish all timed games within x time
+- Score over x points in standard custom

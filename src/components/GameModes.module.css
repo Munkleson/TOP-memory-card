@@ -5,13 +5,15 @@
     transition: all 0.2s ease-in-out;
     border: none;
     font-size: 1em;
+    width: 35%;
+    margin: 2%;
 }
 
 .buttons:hover {
     background-color: rgb(177, 174, 174);
     /* transform: scale(1.1, 1.1); */
     border: none;
-    font-size: 1.05em;
+    /* font-size: 1.05em; */
     transition: all 0.2s ease-in-out;
 }
 
@@ -19,7 +21,7 @@
     outline: none;
 }
 
-.classicModesContainer {
+.modesContainer {
     width: 70%;
     display: flex;
     justify-content: center;
@@ -29,28 +31,16 @@
 
 
 @media only screen and (min-aspect-ratio: 1/1){
-    .buttons {
-        height: 5vh
-    }
-    .classicDifficultyButtons {
-        width: 35%;
-        margin: 2%;
-    }
+
 }
 
 /* For iphone XR + on 9/19.5 resolution*/
 /* the taller the screen, the more the sizes should be based on width, and vice versa */
 @media only screen and (max-aspect-ratio: 9/15){ 
-    .buttons {
-        width: 35%;
-        margin: 2%;
-    }
+    
 }
 
 /* For iphone 8 and under on 9/16 resolution */
 @media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
-    .buttons {
-        width: 35%;
-        margin: 2%;
-    }
+
 }

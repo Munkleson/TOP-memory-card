@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { whichPokemon, shuffleArray } from "./subcomponents/gameModeFunctions";
+import { whichPokemon, classicGameShuffle, standardGameShuffle } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
-import { GameDisplay } from "./CardFunctions";
+import { ClassicGame } from "./ClassicGameCardFunctions";
+import { StandardGame } from "./StandardGameCardFunctions";
+import GameModeSettings from "./GameModeSettings";
 
 function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameMode }) {
-    const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
+    const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon, gameMode));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed, gameMode));
@@ -18,9 +20,22 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     const [cardClickedCheck, setCardClickedCheck] = useState(false);
     const [allowedToClick, setClickAllowance] = useState(true); /// Remove this if I want people to stop spamming click/autoclickers
 
-    useEffect(() => { //// For determining which gameMode is used
+    const [currentlyDisplayedCards, setCurrentlyDisplayedCards] = useState([]);
+    const [cardsRemaining, setCardsRemaining] = useState();
 
-    }, [])
+    let maxNumberOfPokemonShown; //// Didn't really work when I used const
+    if (gameMode.includes("standard")) {
+        maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
+    }
+    useEffect(() => {
+        if (currentGamePokemon) {
+            setCurrentlyDisplayedCards(whichPokemon(currentGamePokemon, maxNumberOfPokemonShown, gameMode));
+        }
+    }, [currentGamePokemon, gameMode, maxNumberOfPokemonShown]);
+
+    // useEffect(() => {
+    //     setMaxNumberOfPokemonShown(GameModeSettings[gameMode.slice(8)].maxShown)
+    // }, []);
 
     function cardClick(id, target) {
         if (allowedToClick) {
@@ -52,8 +67,13 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                     setTimeout(() => {
                         if (updatedPoints !== numberOfPokemon) {
                             target.style.backgroundColor = ""; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
-                            // setFlippingStatus(true);
-                            setCurrentGamePokemon(shuffleArray(currentGamePokemon));
+
+                            /////// Card shuffling logic
+                            if (gameMode.includes("classic")) {
+                                setCurrentGamePokemon(classicGameShuffle(currentGamePokemon));
+                            } else {
+                                setCurrentlyDisplayedCards(standardGameShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id])); //// Clicked array has to be referenced like this, due to state setting being snapshots of when they were called. So in this case clickedArray would not be updated with the new id that was clicked to trigger this parent function
+                            }
                             //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
                             //// Remove the setTimeout and the flipping completely breaks
                             setTimeout(() => {
@@ -80,7 +100,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setGameResult(false);
         setGameActive(false);
         setClickAllowance(true); /// Remove this if I want people to be able to spam click/autoclickers
-        setCardClickedCheckFunction()
+        setCardClickedCheckFunction();
     }
 
     function gameOverFunction(id) {
@@ -110,7 +130,10 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         <>
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} />
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
-            <GameDisplay currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode}/>
+
+            {gameMode.includes("classic") && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} />}
+            {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} />}
+
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>
     );

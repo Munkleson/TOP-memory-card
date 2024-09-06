@@ -1,9 +1,9 @@
 import { gameSettings } from "../gameSettingsVariables";
-import styles from "./CardFunctions.module.css";
+import styles from "./ClassicGameCardFunctions.module.css";
 
 ///// The flip card logic doesn't work if they are placed here for some reason, even when passing down a prop that checks if the game is active. They will remain in the gameFunctions.jsx for now
 
-function GameDisplay({ currentGamePokemon, cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping }) {
+function ClassicGame({ currentGamePokemon, cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping }) {
     return (
         <div className={styles.mainGameBodyDiv}>
             <div className={styles.container}>
@@ -32,12 +32,12 @@ function DisplayCards({ finalCard, cardClick, element, gameResult, index, number
                 </div>
                 <div className={currentlyFlipping ? `${styles.back} ${styles.backFlipped}` : styles.back}></div>
             </div>
-            { !gameSettings.mobileOrNot && 
+            { !gameSettings.mobileOrNot && //// Not mobile
                 ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1) && <div className={styles.separatorDiv}></div>)}
-            { gameSettings.mobileOrNot && 
+            { gameSettings.mobileOrNot && //// Mobile
                 ((index === indexToInsertSeparatorDiv - 1 || index === indexToInsertSeparatorDiv * 2 - 1 || index === indexToInsertSeparatorDiv * 3 - 1 || index === indexToInsertSeparatorDiv * 4 - 1 || index === indexToInsertSeparatorDiv * 5 - 1) && <div className={styles.separatorDiv}></div>)}
         </>
     );
 }
 
-export { GameDisplay };
+export { ClassicGame };
