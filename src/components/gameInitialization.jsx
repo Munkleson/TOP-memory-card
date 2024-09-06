@@ -21,7 +21,8 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     const [allowedToClick, setClickAllowance] = useState(true); /// Remove this if I want people to stop spamming click/autoclickers
 
     const [currentlyDisplayedCards, setCurrentlyDisplayedCards] = useState([]);
-    const [cardsRemaining, setCardsRemaining] = useState();
+    const [cardsRemaining, setCardsRemaining] = useState(numberOfPokemon);
+    const cardsRemainingInitialValue = numberOfPokemon;
 
     let maxNumberOfPokemonShown; //// Didn't really work when I used const
     if (gameMode === "standardCustom"){
@@ -38,6 +39,10 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         }
     } else if (gameMode.includes("standard")) {
         maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
+    }
+
+    function lowerCardsRemainingCounter(){
+        setCardsRemaining((cardsRemaining) =>  cardsRemaining - 1);
     }
 
     useEffect(() => {
@@ -63,6 +68,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                     setClickedArray([...clickedArray, id]);
                     const updatedPoints = currentScore + 1;
                     setCurrentScore(updatedPoints);
+                    lowerCardsRemainingCounter();
                     //// high score functionality
                     if (updatedPoints > highScore) {
                         setHighScore(updatedPoints);
@@ -114,6 +120,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setGameActive(false);
         setClickAllowance(true); /// Remove this if I want people to be able to spam click/autoclickers
         setCardClickedCheckFunction();
+        setCardsRemaining(numberOfPokemon);
     }
 
     function gameOverFunction(id) {
@@ -141,11 +148,11 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
 
     return (
         <>
-            <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} />
+            <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue}/>
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
 
             {gameMode.includes("classic") && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} />}
-            {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown}/>}
+            {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue}/>}
 
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>

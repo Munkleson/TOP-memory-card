@@ -4,23 +4,26 @@ import { gameSettings } from "../gameSettingsVariables";
 
 let timeWhenTimerStarted; //// global object for checking 
 
-function HeaderBar({ backToHomePage, replayGame, highScore, currentScore }) {
+function HeaderBar({ backToHomePage, replayGame, highScore, currentScore}) {
+
     return (
-        <header id="headerBar">
-            <button onClick={backToHomePage} className="headerButtons">
-                Back
-            </button>
-            <button onClick={replayGame} className="headerButtons">
-                Restart game
-            </button>
-            {!gameSettings.mobileOrNot && <div className="headerPokemonLogo"></div>}
-            <p>
-                Current score: <span className="currentScoreText">{currentScore}</span>
-            </p>
-            <p className="highScoreTextHolder">
-                High score for current mode: <span className="highScoreText">{highScore}</span>
-            </p>
-        </header>
+        <>
+            <header id="headerBar">
+                <button onClick={backToHomePage} className="headerButtons">
+                    Back
+                </button>
+                <button onClick={replayGame} className="headerButtons">
+                    Restart game
+                </button>
+                {!gameSettings.mobileOrNot && <div className="headerPokemonLogo"></div>}
+                <p className="currentScoreTextHolder">
+                    Current score: <span className="currentScoreText">{currentScore}</span>
+                </p>
+                <p className="highScoreTextHolder">
+                    High score for current mode: <span className="highScoreText">{highScore}</span>
+                </p>
+            </header>
+        </>
     );
 }
 
@@ -99,3 +102,4 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
 }
 
 export { HeaderBar, FooterBar };
+

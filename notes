@@ -37,6 +37,7 @@ Version control
 
 Things to do (in priority): From 8/31 onwards
 
+-   Title the instructions as "How to play"
 -   Change the instructions. They are really unclear at the moment
 -   BETTER INSTRUCTIONS FOR EVERYTHING
 -   Display how many cards are left in standard mode
@@ -64,6 +65,7 @@ Way down the line on priority
 -   Store pokemon arrays in localStorage rather than fetching every time. Currently fetching just to make sure it works, and also shows I can figure out how to do loading
 -   Achievements
 -   Refactor the code so the input value is saved per game mode
+-   Release a roadmap in the settings
 
 Decision making:
 
@@ -106,3 +108,8 @@ Completed: From 8/31 onwards -
 
 -   Refactor the code to make the timer bar actually reflect the time I have set
     -   This was done using Date.now() comparisons instead of just pure milliseconds calculations, as setInterval and setTimeout are not wholly accurate due to throttling
+
+9/6
+-   Created a menu that allows for different game modes
+-   Difficulties for "classic" mode
+-   Standard mode available

@@ -1,16 +1,14 @@
 #headerBar {
     top: 0px;
-    /* position: absolute; */
     position: fixed;
     width: 100vw;
     height: 5.44vh;
-    /* background-color: #575A5E; */
     background-color: black;
     z-index: 100;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     color: white;
     font-size: 1.74vh;
 }
@@ -24,6 +22,9 @@
     width: var(--headerLogoWidth);
     height: var(--headerLogoHeight);
     background-color: rgb(255, 255, 255, 0);
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .headerButtons {
@@ -91,18 +92,24 @@
     z-index: 1000;
 }
 
-/* @media only screen and (max-aspect-ratio: 9/15){
-    .footerBar {
-        height: 2.5vh;
+@media only screen and (min-aspect-ratio: 1){
+    .headerButtons {
+        margin-left: 50px;
     }
-} */
+    .currentScoreTextHolder {
+        margin-left: 50%;
+    }
+    .highScoreTextHolder {
+        margin-left: 5%;
+    }
+}
 
-@media only screen and (max-aspect-ratio: 1/1) {
-    /* .headerButtons{
-        font-size: 1px;
-    } */
-    
+@media only screen and (max-aspect-ratio: 1) {
+    #headerBar {
+        justify-content: space-evenly;
+    }
     .highScoreTextHolder {
         margin-right: 3px;
     }
 }
+

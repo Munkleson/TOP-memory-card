@@ -142,3 +142,10 @@
         transition: all 0.05s ease-in-out;
     }
 }
+
+@media only screen and (max-aspect-ratio: 1){
+    .playAgainButton{
+        height: 6vh;
+        font-size: 2.2vh;
+    }
+}

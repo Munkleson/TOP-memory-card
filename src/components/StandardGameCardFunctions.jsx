@@ -3,10 +3,12 @@ import styles from "./StandardGameCardFunctions.module.css";
 
 ///// The flip card logic doesn't work if they are placed here for some reason, even when passing down a prop that checks if the game is active. They will remain in the gameFunctions.jsx for now
 
-function StandardGame({ cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping, currentlyDisplayedCards, gameMode, maxNumberOfPokemonShown }) {
+function StandardGame({ cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping, currentlyDisplayedCards, gameMode, maxNumberOfPokemonShown, cardsRemaining, cardsRemainingInitialValue }) {
+    const counterColor = cardsRemainingColorSetter(cardsRemaining, cardsRemainingInitialValue);
     return (
         <div className={styles.mainGameBodyDiv}>
-            <div className={styles.container}>
+            <div className={styles.container}>        
+                <p className={styles.cardsRemainingText}>Cards remaining: <span className={styles.counterText} style={{color: counterColor}}>{cardsRemaining}</span></p>
                 {currentlyDisplayedCards.map((element, index) => {
                     return <DisplayCards key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult} index={index} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} maxNumberOfPokemonShown={maxNumberOfPokemonShown}/>;
                 })}
@@ -18,7 +20,6 @@ function StandardGame({ cardClick, finalCard, gameResult, numberOfPokemon, curre
 function DisplayCards({ finalCard, cardClick, element, gameResult, index, currentlyFlipping, gameMode, maxNumberOfPokemonShown }) {
     const indexToInsertSeparatorDiv = Math.ceil(maxNumberOfPokemonShown / Math.ceil(maxNumberOfPokemonShown / 3)); //// Hard coded here because it'll never be needed anywhere else realistically
     const difficulty = gameMode.slice(8);
-    console.log(difficulty)
     return (
         <>
             <div className={styles.card}>
@@ -62,5 +63,9 @@ function DisplayCards({ finalCard, cardClick, element, gameResult, index, curren
         </>
     );
 }
+
+function cardsRemainingColorSetter(){ //// Function is here if I ever want to change the color of the text based on how many cards are left. Will need to set parameters here
+    return '#FFCC01';
+};
 
 export { StandardGame };

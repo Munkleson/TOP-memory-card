@@ -34,9 +34,7 @@
 
 
 @media only screen and (min-aspect-ratio: 1/1){
-    .buttons {
 
-    }
 }
 
 /* For iphone XR + on 9/19.5 resolution*/
@@ -60,7 +58,6 @@
 
 .whichGameModeText {
     width: 80%;
-    font-size: 2.5vh;
 }
 
 .inputAndButtonHolder {
@@ -75,3 +72,28 @@
     margin: 0 !important;
 }
 
+.titleText {
+    font-size: 5vw;
+    font-weight: bold;
+}
+
+@media only screen and (min-aspect-ratio: 1){
+    .whichGameModeText {
+        font-size: 3vh;
+        font-weight: bold;
+    }
+
+    .titleText {
+        font-size: 3.3vh;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 1){
+    .whichGameModeText {
+        font-size: 4vw;
+    }
+
+    .titleText {
+        font-size: 5vw;
+    }
+}

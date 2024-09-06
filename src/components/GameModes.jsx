@@ -68,8 +68,8 @@ function InsideCustomGameCheck({ props }){
 function DifficultySelect({ props }){
     return (
         <>
-            <br />
-            <p className={styles.difficultyText}>Select your {gameModeData[props.selectedMenuGameMode].name} difficulty level</p>
+            <p className={styles.titleText}>{gameModeData[props.selectedMenuGameMode].name}</p>
+            <p className={styles.difficultyText}>Select difficulty</p>
             <div className={styles.modesContainer}>
                 {gameModeData[props.selectedMenuGameMode].difficulties.map((element, index) => {
                     return (

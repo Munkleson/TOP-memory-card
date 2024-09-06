@@ -29,9 +29,6 @@ function standardGameShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
         const tempArray = [...arrayOfPokemon];
         const shuffledArray = [];
         while (shuffledArray.length < maxNumberOfPokemon){
-            // console.log(clickedArray);
-            // console.log(shuffledArray);
-            // console.log(numberOfValidIds)
             let randomNumber = Math.floor(Math.random() * tempArray.length);
             const splicedData = tempArray.splice(randomNumber, 1)[0];
             shuffledArray.push(splicedData);
