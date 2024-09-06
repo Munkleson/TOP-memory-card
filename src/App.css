@@ -137,14 +137,39 @@ body {
     margin: 0 !important;
 }
 
-.gameLimitNumberInput {
-    width: calc(var(--ballDimensions) * 0.15);
-    height: calc(var(--ballDimensions) * 0.1);
-    font-size: calc(var(--ballDimensions) * 0.06);
-}
-
 .startGameButton {
     font-size: calc(var(--ballDimensions) * 0.05);
+}
+
+@media only screen and (min-aspect-ratio: 1/1){
+    .gameLimitNumberInput {
+        width: calc(var(--ballDimensions) * 0.15);
+        height: calc(var(--ballDimensions) * 0.1);
+        font-size: calc(var(--ballDimensions) * 0.06);
+    }
+}
+
+/* For iphone XR + on 9/19.5 resolution*/
+/* the taller the screen, the more the sizes should be based on width, and vice versa */
+@media only screen and (max-aspect-ratio: 9/15){ 
+    .gameLimitNumberInput {
+        width: 10%;
+        font-size: 3vh;
+    }
+    .startGameButton {
+        font-size: 3vh;
+    }
+}
+
+/* For iphone 8 and under on 9/16 resolution */
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
+    .gameLimitNumberInput {
+        width: 10%;
+        font-size: 3vh;
+    }
+    .startGameButton {
+        font-size: 3vh;
+    }
 }
 
 .startGameButton:hover {
@@ -174,6 +199,8 @@ body {
 .timedModeText:hover {
     cursor: pointer;
 }
+
+
 
 .ballBottomStrongTag {
     font-weight: bold;

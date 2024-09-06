@@ -1,7 +1,6 @@
 
 
 .buttons {
-    height: 5vh;
     background-color: rgb(209, 207, 207);
     transition: all 0.2s ease-in-out;
     border: none;
@@ -27,7 +26,31 @@
     flex-wrap: wrap;
 }
 
-.classicDifficultyButtons {
-    width: 150px;
-    margin: 10px;
+
+
+@media only screen and (min-aspect-ratio: 1/1){
+    .buttons {
+        height: 5vh
+    }
+    .classicDifficultyButtons {
+        width: 35%;
+        margin: 2%;
+    }
+}
+
+/* For iphone XR + on 9/19.5 resolution*/
+/* the taller the screen, the more the sizes should be based on width, and vice versa */
+@media only screen and (max-aspect-ratio: 9/15){ 
+    .buttons {
+        width: 35%;
+        margin: 2%;
+    }
+}
+
+/* For iphone 8 and under on 9/16 resolution */
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
+    .buttons {
+        width: 35%;
+        margin: 2%;
+    }
 }
