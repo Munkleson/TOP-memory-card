@@ -47,10 +47,10 @@ function ModeSelectDisplay({ props }) {
                     {gameModeData.standard.name}
                 </button>
             </div>
-
             <button className={`${styles.buttons} ${styles.backButton}`} onClick={props.enterAndLeaveGameModeSelectScreen}>
                 Back
             </button>
+            <button className={styles.buttons}>Game mode guide</button>
         </>
     );
 }

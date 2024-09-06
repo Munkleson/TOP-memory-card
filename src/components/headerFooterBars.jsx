@@ -46,8 +46,7 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
     // const viewWidth = window.innerWidth;
     const [isGameActive, setGameActiveState] = useState(gameActive);
 
-    const timerLength = 5000; //// How long I want the timed mode to last
-    const marginAmount = (timerBarSizeElement / timerLength) * viewWidth;
+    const marginAmount = (timerBarSizeElement / gameSettings.timer) * viewWidth;
 
     if (gameActive && !isGameActive) {
         setTimerBarState(true);

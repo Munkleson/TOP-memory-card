@@ -8,6 +8,7 @@ import { GenerationSelect } from "./components/subcomponents/generationSelectDis
 import setPokemonGenerationModule from "./components/subcomponents/generationSelectLogic.js";
 import { SelectGameMode } from "./components/GameModes.jsx";
 import GameModeSettings from "./components/GameModeSettings.js";
+import HowToPlay from "./components/HowToPlay.jsx";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -27,6 +28,12 @@ function App() {
     const [enteredModeSelect, setEnteredModeSelectStatus] = useState(false);
     const [isMenuModeSelected, setIsMenuModeSelected] = useState(false);
     const [insideCustomGameMenu, setCustomGameMenuModeSelected] = useState(false); //// This is needed because if you start a game and go home, it doesn't go back to the custom game menu, but instead takes you back to the classic game mode selection screen
+
+    const [howToPlayOpen, setHowToPlayState] = useState(false);
+
+    function openAndCloseHowToPlay(){
+        setHowToPlayState(!howToPlayOpen)
+    }
 
     function setGameModeFunction(selectedButton) {
         //// for the actual game mode to pass down to gameInitialization
@@ -150,6 +157,7 @@ function App() {
         <>
             {!gameStarted ? (
                 <div id="wholeBodyDiv">
+                    {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay}/>}
                     <div className="pokemonLogo"></div>
                     <div id="centerBallDiv">
                         {/* <div className="pokemonLogo"></div> */}
@@ -157,7 +165,7 @@ function App() {
                             <HomePageLoadingAnimation />
                         ) : (
                             <>
-                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} />
+                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen}/>
                                 {enteredModeSelect ? (
                                     <SelectGameMode props={selectGameModeProps} />
                                 ) : (
@@ -168,6 +176,7 @@ function App() {
                                         <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
                                             Select game mode
                                         </button>
+                                        <button onClick={openAndCloseHowToPlay} className="howToPlayButton">How to play</button>
                                     </>
                                 )}
                             </>

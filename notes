@@ -40,7 +40,6 @@ Things to do (in priority): From 8/31 onwards
 -   Title the instructions as "How to play"
 -   Change the instructions. They are really unclear at the moment
 -   BETTER INSTRUCTIONS FOR EVERYTHING
--   Display how many cards are left in standard mode
 -   Music
 -   Get Lin to help with the dropdown menu styling
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
@@ -51,6 +50,7 @@ Things to do (in priority): From 8/31 onwards
 -   Put a message in the home screen easily seen like "beat certain levels to unlock further generations"
     -   So not all are available at the start
 -   Style the "You win" or "Try again!" better
+-   FiftyFifty game mode
 
 Way down the line on priority
 
@@ -72,7 +72,7 @@ Decision making:
 -   Red flash the whole screen or not the header bar. Something looks weird if the header bar isn't flashing, but it looks weird if it is - Covering the header bar makes it so the buttons can't be clicked, which is intentional really
 -   Increase the timed game mode? Seems a bit too fast if it includes the turning animation which takes about 1.2-1.4 seconds
 
-Completed: From 8/31 onwards -  
+Completed: From 8/31 onwards -
 
 8/31
 
@@ -93,6 +93,7 @@ Completed: From 8/31 onwards -
 -   Dropdown menu for the generation selection fully completed bar maybe a bit of styling
 
 9/2
+
 -   Loading screen made, with a 1.5 second buffer for after it is retrieved so it doesn't look janky if it fetches from the API too fast
 -   Now fetches pokemon from all generations during the loading screen.
 
@@ -110,6 +111,8 @@ Completed: From 8/31 onwards -
     -   This was done using Date.now() comparisons instead of just pure milliseconds calculations, as setInterval and setTimeout are not wholly accurate due to throttling
 
 9/6
+
 -   Created a menu that allows for different game modes
 -   Difficulties for "classic" mode
 -   Standard mode available
+-   Display how many cards are left in standard mode

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../css_files/dropdownMenu.css";
 
-function GenerationSelect({setPokemonGeneration, selectedGenForReturn, pokemonGenerations }) {
+function GenerationSelect({setPokemonGeneration, selectedGenForReturn, pokemonGenerations, howToPlayOpen }) {
     const [selectedGen, setSelectedGen] = useState(selectedGenForReturn);
     const [dropdownMenuActive, setDropdownMenuActive] = useState(false);
     
@@ -12,7 +12,8 @@ function GenerationSelect({setPokemonGeneration, selectedGenForReturn, pokemonGe
     }
 
     function activateDropdownMenu() {
-        !dropdownMenuActive ? setDropdownMenuActive(true) : setDropdownMenuActive(false);
+        //// howToPlayOpen is here because I don't want you to be able to select it while the menu is open, but can see it's there maybe
+        !howToPlayOpen && (!dropdownMenuActive ? setDropdownMenuActive(true) : setDropdownMenuActive(false));
     }
 
     useEffect(() => {

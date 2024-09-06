@@ -249,12 +249,32 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
+.howToPlayButton {
+    height: 4vh;
+    background-color: rgb(209, 207, 207);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    font-size: 1em;
+}
+
+.howToPlayButton:active {
+    outline: none;
+}
+
 @media only screen and (min-aspect-ratio: 1){
     .enterModeSelectButton:hover{
         background-color: rgb(177, 174, 174);
         transform: scale(1.1, 1.1);
         border: none;
         font-size: 1.05em;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .howToPlayButton:hover {
+        background-color: rgb(177, 174, 174);
+        transform: scale(1.1, 1.1);
+        border: none;
+        /* font-size: 1.05em; */
         transition: all 0.2s ease-in-out;
     }
 }
@@ -271,3 +291,4 @@ body {
     /* transform: translate(0px, 10px) scale(1.2, 1.2);
     transition: all 0.05s ease-in-out; */
 }
+
