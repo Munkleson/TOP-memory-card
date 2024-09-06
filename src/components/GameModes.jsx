@@ -69,7 +69,7 @@ function DifficultySelect({ props }){
     return (
         <>
             <br />
-            <p>Select your {gameModeData[props.selectedMenuGameMode].name} difficulty level</p>
+            <p className={styles.difficultyText}>Select your {gameModeData[props.selectedMenuGameMode].name} difficulty level</p>
             <div className={styles.modesContainer}>
                 {gameModeData[props.selectedMenuGameMode].difficulties.map((element, index) => {
                     return (
@@ -115,8 +115,10 @@ function CustomGame({ props }) {
                 You can choose between {gameSettings.minNumberOfPokemon} and {gameSettings.maxNumberOfPokemon} different Pokémon to play with
             </p>
             <form action="" onSubmit={props.customGameStart} className="ballFormDiv">
-                <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} />
-                <input type="submit" value={"Start game"} className="startGameButton" />
+                <div className={styles.inputAndButtonHolder}>
+                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} />
+                    <input type="submit" value={"Start game"} className="startGameButton" />
+                </div>
                 <div className="timedModeDiv">
                     <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
                     <span className="timedModeText" onClick={props.timedOrNot}>
@@ -128,138 +130,5 @@ function CustomGame({ props }) {
         </>
     );
 }
-
-// function StandardGame({ props }){
-//     return (
-//         <>
-//             {
-//                 !props.insideCustomGameMenu ? <StandardGameModeSelectDisplay props={props} /> : <CustomStandardGame props={props}/>
-//             }
-//         </>
-//     )
-// }
-
-// function StandardGameModeSelectDisplay({ props }){
-//     return (
-//         <>
-//             <br />
-//             <p>Select your standard difficulty level</p>
-//             <div className={styles.modesContainer}>
-//                 {gameModeData.standard.difficulties.map((element, index) => {
-//                     return (
-//                         <>
-//                             <button className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
-//                                 if (element === "Custom"){
-//                                     props.setInCustomGameMenuOrNot();
-//                                     props.setGameModeFunction(event);
-//                                 } else {
-//                                     props.setGameModeFunction(event);
-//                                     props.gameStart(event);
-//                                 }
-//                             }}>
-//                                 {gameModeData.standard.difficulties[index]}
-//                             </button>
-//                         </>
-//                     )
-//                 })}
-//             </div>
-//             <div className="timedModeDiv">
-//                 <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-//                 <span className="timedModeText" onClick={props.timedOrNot}>Timed mode (Optional)</span>
-//             </div>
-//             <button onClick={props.leaveSelectedMenuMode} className={styles.buttons}>Back</button>
-//         </>
-//     )
-// }
-
-// function CustomStandardGame({ props }) {
-//     return (
-//         <>
-//             <br />
-//             <br />
-//             <p className="ballSecondaryInstructions">
-//                 You can choose between {gameSettings.minNumberOfPokemon} and {gameSettings.maxNumberOfPokemon} different Pokémon to play with
-//             </p>
-//             <form action="" onSubmit={props.customGameStart} className="ballFormDiv">
-//                 <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} />
-//                 <input type="submit" value={"Start game"} className="startGameButton" />
-//                 <div className="timedModeDiv">
-//                     <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-//                     <span className="timedModeText" onClick={props.timedOrNot}>
-//                         Timed mode (Optional)
-//                     </span>
-//                 </div>
-//                 <button onClick={props.setInCustomGameMenuOrNot} className={styles.buttons}>Back</button>
-//             </form>
-//         </>
-//     );
-// }
-
-
-// function ClassicGame({ props }) {
-//     return (
-//         <>
-//         {
-//             !props.insideCustomGameMenu ? <ClassicGameModeSelectDisplay props={props} /> : <CustomClassicGame props={props}/>
-//         }
-//         </>
-//     );
-// }
-
-// function ClassicGameModeSelectDisplay({ props }){
-//     return (
-//         <>
-//             <br />
-//             <p>Select your classic difficulty level</p>
-//             <div className={styles.modesContainer}>
-//                 {gameModeData.standard.difficulties.map((element, index) => {
-//                     return (
-//                         <>
-//                             <button className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
-//                                 if (element === "Custom"){
-//                                     props.setInCustomGameMenuOrNot();
-//                                     props.setGameModeFunction(event);
-//                                 } else {
-//                                     props.setGameModeFunction(event);
-//                                     props.gameStart(event);
-//                                 }
-//                             }}>
-//                                 {gameModeData.classic.difficulties[index]}
-//                             </button>
-//                         </>
-//                     )
-//                 })}
-//             </div>
-//             <div className="timedModeDiv">
-//                 <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-//                 <span className="timedModeText" onClick={props.timedOrNot}>Timed mode (Optional)</span>
-//             </div>
-//             <button onClick={props.leaveSelectedMenuMode} className={styles.buttons}>Back</button>
-//         </>
-//     )
-// }
-
-// function CustomClassicGame({ props }) {
-//     return (
-//         <>
-//             <br />
-//             <br />
-//             <p className="ballSecondaryInstructions">
-//                 You can choose between {gameSettings.minNumberOfPokemon} and {gameSettings.maxNumberOfPokemon} different Pokémon to play with
-//             </p>
-//             <form action="" onSubmit={props.customGameStart} className="ballFormDiv">
-//                 <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} />
-//                 <input type="submit" value={"Start game"} className="startGameButton" />
-//                 <div className="timedModeDiv">
-//                     <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-//                     <span className="timedModeText" onClick={props.timedOrNot}>
-//                         Timed mode (Optional)
-//                     </span>
-//                 </div>
-//                 <button onClick={props.setInCustomGameMenuOrNot} className={styles.buttons}>Back</button>
-//             </form>
-//         </>
-//     );
-// }
 
 export { SelectGameMode };

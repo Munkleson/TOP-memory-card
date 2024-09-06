@@ -18,6 +18,9 @@ export default {
     Nightmare: {
         numberOfCards: 99,
         maxShown: 9,
+    },
+    Custom: {
+        maxShown: 9,
     }
 }
 

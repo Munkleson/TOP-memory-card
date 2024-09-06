@@ -3,20 +3,22 @@ import styles from "./StandardGameCardFunctions.module.css";
 
 ///// The flip card logic doesn't work if they are placed here for some reason, even when passing down a prop that checks if the game is active. They will remain in the gameFunctions.jsx for now
 
-function StandardGame({ cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping, currentlyDisplayedCards, gameMode }) {
+function StandardGame({ cardClick, finalCard, gameResult, numberOfPokemon, currentlyFlipping, currentlyDisplayedCards, gameMode, maxNumberOfPokemonShown }) {
     return (
         <div className={styles.mainGameBodyDiv}>
             <div className={styles.container}>
                 {currentlyDisplayedCards.map((element, index) => {
-                    return <DisplayCards key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult} index={index} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode}/>;
+                    return <DisplayCards key={element.id} elementId={element.id} finalCard={finalCard} cardClick={cardClick} element={element} gameResult={gameResult} index={index} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} maxNumberOfPokemonShown={maxNumberOfPokemonShown}/>;
                 })}
             </div>
         </div>
     );
 }
 
-function DisplayCards({ finalCard, cardClick, element, gameResult, index, currentlyFlipping, gameMode }) {
+function DisplayCards({ finalCard, cardClick, element, gameResult, index, currentlyFlipping, gameMode, maxNumberOfPokemonShown }) {
+    const indexToInsertSeparatorDiv = Math.ceil(maxNumberOfPokemonShown / Math.ceil(maxNumberOfPokemonShown / 3)); //// Hard coded here because it'll never be needed anywhere else realistically
     const difficulty = gameMode.slice(8);
+    console.log(difficulty)
     return (
         <>
             <div className={styles.card}>
@@ -37,8 +39,10 @@ function DisplayCards({ finalCard, cardClick, element, gameResult, index, curren
                 :
                     (difficulty === "Medium" ?  
                         ((index === 2) && <div className={styles.separatorDiv}></div>)
+                    :
+                        difficulty !== "Custom" ? ((index === 2 || index === 5) && <div className={styles.separatorDiv}></div>) 
                         :
-                        ((index === 2 || index === 5) && <div className={styles.separatorDiv}></div>)
+                            ((index === indexToInsertSeparatorDiv - 1 || index === (indexToInsertSeparatorDiv * 2 - 1)) && <div className={styles.separatorDiv}></div>)
                     )
                 ) 
             }
@@ -47,8 +51,11 @@ function DisplayCards({ finalCard, cardClick, element, gameResult, index, curren
                 :
                     (difficulty === "Medium" ?  
                         ((index === 1 || index === 3)  && <div className={styles.separatorDiv}></div>)
+                    :
+                        (difficulty !== "Custom" ? (index === 2 || index === 5) && <div className={styles.separatorDiv}></div> 
                         :
-                        ((index === 2 || index === 5) && <div className={styles.separatorDiv}></div>)
+                            ((index === indexToInsertSeparatorDiv - 1) && <div className={styles.separatorDiv}></div>)
+                        )
                     )
                 ) 
             }

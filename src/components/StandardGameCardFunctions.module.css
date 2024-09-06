@@ -104,7 +104,7 @@
         width: var(--cardWidth);
     }
     .pokemonName {
-        font-size: 2.0vw;
+        font-size: 3vw;
     }
 }
 
@@ -116,6 +116,6 @@
         height: 27vh;
     }
     .pokemonName {
-        font-size: 2.0vw;
+        font-size: 3vw;
     }
 }

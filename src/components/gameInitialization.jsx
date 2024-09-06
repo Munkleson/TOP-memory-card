@@ -8,7 +8,7 @@ import { StandardGame } from "./StandardGameCardFunctions";
 import GameModeSettings from "./GameModeSettings";
 
 function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameMode }) {
-    const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon, gameMode));
+    const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
     const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed, gameMode));
@@ -24,12 +24,25 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     const [cardsRemaining, setCardsRemaining] = useState();
 
     let maxNumberOfPokemonShown; //// Didn't really work when I used const
-    if (gameMode.includes("standard")) {
+    if (gameMode === "standardCustom"){
+        if (numberOfPokemon < 18) {
+            maxNumberOfPokemonShown = Math.floor(numberOfPokemon / 2);
+        }
+        // if (numberOfPokemon === 6 || numberOfPokemon === 7){
+        //     maxNumberOfPokemonShown = 3;
+        // } else if (numberOfPokemon === 8){
+        //     maxNumberOfPokemonShown = 4
+        // } 
+        else {
+            maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
+        }
+    } else if (gameMode.includes("standard")) {
         maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
     }
+
     useEffect(() => {
         if (currentGamePokemon) {
-            setCurrentlyDisplayedCards(whichPokemon(currentGamePokemon, maxNumberOfPokemonShown, gameMode));
+            setCurrentlyDisplayedCards(whichPokemon(currentGamePokemon, maxNumberOfPokemonShown));
         }
     }, [currentGamePokemon, gameMode, maxNumberOfPokemonShown]);
 
@@ -132,7 +145,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
 
             {gameMode.includes("classic") && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} />}
-            {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} />}
+            {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown}/>}
 
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>

@@ -38,6 +38,8 @@ Version control
 Things to do (in priority): From 8/31 onwards
 
 -   Change the instructions. They are really unclear at the moment
+-   BETTER INSTRUCTIONS FOR EVERYTHING
+-   Display how many cards are left in standard mode
 -   Music
 -   Get Lin to help with the dropdown menu styling
 -   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
@@ -61,6 +63,7 @@ Way down the line on priority
 -   Custom pokemon set option. i.e. selectable indexes of pokemon
 -   Store pokemon arrays in localStorage rather than fetching every time. Currently fetching just to make sure it works, and also shows I can figure out how to do loading
 -   Achievements
+-   Refactor the code so the input value is saved per game mode
 
 Decision making:
 
