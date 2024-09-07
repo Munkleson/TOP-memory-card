@@ -6,6 +6,7 @@ import { gameSettings } from "../gameSettingsVariables";
 export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
     const [selectedMode, setSelectedMode] = useState("");
     function selectMode(event){
+        console.log(event.target)
         setSelectedMode(event.target.innerText.toLowerCase());
     }
     return (
@@ -15,7 +16,7 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
                     {Object.keys(gameModeData).map((element, index) => {
                         return (
                         <>
-                            <DisplayModes element={element} selectMode={selectMode} selectedMode={selectedMode} key={index}/>
+                            <DisplayModes element={element} selectMode={selectMode} selectedMode={selectedMode} index={index}/>
                         </>)
                     })}
                     <button onClick={() => {
@@ -37,12 +38,12 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
     )
 }
 
-function DisplayModes({ element, selectMode, selectedMode, }){
+function DisplayModes({ element, selectMode, selectedMode, index}){
     return (
-        <div onClick={selectMode} className={
+        <div key={index} onClick={selectMode} className={
             element === selectedMode ? styles.modeDivSelected : styles.modeDiv
-            }>
-            <div className={styles.modeText}>{gameModeData[element].name}</div>
+            }>{gameModeData[element].name}
+            {/* <span className={styles.modeText}>{gameModeData[element].name}</span> */}
         </div>
     )
 }

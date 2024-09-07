@@ -84,7 +84,7 @@ function DifficultySelect({ props }){
                 {gameModeData[props.selectedMenuGameMode].difficulties.map((element, index) => {
                     return (
                         <>
-                            <button className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
+                            <button key={index} className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
                                 if (element === "Custom"){
                                     props.setInCustomGameMenuOrNot();
                                     props.setGameModeFunction(event);
