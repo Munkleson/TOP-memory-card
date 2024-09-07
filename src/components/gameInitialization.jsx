@@ -51,6 +51,18 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         }
     }, [currentGamePokemon, gameMode, maxNumberOfPokemonShown]);
 
+    useEffect(() => {
+        const touchMoveFunction = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        };
+        document.addEventListener("touchmove", touchMoveFunction, { passive: false });
+        return () => {
+            document.removeEventListener("touchmove", touchMoveFunction);
+        }
+    }, [])
+
     // useEffect(() => {
     //     setMaxNumberOfPokemonShown(GameModeSettings[gameMode.slice(8)].maxShown)
     // }, []);

@@ -59,20 +59,6 @@ function App() {
 
     const effectRan = useRef(false);
 
-    document.addEventListener(
-        "touchmove",
-        (event) => {
-            //// Not disabled when the how to play menu is open
-            if (!howToPlayOpen) {
-                //// disable scrolling on mobile, as it can be easily done and affect the game - Based off feedback
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-            }
-        },
-        { passive: false }
-    );
-
     useEffect(() => {
         function localStorageVersionControl() {
             //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
