@@ -4,7 +4,6 @@ import { gameModeData } from "./GameModeData";
 import { gameSettings } from "../gameSettingsVariables";
 
 export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
-    setInstructionData();
     const [selectedMode, setSelectedMode] = useState("");
     function selectMode(event){
         setSelectedMode(event.target.innerText.toLowerCase());
@@ -51,17 +50,17 @@ function DisplayModes({ element, selectMode, selectedMode, }){
 function DisplayInstructions({ selectedMode }){
     return (
         <>              
-            {gameModeData[selectedMode].instructions.map((element, index) => {
+            {instructions[selectedMode].map((element, index) => {
                 return <>
-                    <p className={styles.instructionsText} key={index} style={{color: (selectedMode === "standard" && index === gameModeData[selectedMode].instructions.length - 1) && "#FFCC01", fontWeight: "bold"}}>{element}</p>
+                    <p className={styles.instructionsText} key={index} style={{color: (selectedMode === "standard" && index === instructions[selectedMode].length - 1) && "#FFCC01", fontWeight: "bold"}}>{element}</p>
                 </>
             })}
         </>
     )
 }
 
-function setInstructionData(){
-    gameModeData.classic.instructions = [
+const instructions = {
+    classic: [
         `• In this game mode, you will have a number of cards per round based on the difficulty level. All of them will be shown at the same time`,
         `• Once a card is ${gameSettings.mobileOrNot ? "tapped" : "clicked"}, the deck will shuffle and the cards may be displayed in a previous position than they were previously`,
         `• The number of cards per round will depend on the difficulty level. The settings are as follows:`,
@@ -72,9 +71,8 @@ function setInstructionData(){
         `    - ${gameModeData.classic.difficulties[4]}: You may choose a number from 6 to 30 cards`,
         ``,
         ``,
-    ];
-    
-    gameModeData.standard.instructions = [
+    ],
+    standard: [
         "• In this game mode, you will have a number of cards per round based on the difficulty level. However, only a number of them will be displayed at a time",
         `• Once a card is ${gameSettings.mobileOrNot ? "tapped" : "clicked"}, the deck will shuffle and show you a random selection of cards out of all the cards in the deck`,
         "• The number of cards displayed will depend on the difficulty level. The settings are as follows:",
@@ -85,5 +83,5 @@ function setInstructionData(){
         `    - ${gameModeData.standard.difficulties[4]}: 9 cards displayed out of 99`, 
         `    - ${gameModeData.standard.difficulties[5]}: Up to a maximum of 9 cards displayed. You may choose a number from 6 to 99 cards`,          
         "* There will always be at least one valid card displayed",
-    ];
+    ],
 }
