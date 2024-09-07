@@ -31,8 +31,8 @@ function App() {
 
     const [howToPlayOpen, setHowToPlayState] = useState(false);
 
-    function openAndCloseHowToPlay(){
-        setHowToPlayState(!howToPlayOpen)
+    function openAndCloseHowToPlay() {
+        setHowToPlayState(!howToPlayOpen);
     }
 
     function setGameModeFunction(selectedButton) {
@@ -62,10 +62,13 @@ function App() {
     document.addEventListener(
         "touchmove",
         (event) => {
-            //// disable scrolling on mobile, as it can be easily done and affect the game - Based off feedback
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+            //// Not disabled when the how to play menu is open
+            if (!howToPlayOpen) {
+                //// disable scrolling on mobile, as it can be easily done and affect the game - Based off feedback
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
         },
         { passive: false }
     );
@@ -157,7 +160,7 @@ function App() {
         <>
             {!gameStarted ? (
                 <div id="wholeBodyDiv">
-                    {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay}/>}
+                    {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
                     <div className="pokemonLogo"></div>
                     <div id="centerBallDiv">
                         {/* <div className="pokemonLogo"></div> */}
@@ -165,7 +168,7 @@ function App() {
                             <HomePageLoadingAnimation />
                         ) : (
                             <>
-                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen}/>
+                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen} />
                                 {enteredModeSelect ? (
                                     <SelectGameMode props={selectGameModeProps} />
                                 ) : (
@@ -176,7 +179,9 @@ function App() {
                                         <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
                                             Select game mode
                                         </button>
-                                        <button onClick={openAndCloseHowToPlay} className="howToPlayButton">How to play</button>
+                                        <button onClick={openAndCloseHowToPlay} className="howToPlayButton">
+                                            How to play
+                                        </button>
                                     </>
                                 )}
                             </>

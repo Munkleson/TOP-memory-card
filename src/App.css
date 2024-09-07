@@ -250,7 +250,7 @@ body {
 }
 
 .howToPlayButton {
-    height: 4vh;
+    height: 5vh;
     background-color: rgb(209, 207, 207);
     transition: all 0.2s ease-in-out;
     border: none;
@@ -281,6 +281,10 @@ body {
 
 @media only screen and (max-aspect-ratio: 1){
     .enterModeSelectButton {
+        font-size: 1.3em;
+        height: 6vh;
+    }
+    .howToPlayButton {
         font-size: 1.3em;
         height: 6vh;
     }
