@@ -47,10 +47,12 @@
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    overflow-y: auto;
     padding-left: 5%;
     padding-right: 5%;
     box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+    touch-action: pan-y;
 }
 
 .footer {
