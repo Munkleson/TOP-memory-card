@@ -11,9 +11,9 @@ export default function HowToPlay({ openAndCloseHowToPlay }){
                     </div>
                     <div className={styles.instructionsDiv}>
                         <h3 className={styles.subHeading}>Overview</h3>
-                        <p className={styles.subText}>• This is a memory game where you have to remember which Pokémon you have already clicked, and avoid clicking them again</p>
-                        <p className={styles.subText}>• Each round will have a certain number of Pokémon based on your chosen game mode, and each time you click on a Pokémon their position will shuffle</p>
-                        <p className={styles.subText}>• You win if you click on all the Pokémon without picking the same one twice</p>
+                        <p className={styles.subText}>• This is a memory game where you have to remember which Pokémon you have already {gameSettings.mobileOrNot ? "tapped" : "clicked"} on, and avoid choosing them again</p>
+                        <p className={styles.subText}>• Each round will have a certain number of Pokémon based on your chosen game mode, and each time you {gameSettings.mobileOrNot ? "tap on" : "click"} a Pokémon their position will shuffle</p>
+                        <p className={styles.subText}>• You win if you {gameSettings.mobileOrNot ? "tap" : "click"} on all the Pokémon without choosing the same one twice</p>
 
                         <h3 className={styles.subHeading}>Timed mode</h3>
                         <p className={styles.subText}>• You have the option to play the game with a {gameSettings.timer / 1000} second timer. If it reaches 0, you also lose!</p>
