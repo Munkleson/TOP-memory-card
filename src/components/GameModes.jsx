@@ -2,6 +2,8 @@ import { gameSettings } from "../gameSettingsVariables";
 import { numberInput } from "./subcomponents/numberInputLogic";
 import styles from "./GameModes.module.css";
 import { gameModeData } from "./GameModeData";
+import ModeInstructions from "./ModeInstructions";
+import { useState } from "react";
 
 ///// For reference
 //selectGameModeProps = {
@@ -36,8 +38,13 @@ function SelectGameMode({ props }) {
 }
 
 function ModeSelectDisplay({ props }) {
+    const [instructionsOpened, setInstructionsState] = useState(false);
+    function openAndCloseInstructions() {
+        setInstructionsState(!instructionsOpened)
+    }
     return (
         <>
+            {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={props.openAndCloseMenu}/>}
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
                 <button className={styles.buttons} onClick={props.setMenuGameModeFunction}>
@@ -50,7 +57,10 @@ function ModeSelectDisplay({ props }) {
             <button className={`${styles.buttons} ${styles.backButton}`} onClick={props.enterAndLeaveGameModeSelectScreen}>
                 Back
             </button>
-            <button className={styles.buttons}>Game mode guide</button>
+            <button className={styles.instructionsButton} onClick={() => {
+                openAndCloseInstructions();
+                props.openAndCloseMenu();
+            }}>?</button>
         </>
     );
 }

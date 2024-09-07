@@ -31,10 +31,38 @@
     margin: 0 !important;
 }
 
+.instructionsButton {
+    /* background-color: rgb(209, 207, 207); */
+    /* background-color: #688fd8; */
+    background-color: #454c5a;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    font-size: 1em;
+    margin: 2%;
+    padding: 0;
+    border-radius: 50%;
+    width: 10%;
+    height: 10%;
+    border: black 2px solid;
+    box-shadow: 0 1px 5px black;
+    color: white;
+    transition: 0.2s;
+}
 
+.instructionsButton:hover {
+    transform: scale(0.9, 0.9);
+    border: black 2px solid;
+    transition: 0.2s;
+}
+
+.instructionsButton:active {
+    transform: scale(0.6, 0.6);
+}
 
 @media only screen and (min-aspect-ratio: 1/1){
-
+    .instructionsButton {
+        font-size: 2em;
+    }
 }
 
 /* For iphone XR + on 9/19.5 resolution*/
@@ -43,11 +71,14 @@
     .buttons {
         font-size: 2vh;
     }
+    .instructionsButton {
+        font-size: 3vh;
+    }
 }
 
 /* For iphone 8 and under on 9/16 resolution */
 @media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
-    .buttons {
+    .buttons, .instructionsButton {
         font-size: 2vh;
     }
 }

@@ -37,12 +37,8 @@ Version control
 
 Things to do (in priority): From 8/31 onwards
 
--   Title the instructions as "How to play"
--   Change the instructions. They are really unclear at the moment
--   BETTER INSTRUCTIONS FOR EVERYTHING
 -   Music
 -   Get Lin to help with the dropdown menu styling
--   Different game modes - Impossible - Just the many faces of unown - Preset difficulty - Custom - Rapid - Infinite - Progress mode - After you beat a 6 card game, it moves on to 7, and then 8, and so on. - May need a timed mode for this
 -   Settings button top right with things like: - Credits - Instructions - High scores screen for every mode
 -   Remove anything after a hyphen - Make a new array with the correct names of all pokemon and map it onto the current lists
 -   Show pokemon game pictures for each generation in the dropdown menu(i.e. picture of red and blue for gen 1, ruby sapphire for 3, etc.)
@@ -116,3 +112,8 @@ Completed: From 8/31 onwards -
 -   Difficulties for "classic" mode
 -   Standard mode available
 -   Display how many cards are left in standard mode
+
+9/7
+
+-   Basic instructions on the home page are done
+    -   Scrolling in the instructions div is not "disabled"

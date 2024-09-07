@@ -30,10 +30,10 @@ function App() {
     const [isMenuModeSelected, setIsMenuModeSelected] = useState(false);
     const [insideCustomGameMenu, setCustomGameMenuModeSelected] = useState(false); //// This is needed because if you start a game and go home, it doesn't go back to the custom game menu, but instead takes you back to the classic game mode selection screen
 
-    const [howToPlayOpen, setHowToPlayState] = useState(false);
-
-    function openAndCloseHowToPlay() {
-        setHowToPlayState(!howToPlayOpen);
+    //// This is here to stop the generation selector from being opened and looking really janky when you are in another menu. Just a little bit visually unpleasing, but if it doesn't open when you click it but you can see it it looks really weird too. Could consider just removing it when a menu is opened
+    const [menuOpen, setMenuOpenState] = useState(false);
+    function openAndCloseMenu() {
+        setMenuOpenState(!menuOpen);
     }
 
     useEffect(() => {
@@ -154,6 +154,7 @@ function App() {
         setInCustomGameMenuOrNot: setInCustomGameMenuOrNot,
         insideCustomGameMenu: insideCustomGameMenu,
         setGameModeFunction: setGameModeFunction,
+        openAndCloseMenu: openAndCloseMenu,
     };
 
     return (
@@ -162,7 +163,7 @@ function App() {
                 <>
                     <div className="topRelativeBar"></div>
                     {/* How to Play is set here so the touch move on mobile disable doesn't affect it */}
-                    {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
+                    {(menuOpen && !enteredModeSelect) && <HowToPlay openAndCloseMenu={openAndCloseMenu} />}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
@@ -171,7 +172,7 @@ function App() {
                                 <HomePageLoadingAnimation />
                             ) : (
                                 <>
-                                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen} />
+                                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} menuOpen={menuOpen} />
                                     {enteredModeSelect ? (
                                         <SelectGameMode props={selectGameModeProps} />
                                     ) : (
@@ -182,7 +183,7 @@ function App() {
                                             <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
                                                 Select game mode
                                             </button>
-                                            <button onClick={openAndCloseHowToPlay} className="howToPlayButton">
+                                            <button onClick={openAndCloseMenu} className="howToPlayButton">
                                                 How to play
                                             </button>
                                         </>
