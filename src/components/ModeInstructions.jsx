@@ -4,8 +4,10 @@ import { gameModeData } from "./GameModeData";
 
 export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
     const [selectedMode, setSelectedMode] = useState("");
+    console.log(selectedMode)
     function selectMode(event){
         setSelectedMode(event.target.innerText.toLowerCase());
+        console.log(event.target.innerText.toLowerCase())
     }
     return (
         <>
@@ -37,8 +39,6 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
 }
 
 function DisplayModes({ element, selectMode, selectedMode, }){
-    // console.log(element)
-    // console.log(selectedMode)
     return (
         <div onClick={selectMode} className={
             element === selectedMode ? styles.modeDivSelected : styles.modeDiv
@@ -49,6 +49,10 @@ function DisplayModes({ element, selectMode, selectedMode, }){
 }
 
 function DisplayInstructions({ selectedMode }){
+    console.log(selectedMode);
+    console.log(gameModeData);
+    console.log(gameModeData[selectedMode]);
+    console.log(gameModeData[selectedMode].instructions)
     return (
         <>              
             {gameModeData[selectedMode].instructions.map((element, index) => {
