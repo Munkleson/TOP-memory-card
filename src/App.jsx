@@ -9,6 +9,7 @@ import setPokemonGenerationModule from "./components/subcomponents/generationSel
 import { SelectGameMode } from "./components/GameModes.jsx";
 import GameModeSettings from "./components/GameModeSettings.js";
 import HowToPlay from "./components/HowToPlay.jsx";
+import "./components/css_files/gameSystems.css";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -34,6 +35,19 @@ function App() {
     function openAndCloseHowToPlay() {
         setHowToPlayState(!howToPlayOpen);
     }
+
+    useEffect(() => {
+        const wholeBodyDiv = document.querySelector("#wholeBodyDiv");
+        const touchMoveFunction = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        };
+        wholeBodyDiv.addEventListener("touchmove", touchMoveFunction, { passive: false });
+        return () => {
+            wholeBodyDiv.removeEventListener("touchmove", touchMoveFunction);
+        };
+    }, []);
 
     function setGameModeFunction(selectedButton) {
         //// for the actual game mode to pass down to gameInitialization
@@ -145,35 +159,39 @@ function App() {
     return (
         <>
             {!gameStarted ? (
-                <div id="wholeBodyDiv">
+                <>
+                    <div className="topRelativeBar"></div>
+                    {/* How to Play is set here so the touch move on mobile disable doesn't affect it */}
                     {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
-                    <div className="pokemonLogo"></div>
-                    <div id="centerBallDiv">
-                        {/* <div className="pokemonLogo"></div> */}
-                        {!pokemonDataReady ? (
-                            <HomePageLoadingAnimation />
-                        ) : (
-                            <>
-                                <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen} />
-                                {enteredModeSelect ? (
-                                    <SelectGameMode props={selectGameModeProps} />
-                                ) : (
-                                    <>
-                                        <br />
-                                        <p className="ballInstructions">This is a memory game where the goal is to click all the cards without selecting the same Pokémon twice!</p>
-                                        <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>
-                                        <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
-                                            Select game mode
-                                        </button>
-                                        <button onClick={openAndCloseHowToPlay} className="howToPlayButton">
-                                            How to play
-                                        </button>
-                                    </>
-                                )}
-                            </>
-                        )}
+                    <div id="wholeBodyDiv">
+                        <div className="pokemonLogo"></div>
+                        <div id="centerBallDiv">
+                            {/* <div className="pokemonLogo"></div> */}
+                            {!pokemonDataReady ? (
+                                <HomePageLoadingAnimation />
+                            ) : (
+                                <>
+                                    <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} howToPlayOpen={howToPlayOpen} />
+                                    {enteredModeSelect ? (
+                                        <SelectGameMode props={selectGameModeProps} />
+                                    ) : (
+                                        <>
+                                            <br />
+                                            <p className="ballInstructions">This is a memory game where the goal is to click all the cards without selecting the same Pokémon twice!</p>
+                                            <strong className="ballBottomStrongTag">How many will you be able to remember?</strong>
+                                            <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
+                                                Select game mode
+                                            </button>
+                                            <button onClick={openAndCloseHowToPlay} className="howToPlayButton">
+                                                How to play
+                                            </button>
+                                        </>
+                                    )}
+                                </>
+                            )}
+                        </div>
                     </div>
-                </div>
+                </>
             ) : (
                 <div id="gameBodyDiv">
                     <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} gameMode={gameMode} />
