@@ -1,7 +1,23 @@
 import { gameSettings } from "../gameSettingsVariables";
 import styles from "./HowToPlay.module.css";
+import { useEffect } from "react";
 
 export default function HowToPlay({ openAndCloseHowToPlay }){
+    useEffect(() => {
+        const titleDiv = document.querySelector(`.${styles.titleDiv}`);
+        const footerDiv = document.querySelector(`.${styles.footer}`)
+        const touchMoveFunction = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        };
+        titleDiv.addEventListener("touchmove", touchMoveFunction, { passive: false });
+        footerDiv.addEventListener("touchmove", touchMoveFunction, { passive: false });
+        return () => {
+            titleDiv.removeEventListener("touchmove", touchMoveFunction);
+            footerDiv.removeEventListener("touchmove", touchMoveFunction);
+        };
+    }, []);
     return (
         <>
             <div className={styles.container}>
