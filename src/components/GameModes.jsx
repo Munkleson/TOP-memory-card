@@ -2,8 +2,6 @@ import { gameSettings } from "../gameSettingsVariables";
 import { numberInput } from "./subcomponents/numberInputLogic";
 import styles from "./GameModes.module.css";
 import { gameModeData } from "./GameModeData";
-import ModeInstructions from "./ModeInstructions";
-import { useState } from "react";
 
 ///// For reference
 //selectGameModeProps = {
@@ -115,7 +113,7 @@ function CustomGame({ props }) {
         case "standard":
             gameSettings.maxNumberOfPokemon = 99;
     }
-
+    
     return (
         <>
             <br />

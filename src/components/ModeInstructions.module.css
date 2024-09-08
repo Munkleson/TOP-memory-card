@@ -44,10 +44,6 @@
     font-weight: bold;
 }
 
-.modeDiv {
-
-}
-
 .modeDivSelected {
     background-color: #1f2025;
 }
@@ -131,7 +127,7 @@
 
 .closeButton {
     position: absolute;
-    bottom: 3%;
+    bottom: 5%;
     left: 50%;
     transform: translate(-50%);
 }

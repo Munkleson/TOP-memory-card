@@ -18,6 +18,21 @@ export default function HowToPlay({ openAndCloseMenu }) {
             footerDiv.removeEventListener("touchmove", touchMoveFunction);
         };
     }, []);
+        //// Stop possibility of touch move if there is no need for scrolling anyway
+        useEffect(() => {
+            const instructionsDiv = document.querySelector(`.${styles.instructionsDiv}`);
+            const touchMoveFunction = (event) => {
+                if (instructionsDiv.scrollHeight < instructionsDiv.clientHeight){
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+            };
+            instructionsDiv.addEventListener("touchmove", touchMoveFunction, { passive: false });
+            return () => {
+                instructionsDiv.removeEventListener("touchmove", touchMoveFunction);
+            };
+        }, []);
     return (
         <>
             <div className={styles.container}>

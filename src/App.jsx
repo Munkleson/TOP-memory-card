@@ -22,7 +22,7 @@ function App() {
     const [gameStarted, setGameState] = useState(false);
     const [numberOfPokemon, setNumberOfPokemon] = useState(0);
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
-    const [customInputValue, setcustomInputValue] = useState("0");
+    const [customInputValue, setcustomInputValue] = useState("");
 
     const [selectedMenuGameMode, setSelectedMenuGameMode] = useState("");
     const [gameMode, setGameMode] = useState("");
