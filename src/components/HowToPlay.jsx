@@ -47,7 +47,7 @@ export default function HowToPlay({ openAndCloseMenu }) {
                         <p className={styles.subText}>• You win if you {gameSettings.mobileOrNot ? "tap" : "click"} on all the Pokémon without choosing the same one twice</p>
 
                         <h3 className={styles.subHeading}>Timed mode</h3>
-                        <p className={styles.subText}>• You have the option to play the game with a {gameSettings.timer / 1000} second timer. If it reaches 0, you also lose!</p>
+                        <p className={styles.subText}>• You have the option to play the game with a timer. If it reaches 0, you will lose!</p>
 
                         <h3 className={styles.subHeading}>Scoring</h3>
                         <p className={styles.subText}>• Scoring is dependent on the game mode and difficulty you are currently playing. Playing timed will also result in a different scoring system</p>
