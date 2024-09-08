@@ -44,12 +44,11 @@ function ModeSelectDisplay({ props }) {
         <>
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
-                <button className={styles.buttons} onClick={props.setMenuGameModeFunction}>
-                    {gameModeData.classic.name}
-                </button>
-                <button className={styles.buttons} onClick={props.setMenuGameModeFunction}>
-                    {gameModeData.standard.name}
-                </button>
+                {Object.keys(gameModeData).map((element, index) => {
+                    return <button className={styles.buttons} onClick={props.setMenuGameModeFunction} key={index}>
+                        {gameModeData[element].name}
+                    </button> 
+                })}
             </div>
             <button className={`${styles.buttons} ${styles.backButton}`} onClick={props.enterAndLeaveGameModeSelectScreen}>
                 Back
@@ -113,7 +112,7 @@ function CustomGame({ props }) {
         case "standard":
             gameSettings.maxNumberOfPokemon = 99;
     }
-    
+
     return (
         <>
             <br />

@@ -42,9 +42,47 @@ function standardGameShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
            return recursiveShuffle();
         }
     }
-
-
     return recursiveShuffle();
 }
 
-export { whichPokemon, classicGameShuffle, standardGameShuffle };
+function fiftyFiftyShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray){
+        const tempArray = [...arrayOfPokemon];
+        const shuffledArray = [];
+        let randomClickedId = 0;
+
+        if (clickedArray.length !== 1){
+            randomClickedId = Math.floor(Math.random() * clickedArray.length);
+        }
+        const chosenClickedId = clickedArray[randomClickedId];
+
+        if (Math.floor(Math.random() * 2) === 0){    
+            while (shuffledArray.length < 1){
+                let randomNumber = Math.floor(Math.random() * tempArray.length);
+                if (!clickedArray.includes(tempArray[randomNumber].id)){
+                    const splicedData = tempArray.splice(randomNumber, 1)[0];
+                    shuffledArray.push(splicedData);
+                }
+            };
+            for (let index = 0; index < arrayOfPokemon.length; index++) {
+                if (arrayOfPokemon[index].id === chosenClickedId){
+                    shuffledArray.push(arrayOfPokemon[index]);
+                }
+            };
+        } else {
+            for (let index = 0; index < arrayOfPokemon.length; index++) {
+                if (arrayOfPokemon[index].id === chosenClickedId){
+                    shuffledArray.push(arrayOfPokemon[index]);
+                }
+            };
+            while (shuffledArray.length < 2){
+                let randomNumber = Math.floor(Math.random() * tempArray.length);
+                if (!clickedArray.includes(tempArray[randomNumber].id)){
+                    const splicedData = tempArray.splice(randomNumber, 1)[0];
+                    shuffledArray.push(splicedData);
+                };
+            };
+        };
+        return shuffledArray;
+}
+
+export { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle };

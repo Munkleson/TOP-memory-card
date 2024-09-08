@@ -107,10 +107,10 @@ body {
     font-size: calc(var(--ballDimensions) * 0.032);
 }
 
-#centerBallDiv * {
+/* #centerBallDiv * {
     margin-top: calc(var(--ballDimensions) * 0.02);
     margin-bottom: calc(var(--ballDimensions) * 0.02);
-}
+} */
 
 
 /* @media only screen and (max-height: 760px) {
@@ -255,6 +255,7 @@ body {
     transition: all 0.2s ease-in-out;
     border: none;
     font-size: 1em;
+    margin-top: 3%;
 }
 
 .howToPlayButton:active {

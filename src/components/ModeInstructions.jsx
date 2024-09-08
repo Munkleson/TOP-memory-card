@@ -65,6 +65,9 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
 }
 
 function DisplayModes({ element, selectMode, selectedMode, index}){
+    if (selectedMode === "fifty-fifty"){
+        selectedMode = "fiftyFifty";
+    }
     return (
         <div key={index} onClick={selectMode} className={
             element === selectedMode ? styles.modeDivSelected : styles.modeDiv
@@ -75,6 +78,9 @@ function DisplayModes({ element, selectMode, selectedMode, index}){
 }
 
 function DisplayInstructions({ selectedMode }){
+    if (selectedMode === "fifty-fifty"){
+        selectedMode = "fiftyFifty";
+    }
     return (
         <>              
             {gameModeData[selectedMode].instructions.map((element, index) => {

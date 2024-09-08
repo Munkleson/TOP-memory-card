@@ -4,7 +4,7 @@
     height: var(--height);
     position: fixed;
     left: 10px;
-    top: -5px;
+    top: 1%;
     box-sizing: border-box;
     font-size: 1.74vh;
 }
@@ -108,7 +108,6 @@
         height: var(--height);
         position: fixed;
         left: 10px;
-        top: -5px;
         box-sizing: border-box;
         font-size: 2.7vw;
     }

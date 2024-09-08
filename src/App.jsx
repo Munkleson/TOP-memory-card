@@ -57,12 +57,23 @@ function App() {
 
     function setGameModeFunction(selectedButton) {
         //// for the actual game mode to pass down to gameInitialization
-        setGameMode(`${selectedMenuGameMode}${selectedButton.target.innerText}`);
+        if (selectedButton.target.innerText === "Fifty-fifty"){
+            //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
+            setGameMode(`fiftyFifty${selectedButton.target.innerText}`);
+        } else {
+            setGameMode(`${selectedMenuGameMode}${selectedButton.target.innerText}`);
+        }
     }
 
     function setMenuGameModeFunction(selectedButton) {
         //// For menu navigation purposes
-        setSelectedMenuGameMode(selectedButton.target.innerText.toLowerCase());
+        if (selectedButton.target.innerText === "Fifty-fifty"){
+            //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
+            setSelectedMenuGameMode("fiftyFifty");
+        } else {
+            setSelectedMenuGameMode(selectedButton.target.innerText.toLowerCase());
+        }
+
         setIsMenuModeSelected(true);
     }
     function leaveSelectedMenuMode() {
@@ -133,7 +144,7 @@ function App() {
 
     function gameStart(event) {
         //// For non-custom games
-        setNumberOfPokemon(GameModeSettings[event.target.innerText].numberOfCards);
+        setNumberOfPokemon(GameModeSettings[selectedMenuGameMode][event.target.innerText].numberOfCards);
         setGameState(true);
     }
 

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { whichPokemon, classicGameShuffle, standardGameShuffle } from "./subcomponents/gameModeFunctions";
+import { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
 import { ClassicGame } from "./ClassicGameCardFunctions";
 import { StandardGame } from "./StandardGameCardFunctions";
+import { FiftyFiftyGame } from "./FiftyFifty";
 import GameModeSettings from "./GameModeSettings";
+import { gameModeData } from "./GameModeData";
 
 function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameMode }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
@@ -29,16 +31,18 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         if (numberOfPokemon < 18) {
             maxNumberOfPokemonShown = Math.floor(numberOfPokemon / 2);
         }
-        // if (numberOfPokemon === 6 || numberOfPokemon === 7){
-        //     maxNumberOfPokemonShown = 3;
-        // } else if (numberOfPokemon === 8){
-        //     maxNumberOfPokemonShown = 4
-        // } 
+        //// to get data of how many pokemon to show at one timme
         else {
-            maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
+            maxNumberOfPokemonShown = GameModeSettings.standard[gameMode.slice(8)].maxShown;
         }
-    } else if (gameMode.includes("standard")) {
-        maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(8)].maxShown;
+    } else if (!gameMode.includes("classic")) {
+        let indexToSlice = 0;
+        Object.keys(gameModeData).map((element) => {
+            if (gameMode.includes(element)){
+                indexToSlice = element.length;
+            }
+        });
+        maxNumberOfPokemonShown = GameModeSettings[gameMode.slice(0, indexToSlice)][gameMode.slice(indexToSlice)].maxShown;
     }
 
     function lowerCardsRemainingCounter(){
@@ -98,12 +102,16 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                     setTimeout(() => {
                         if (updatedPoints !== numberOfPokemon) {
                             target.style.backgroundColor = ""; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
-
                             /////// Card shuffling logic
                             if (gameMode.includes("classic")) {
                                 setCurrentGamePokemon(classicGameShuffle(currentGamePokemon));
                             } else {
-                                setCurrentlyDisplayedCards(standardGameShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id])); //// Clicked array has to be referenced like this, due to state setting being snapshots of when they were called. So in this case clickedArray would not be updated with the new id that was clicked to trigger this parent function
+                                if (gameMode.includes("fiftyFifty")){
+                                    setCurrentlyDisplayedCards(fiftyFiftyShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id]));
+                                } else {
+                                    setCurrentlyDisplayedCards(standardGameShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id])); //// Clicked array has to be referenced like this, due to state setting being snapshots of when they were called. So in this case clickedArray would not be updated with the new id that was clicked to trigger this parent function
+                                }
+                                
                             }
                             //// setTimeout is required based on how this is structured. The callback will manipulate the dom elements after the re-render with the cards showing the back side, and flip them back to front but after the cards have been shuffled
                             //// Remove the setTimeout and the flipping completely breaks
@@ -165,6 +173,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
 
             {gameMode.includes("classic") && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} />}
             {gameMode.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue}/>}
+            {gameMode.includes("fiftyFifty") && <FiftyFiftyGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameMode={gameMode} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue}/>}
 
             <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
         </>
