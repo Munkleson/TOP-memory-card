@@ -38,13 +38,12 @@ function SelectGameMode({ props }) {
 }
 
 function ModeSelectDisplay({ props }) {
-    const [instructionsOpened, setInstructionsState] = useState(false);
-    function openAndCloseInstructions() {
-        setInstructionsState(!instructionsOpened)
-    }
+    // const [instructionsOpened, setInstructionsState] = useState(false);
+    // function openAndCloseInstructions() {
+    //     setInstructionsState(!instructionsOpened)
+    // }
     return (
         <>
-            {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={props.openAndCloseMenu}/>}
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
                 <button className={styles.buttons} onClick={props.setMenuGameModeFunction}>
@@ -58,7 +57,7 @@ function ModeSelectDisplay({ props }) {
                 Back
             </button>
             <button className={styles.instructionsButton} onClick={() => {
-                openAndCloseInstructions();
+                props.openAndCloseInstructions();
                 props.openAndCloseMenu();
             }}>?</button>
         </>

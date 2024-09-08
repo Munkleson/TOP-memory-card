@@ -6,7 +6,6 @@ import { gameSettings } from "../gameSettingsVariables";
 export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
     const [selectedMode, setSelectedMode] = useState("");
     function selectMode(event){
-        console.log(event.target)
         setSelectedMode(event.target.innerText.toLowerCase());
     }
     return (

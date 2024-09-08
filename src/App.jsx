@@ -10,6 +10,7 @@ import { SelectGameMode } from "./components/GameModes.jsx";
 import GameModeSettings from "./components/GameModeSettings.js";
 import HowToPlay from "./components/HowToPlay.jsx";
 import "./components/css_files/gameSystems.css";
+import ModeInstructions from "./components/ModeInstructions.jsx";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -34,6 +35,11 @@ function App() {
     const [menuOpen, setMenuOpenState] = useState(false);
     function openAndCloseMenu() {
         setMenuOpenState(!menuOpen);
+    }
+
+    const [instructionsOpened, setInstructionsState] = useState(false);
+    function openAndCloseInstructions() {
+        setInstructionsState(!instructionsOpened)
     }
 
     useEffect(() => {
@@ -155,6 +161,7 @@ function App() {
         insideCustomGameMenu: insideCustomGameMenu,
         setGameModeFunction: setGameModeFunction,
         openAndCloseMenu: openAndCloseMenu,
+        openAndCloseInstructions: openAndCloseInstructions,
     };
 
     return (
@@ -162,8 +169,9 @@ function App() {
             {!gameStarted ? (
                 <>
                     <div className="topRelativeBar"></div>
-                    {/* How to Play is set here so the touch move on mobile disable doesn't affect it */}
+                    {/* How to Play and Mode Instructions is set here so the touch move on mobile disabling scrolling doesn't affect it */}
                     {(menuOpen && !enteredModeSelect) && <HowToPlay openAndCloseMenu={openAndCloseMenu} />}
+                    {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={openAndCloseMenu}/>}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
