@@ -47,6 +47,7 @@
     backface-visibility: hidden;
     transition: 0.7s ease;
     transform-origin: center;
+    padding-top: 3%;
 }
 
 .front {
@@ -73,12 +74,6 @@
     transform: rotateY(0deg);
 }
 
-.pokemonName {
-    margin-top: .6vh;
-    font-size: 2.2vh;
-    width: 99%;
-}
-
 
 @media only screen and (min-aspect-ratio: 1/1){
     .card {
@@ -102,8 +97,9 @@
     .card {
         --cardWidth: 16vw;
         width: var(--cardWidth);
+        font-size: 2.0vw;
     }
-    .pokemonName {
+    .front {
         font-size: 2.0vw;
     }
 }
@@ -114,8 +110,9 @@
         /* --cardWidth: 15vw; */
         /* width: var(--cardWidth); */
         height: 13.5vh;
+        font-size: 2.0vw;
     }
-    .pokemonName {
+    .front {
         font-size: 2.0vw;
     }
 }

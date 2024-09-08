@@ -32,7 +32,6 @@ function standardGameShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
             let randomNumber = Math.floor(Math.random() * tempArray.length);
             const splicedData = tempArray.splice(randomNumber, 1)[0];
             shuffledArray.push(splicedData);
-            console.log(clickedArray.includes(splicedData.id))
             if (!clickedArray.includes(splicedData.id)){
                 numberOfValidIds++;
             }

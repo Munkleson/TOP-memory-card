@@ -30,8 +30,7 @@ function DisplayCards({ finalCard, cardClick, element, gameResult, index, curren
                         backgroundImage: `url(${element.imageUrl})`,
                         backgroundColor: finalCard === element.id && (gameResult === "win" ? "rgb(90, 218, 90)" : "red"),
                     }}
-                >
-                    <p className={styles.pokemonName}>{element.name}</p>
+                > {element.name}
                 </div>
                 <div className={currentlyFlipping ? `${styles.back} ${styles.backFlipped}` : styles.back}></div>
             </div>
