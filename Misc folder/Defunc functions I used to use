@@ -148,9 +148,9 @@ GameModes.jsx;
 //                             <button className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
 //                                 if (element === "Custom"){
 //                                     props.setInCustomGameMenuOrNot();
-//                                     props.setGameModeFunction(event);
+//                                     props.setGameModeAndDifficultyFunction(event);
 //                                 } else {
-//                                     props.setGameModeFunction(event);
+//                                     props.setGameModeAndDifficultyFunction(event);
 //                                     props.gameStart(event);
 //                                 }
 //                             }}>
@@ -214,9 +214,9 @@ GameModes.jsx;
 //                             <button className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
 //                                 if (element === "Custom"){
 //                                     props.setInCustomGameMenuOrNot();
-//                                     props.setGameModeFunction(event);
+//                                     props.setGameModeAndDifficultyFunction(event);
 //                                 } else {
-//                                     props.setGameModeFunction(event);
+//                                     props.setGameModeAndDifficultyFunction(event);
 //                                     props.gameStart(event);
 //                                 }
 //                             }}>

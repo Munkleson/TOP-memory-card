@@ -17,6 +17,7 @@
   background-color: #ffffff;
 
   overflow-x: hidden;
+
 }
 
 a {
@@ -59,6 +60,7 @@ button {
   background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
+  color: black;
 }
 button:hover {
   /* border-color: #646cff; */
@@ -121,4 +123,15 @@ button:focus-visible {
 
 button:hover {
   cursor: pointer;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #292c35;
+
+  --radius-value: 20px;
+  border-radius: var(--radius-value);
 }

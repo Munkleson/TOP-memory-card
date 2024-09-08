@@ -10,9 +10,9 @@ import { gameModeData } from "./GameModeData";
 //     gameStart,
 //     setcustomInputValue,
 //     timedCheckBoxTicked,
-//     setMenuGameModeFunction,
+//     setGameModeFunction,
 //     isMenuModeSelected,
-//     selectedMenuGameMode,
+//     gameMode,
 //     leaveSelectedMenuMode,
 //     enterAndLeaveGameModeSelectScreen,
 //     setInCustomGameMenuOrNot,
@@ -26,8 +26,8 @@ function SelectGameMode({ props }) {
                 <ModeSelectDisplay props={props} />
             ) : (
                 <>
-                    {/* {props.selectedMenuGameMode === gameModeData.standard.name && <StandardGame props={props}/>}
-                    {props.selectedMenuGameMode === gameModeData.classic.name && <ClassicGame props={props}/>} */}
+                    {/* {props.gameMode === gameModeData.standard.name && <StandardGame props={props}/>}
+                    {props.gameMode === gameModeData.classic.name && <ClassicGame props={props}/>} */}
                     <InsideCustomGameCheck props={props}/>
                 </>
             )}
@@ -45,7 +45,7 @@ function ModeSelectDisplay({ props }) {
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
                 {Object.keys(gameModeData).map((element, index) => {
-                    return <button className={styles.buttons} onClick={props.setMenuGameModeFunction} key={index}>
+                    return <button className={styles.buttons} onClick={props.setGameModeFunction} key={index}>
                         {gameModeData[element].name}
                     </button> 
                 })}
@@ -74,22 +74,22 @@ function InsideCustomGameCheck({ props }){
 function DifficultySelect({ props }){
     return (
         <>
-            <p className={styles.titleText}>{gameModeData[props.selectedMenuGameMode].name}</p>
+            <p className={styles.titleText}>{gameModeData[props.gameMode].name}</p>
             <p className={styles.difficultyText}>Select difficulty</p>
             <div className={styles.modesContainer}>
-                {gameModeData[props.selectedMenuGameMode].difficulties.map((element, index) => {
+                {gameModeData[props.gameMode].difficulties.map((element, index) => {
                     return (
                         <>
                             <button key={index} className={`${styles.buttons} ${styles.modeButtons}`} onClick={(event) => {
                                 if (element === "Custom"){
                                     props.setInCustomGameMenuOrNot();
-                                    props.setGameModeFunction(event);
+                                    props.setGameModeAndDifficultyFunction(event);
                                 } else {
-                                    props.setGameModeFunction(event);
+                                    props.setGameModeAndDifficultyFunction(event);
                                     props.gameStart(event);
                                 }
                             }}>
-                                {gameModeData[props.selectedMenuGameMode].difficulties[index]}
+                                {gameModeData[props.gameMode].difficulties[index]}
                             </button>
                         </>
                     )
@@ -103,15 +103,21 @@ function DifficultySelect({ props }){
         </>
     )
 }
-
+//// should be stored in an object, not here
 function CustomGame({ props }) {
-    switch(props.selectedMenuGameMode){
-        case "classic": 
-            gameSettings.maxNumberOfPokemon = 30;
-            break;
-        case "standard":
-            gameSettings.maxNumberOfPokemon = 99;
+    if (props.gameMode === "classic"){
+        gameSettings.maxNumberOfPokemon = 30;
+    } else {
+        gameSettings.maxNumberOfPokemon = 99;
     }
+    // switch(props.gameMode){
+    //     case "classic": 
+    //         gameSettings.maxNumberOfPokemon = 30;
+    //         break;
+    //     case "standard":
+    //         gameSettings.maxNumberOfPokemon = 99;
+    //     case "fifty"
+    // }
 
     return (
         <>

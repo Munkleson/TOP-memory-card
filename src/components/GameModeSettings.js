@@ -1,5 +1,6 @@
 export default {
     classic: {
+        timer: 5000,
         Easy: {
             numberOfCards: 6,
         },
@@ -19,6 +20,7 @@ export default {
         }
     },
     standard: {
+        timer: 5000,
         Easy: {
             numberOfCards: 6,
             maxShown: 3,
@@ -46,6 +48,7 @@ export default {
         }
     },
     fiftyFifty: {
+        timer: 3500,
         Easy: {
             numberOfCards: 6,
             maxShown: 2,

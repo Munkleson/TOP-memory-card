@@ -24,8 +24,9 @@ function App() {
     const [timedCheckBoxTicked, setTimeCheckBoxState] = useState(false);
     const [customInputValue, setcustomInputValue] = useState("");
 
-    const [selectedMenuGameMode, setSelectedMenuGameMode] = useState("");
     const [gameMode, setGameMode] = useState("");
+    const [gameDifficulty, setGameDifficulty] = useState("");
+    const [gameModeAndDifficulty, setGameModeAndDifficulty] = useState("");
 
     const [enteredModeSelect, setEnteredModeSelectStatus] = useState(false);
     const [isMenuModeSelected, setIsMenuModeSelected] = useState(false);
@@ -39,7 +40,7 @@ function App() {
 
     const [instructionsOpened, setInstructionsState] = useState(false);
     function openAndCloseInstructions() {
-        setInstructionsState(!instructionsOpened)
+        setInstructionsState(!instructionsOpened);
     }
 
     useEffect(() => {
@@ -55,23 +56,31 @@ function App() {
         };
     }, []);
 
-    function setGameModeFunction(selectedButton) {
+    const gameModeAndDifficultyProps = {
+        gameMode: gameMode,
+        gameDifficulty: gameDifficulty,
+        gameModeAndDifficulty: gameModeAndDifficulty,
+    };
+
+    function setGameModeAndDifficultyFunction(selectedButton) {
         //// for the actual game mode to pass down to gameInitialization
-        if (selectedButton.target.innerText === "Fifty-fifty"){
+        if (selectedButton.target.innerText === "Fifty-fifty") {
             //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
-            setGameMode(`fiftyFifty${selectedButton.target.innerText}`);
+            setGameModeAndDifficulty(`fiftyFifty${selectedButton.target.innerText}`);
         } else {
-            setGameMode(`${selectedMenuGameMode}${selectedButton.target.innerText}`);
+            setGameModeAndDifficulty(`${gameMode}${selectedButton.target.innerText}`);
         }
+        //// Only for setting the difficulty
+        setGameDifficulty(selectedButton.target.innerText);
     }
 
-    function setMenuGameModeFunction(selectedButton) {
+    function setGameModeFunction(selectedButton) {
         //// For menu navigation purposes
-        if (selectedButton.target.innerText === "Fifty-fifty"){
+        if (selectedButton.target.innerText === "Fifty-fifty") {
             //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
-            setSelectedMenuGameMode("fiftyFifty");
+            setGameMode("fiftyFifty");
         } else {
-            setSelectedMenuGameMode(selectedButton.target.innerText.toLowerCase());
+            setGameMode(selectedButton.target.innerText.toLowerCase());
         }
 
         setIsMenuModeSelected(true);
@@ -144,7 +153,7 @@ function App() {
 
     function gameStart(event) {
         //// For non-custom games
-        setNumberOfPokemon(GameModeSettings[selectedMenuGameMode][event.target.innerText].numberOfCards);
+        setNumberOfPokemon(GameModeSettings[gameMode][event.target.innerText].numberOfCards);
         setGameState(true);
     }
 
@@ -163,14 +172,14 @@ function App() {
         customGameStart: customGameStart,
         setcustomInputValue: setcustomInputValue,
         timedCheckBoxTicked: timedCheckBoxTicked,
-        setMenuGameModeFunction: setMenuGameModeFunction,
+        setGameModeFunction: setGameModeFunction,
         isMenuModeSelected: isMenuModeSelected,
-        selectedMenuGameMode: selectedMenuGameMode,
+        gameMode: gameMode,
         leaveSelectedMenuMode: leaveSelectedMenuMode,
         enterAndLeaveGameModeSelectScreen: enterAndLeaveGameModeSelectScreen,
         setInCustomGameMenuOrNot: setInCustomGameMenuOrNot,
         insideCustomGameMenu: insideCustomGameMenu,
-        setGameModeFunction: setGameModeFunction,
+        setGameModeAndDifficultyFunction: setGameModeAndDifficultyFunction,
         openAndCloseMenu: openAndCloseMenu,
         openAndCloseInstructions: openAndCloseInstructions,
     };
@@ -181,8 +190,8 @@ function App() {
                 <>
                     <div className="topRelativeBar"></div>
                     {/* How to Play and Mode Instructions is set here so the touch move on mobile disabling scrolling doesn't affect it */}
-                    {(menuOpen && !enteredModeSelect) && <HowToPlay openAndCloseMenu={openAndCloseMenu} />}
-                    {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={openAndCloseMenu}/>}
+                    {menuOpen && !enteredModeSelect && <HowToPlay openAndCloseMenu={openAndCloseMenu} />}
+                    {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={openAndCloseMenu} />}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
@@ -214,7 +223,7 @@ function App() {
                 </>
             ) : (
                 <div id="gameBodyDiv">
-                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} gameMode={gameMode} />
+                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} gameModeAndDifficulty={gameModeAndDifficulty} gameModeAndDifficultyProps={gameModeAndDifficultyProps}/>
                 </div>
             )}
         </>

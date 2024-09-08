@@ -6,7 +6,12 @@ import { useEffect } from "react";
 export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
     const [selectedMode, setSelectedMode] = useState("");
     function selectMode(event){
-        setSelectedMode(event.target.innerText.toLowerCase());
+        if (event.target.innerText === "Fifty-fifty"){
+            setSelectedMode("fiftyFifty")
+        } else {
+            setSelectedMode(event.target.innerText.toLowerCase());
+        }
+
     }
     useEffect(() => {
         const sideBar = document.querySelector(`.${styles.sideBar}`);
@@ -42,7 +47,7 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
                     {Object.keys(gameModeData).map((element, index) => {
                         return (
                         <>
-                            <DisplayModes element={element} selectMode={selectMode} selectedMode={selectedMode} index={index}/>
+                            <DisplayModes key={element} element={element} selectMode={selectMode} selectedMode={selectedMode} index={index}/>
                         </>)
                     })}
                     <button onClick={() => {
@@ -65,9 +70,7 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
 }
 
 function DisplayModes({ element, selectMode, selectedMode, index}){
-    if (selectedMode === "fifty-fifty"){
-        selectedMode = "fiftyFifty";
-    }
+
     return (
         <div key={index} onClick={selectMode} className={
             element === selectedMode ? styles.modeDivSelected : styles.modeDiv
@@ -78,14 +81,12 @@ function DisplayModes({ element, selectMode, selectedMode, index}){
 }
 
 function DisplayInstructions({ selectedMode }){
-    if (selectedMode === "fifty-fifty"){
-        selectedMode = "fiftyFifty";
-    }
+
     return (
         <>              
-            {gameModeData[selectedMode].instructions.map((element, index) => {
+            {gameModeData[selectedMode].instructions.map((element) => {
                 return <>
-                    <p className={styles.instructionsText} key={index} style={{color: (selectedMode === "standard" && index === gameModeData[selectedMode].instructions.length - 1) && "#FFCC01", fontWeight: "bold"}}>{element}</p>
+                    <p className={styles.instructionsText} key={element} style={{color: (selectedMode === "standard" && element.includes("There will always be at least one valid")) && "#FFCC01", fontWeight: "bold"}}>{element}</p>
                 </>
             })}
         </>

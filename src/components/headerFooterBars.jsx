@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./css_files/headerFooterBar.css";
 import { gameSettings } from "../gameSettingsVariables";
+import GameModeSettings from "./GameModeSettings";
 
 let timeWhenTimerStarted; //// global object for checking 
 
@@ -27,26 +28,27 @@ function HeaderBar({ backToHomePage, replayGame, highScore, currentScore}) {
     );
 }
 
-function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
+function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps }) {
     return (
         <>
             {timed && (
                 <div className="footerBar" style={{ backgroundColor: "rgb(255, 255, 255, 0)" }}>
-                    <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} />
+                    <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps}/>
                 </div>
             )}
         </>
     );
 }
 
-function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver }) {
+function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps }) {
     const [timerBarSizeElement, setTimerBarSizeElement] = useState(0);
     const [timerBarActive, setTimerBarState] = useState(false);
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
     // const viewWidth = window.innerWidth;
     const [isGameActive, setGameActiveState] = useState(gameActive);
-
-    const marginAmount = (timerBarSizeElement / gameSettings.timer) * viewWidth;
+    
+    //// Timer retrieved and set below
+    const marginAmount = (timerBarSizeElement / GameModeSettings[gameModeAndDifficultyProps.gameMode].timer) * viewWidth;
 
     if (gameActive && !isGameActive) {
         setTimerBarState(true);
