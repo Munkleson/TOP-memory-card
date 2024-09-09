@@ -11,6 +11,9 @@ import GameModeSettings from "./components/GameModeSettings.js";
 import HowToPlay from "./components/HowToPlay.jsx";
 import "./components/css_files/gameSystems.css";
 import ModeInstructions from "./components/ModeInstructions.jsx";
+import HighScoresComponent from "./components/HighScores.jsx";
+import { gameModeData } from "./components/GameModeData.js";
+import localStorageVersionControl from "./components/subcomponents/versionControl.js";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -32,15 +35,31 @@ function App() {
     const [isMenuModeSelected, setIsMenuModeSelected] = useState(false);
     const [insideCustomGameMenu, setCustomGameMenuModeSelected] = useState(false); //// This is needed because if you start a game and go home, it doesn't go back to the custom game menu, but instead takes you back to the classic game mode selection screen
 
-    //// This is here to stop the generation selector from being opened and looking really janky when you are in another menu. Just a little bit visually unpleasing, but if it doesn't open when you click it but you can see it it looks really weird too. Could consider just removing it when a menu is opened
+    const [displayHighScoresOpen, setDisplayHighScores] = useState(false);
+    function openAndCloseHighScores (){
+        (!menuOpen || displayHighScoresOpen) && setDisplayHighScores(!displayHighScoresOpen);
+        (!menuOpen && !displayHighScoresOpen) && setMenuOpenState(!menuOpen);
+        (menuOpen && displayHighScoresOpen) && setMenuOpenState(!menuOpen);
+    }
+
+    //// These below are here to stop the generation selector and any other menu from being opened and looking really janky when you are in a particular menu. Just a little bit visually unpleasing, but if it doesn't open when you click it but you can see it it looks really weird too. Could consider just removing it when a menu is opened
     const [menuOpen, setMenuOpenState] = useState(false);
-    function openAndCloseMenu() {
-        setMenuOpenState(!menuOpen);
+    // function openAndCloseMenu() {
+    //     setMenuOpenState(!menuOpen);
+    // }
+
+    const [howToPlayOpen, setHowToPlayOpen]= useState(false);
+    function openAndCloseHowToPlay(){
+        (!menuOpen || howToPlayOpen) && setHowToPlayOpen(!howToPlayOpen);
+        (!menuOpen && !howToPlayOpen) && setMenuOpenState(!menuOpen);
+        (menuOpen && howToPlayOpen) && setMenuOpenState(!menuOpen);
     }
 
     const [instructionsOpened, setInstructionsState] = useState(false);
     function openAndCloseInstructions() {
-        setInstructionsState(!instructionsOpened);
+        (!menuOpen || instructionsOpened) && setInstructionsState(!instructionsOpened);
+        (!menuOpen && !instructionsOpened) && setMenuOpenState(!menuOpen);
+        (menuOpen && instructionsOpened) && setMenuOpenState(!menuOpen);
     }
 
     useEffect(() => {
@@ -100,11 +119,6 @@ function App() {
     const effectRan = useRef(false);
 
     useEffect(() => {
-        function localStorageVersionControl() {
-            //// deletes everything in localstorage if the version is not the same. Not really needed, but a just in case I want to update things like scoring algorithms. May edit this in future to just erase certain things
-            localStorage.version !== gameSettings.currentVersion && localStorage.clear();
-            localStorage.version = gameSettings.currentVersion;
-        }
         localStorageVersionControl();
     }, []);
 
@@ -180,7 +194,7 @@ function App() {
         setInCustomGameMenuOrNot: setInCustomGameMenuOrNot,
         insideCustomGameMenu: insideCustomGameMenu,
         setGameModeAndDifficultyFunction: setGameModeAndDifficultyFunction,
-        openAndCloseMenu: openAndCloseMenu,
+        // openAndCloseMenu: openAndCloseMenu,
         openAndCloseInstructions: openAndCloseInstructions,
     };
 
@@ -190,8 +204,10 @@ function App() {
                 <>
                     <div className="topRelativeBar"></div>
                     {/* How to Play and Mode Instructions is set here so the touch move on mobile disabling scrolling doesn't affect it */}
-                    {menuOpen && !enteredModeSelect && <HowToPlay openAndCloseMenu={openAndCloseMenu} />}
-                    {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} openAndCloseMenu={openAndCloseMenu} />}
+                    {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
+                    {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} />}
+                    <button className="highScoresButton" onClick={openAndCloseHighScores}></button>
+                    {displayHighScoresOpen && <HighScoresComponent openAndCloseHighScores={openAndCloseHighScores}/>}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
@@ -200,6 +216,8 @@ function App() {
                                 <HomePageLoadingAnimation />
                             ) : (
                                 <>
+                                {/* These have to be here otherwise they will appear before the loading screen may have finished loading. All menu items/systems etc should be unless they're not affected (maybe like high scores) */}
+                                {/* menu open is put in Generation Select because it shouldn't function if another menu is open */}
                                     <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} menuOpen={menuOpen} />
                                     {enteredModeSelect ? (
                                         <SelectGameMode props={selectGameModeProps} />
@@ -211,7 +229,7 @@ function App() {
                                             <button onClick={enterAndLeaveGameModeSelectScreen} className="enterModeSelectButton">
                                                 Select game mode
                                             </button>
-                                            <button onClick={openAndCloseMenu} className="howToPlayButton">
+                                            <button onClick={openAndCloseHowToPlay} className="howToPlayButton">
                                                 How to play
                                             </button>
                                         </>

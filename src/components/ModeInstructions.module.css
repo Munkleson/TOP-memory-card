@@ -130,14 +130,16 @@
     bottom: 5%;
     left: 50%;
     transform: translate(-50%);
+    margin: 0;
+    text-align: center;
+    transition: 0.2s;
 }
 
 .closeButton:hover {
     outline: none;
     border: none;
     background-color: rgb(177, 174, 174);
-    /* transform: scale(1.1, 1.1) !important; */
     border: none;
-    /* font-size: 1.05em; */
-    transition: all 0.15s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    padding: 0.6em 1.2em;
 }

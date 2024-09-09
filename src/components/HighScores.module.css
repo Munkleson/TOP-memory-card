@@ -1,0 +1,236 @@
+.overallContainer {
+    position: absolute;
+    z-index: 100;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    background-color: white;
+    border: black 2px solid;
+    background-color: #454c5a;
+    border-radius: 20px;
+    color: white;
+    overflow: hidden;
+}
+
+.header {
+    background-color: #292c35;
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    /* align-items: center; */
+}
+
+.highScoreText {
+    /* width: fit-content; */
+    text-align: center;
+}
+
+.otherHeaderDiv {
+
+}
+
+.closeButton {
+    text-align: center;
+    transition: 0.2s;
+    /* width: 10%; */
+    /* height: 10%; */
+    margin: 0;
+    font-size: 1em;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.closeButton:hover {
+    outline: none;
+    border: none;
+    background-color: rgb(177, 174, 174);
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+/* #FFCC01 */
+
+.contentContainer {
+    display: flex;
+    width: 100%;
+    /* height: 100%; */
+    justify-content: center;
+}
+
+.contentContainer li {
+    list-style: none;
+}
+
+.normalDiv {
+    width: 50%;
+}
+
+.timedDiv{
+    width: 50%;
+}
+
+.innerNormalDiv, .innerTimedDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.difficultyDiv {
+    width: 40%;
+}
+
+.scoreDiv {
+    width: 40%;
+    padding: 0;
+}
+
+.difficultyText {
+    font-weight: bold;
+    width: 30%;
+    text-align: left;
+    margin-left: 10%;
+}
+
+.scoreText {
+    text-align: center;
+}
+
+.timedText {
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    border-image: linear-gradient(to right, #a7b1c7 10%, transparent 90%) 50% 1;
+}
+
+.normalText {
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    border-image: linear-gradient(to left, #a7b1c7 10%, transparent 90%) 50% 1;
+}
+
+@media only screen and (max-aspect-ratio: 1){
+    .overallContainer {
+        width: 90%;
+        height: 50%;
+    }
+    .header {
+        align-items: normal;
+    }
+}
+
+
+.selectedHolder {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20%;
+    /* background-color: #1f2229; */
+    background-color: #e2dfdf;
+    padding: 1%;
+    border-radius: 0.5em;
+    color: black;
+    transition: 0.2s;
+}
+
+.selectedHolder:hover {
+    cursor: pointer;
+    background-color: rgb(177, 174, 174);
+    transition: 0.2s;
+}
+
+.selectedMode {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caret {
+    position: absolute;
+    right: 0.1em;
+    /* top: 50%; */
+    width: 0;
+    height: 0;
+    border-left: 0.3125em solid transparent;
+    border-right: 0.3125em solid transparent;
+    border-top: 0.375em solid black;
+    transition: 0.3s;
+}
+
+@media only screen and (max-aspect-ratio: 1){
+    .selectedHolder{
+        width: 25%;
+        left: 2%;
+    }
+    .caret {
+        right: 0.1em;
+    }
+    .closeButton {
+        padding: 1%;
+        width: 25%;
+        right: 2%;
+    }
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.modeMenu {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background-color: #252830;
+    border: 1px #363a43 solid;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em;
+    color: white;
+    position: absolute;
+    top: 2em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: 0.2s;
+    z-index: 1000;
+    animation: loadMenu 0.3s linear;
+}
+
+@keyframes loadMenu {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.modeMenuOpen {
+    opacity: 1;
+}
+
+.modeMenu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.modeMenu li:hover {
+    background: #32363f;
+    transition: 0.2s;
+}
+
+.activeSelection {
+    background-color: #454c5a;
+    transition: 0.2s;
+}

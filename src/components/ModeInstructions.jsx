@@ -3,7 +3,7 @@ import styles from "./ModeInstructions.module.css";
 import { gameModeData } from "./GameModeData";
 import { useEffect } from "react";
 
-export default function ModeInstructions({ openAndCloseInstructions, openAndCloseMenu }){
+export default function ModeInstructions({ openAndCloseInstructions }){
     const [selectedMode, setSelectedMode] = useState("");
     function selectMode(event){
         if (event.target.innerText === "Fifty-fifty"){
@@ -52,7 +52,6 @@ export default function ModeInstructions({ openAndCloseInstructions, openAndClos
                     })}
                     <button onClick={() => {
                         openAndCloseInstructions();
-                        openAndCloseMenu();
                         }} className={styles.closeButton}>Close</button>
                 </div>
                 <div className={styles.contentDiv}>

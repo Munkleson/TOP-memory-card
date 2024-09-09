@@ -13,7 +13,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
     const [clickedArray, setClickedArray] = useState([]);
     const [currentScore, setCurrentScore] = useState(0);
-    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed, gameModeAndDifficulty));
+    const [highScore, setHighScore] = useState(getHighScore(numberOfPokemon, timed, gameModeAndDifficultyProps));
     const [gameOver, setGameOver] = useState(false);
     const [currentlyFlipping, setFlippingStatus] = useState(false);
     const [finalCard, setFinalCard] = useState(null); //// the card that ends the game, either in a win or a loss
@@ -88,7 +88,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                     //// high score functionality
                     if (updatedPoints > highScore) {
                         setHighScore(updatedPoints);
-                        storeInLocalStorage(updatedPoints, numberOfPokemon, timed, gameModeAndDifficulty);
+                        storeInLocalStorage(updatedPoints, numberOfPokemon, timed, gameModeAndDifficultyProps);
                     }
                     //// flips cards only if the game is not over
                     if (updatedPoints !== numberOfPokemon) {

@@ -71,6 +71,16 @@
     display: none;
     transition: 0.2s;
     z-index: 10;
+    animation: loadMenu 0.3s linear;
+}
+
+@keyframes loadMenu {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .generationMenu li {

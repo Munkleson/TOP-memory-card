@@ -26,8 +26,6 @@ function SelectGameMode({ props }) {
                 <ModeSelectDisplay props={props} />
             ) : (
                 <>
-                    {/* {props.gameMode === gameModeData.standard.name && <StandardGame props={props}/>}
-                    {props.gameMode === gameModeData.classic.name && <ClassicGame props={props}/>} */}
                     <InsideCustomGameCheck props={props}/>
                 </>
             )}
@@ -36,10 +34,6 @@ function SelectGameMode({ props }) {
 }
 
 function ModeSelectDisplay({ props }) {
-    // const [instructionsOpened, setInstructionsState] = useState(false);
-    // function openAndCloseInstructions() {
-    //     setInstructionsState(!instructionsOpened)
-    // }
     return (
         <>
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
@@ -55,7 +49,6 @@ function ModeSelectDisplay({ props }) {
             </button>
             <button className={styles.instructionsButton} onClick={() => {
                 props.openAndCloseInstructions();
-                props.openAndCloseMenu();
             }}>?</button>
         </>
     );
@@ -110,15 +103,6 @@ function CustomGame({ props }) {
     } else {
         gameSettings.maxNumberOfPokemon = 99;
     }
-    // switch(props.gameMode){
-    //     case "classic": 
-    //         gameSettings.maxNumberOfPokemon = 30;
-    //         break;
-    //     case "standard":
-    //         gameSettings.maxNumberOfPokemon = 99;
-    //     case "fifty"
-    // }
-
     return (
         <>
             <br />

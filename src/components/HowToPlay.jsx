@@ -2,7 +2,7 @@ import { gameSettings } from "../gameSettingsVariables";
 import styles from "./HowToPlay.module.css";
 import { useEffect } from "react";
 
-export default function HowToPlay({ openAndCloseMenu }) {
+export default function HowToPlay({ openAndCloseHowToPlay }) {
     useEffect(() => {
         const titleDiv = document.querySelector(`.${styles.titleDiv}`);
         const footerDiv = document.querySelector(`.${styles.footer}`);
@@ -51,13 +51,14 @@ export default function HowToPlay({ openAndCloseMenu }) {
 
                         <h3 className={styles.subHeading}>Scoring</h3>
                         <p className={styles.subText}>• Scoring is dependent on the game mode and difficulty you are currently playing. Playing timed will also result in a different scoring system</p>
+                        <p style={{color: "#FFCC01"}} className={styles.subText}>* Custom games high scores are not displayed in the high scores page</p>
 
                         <h3 className={styles.subHeading}>Misc.</h3>
                         <p className={styles.subText}>• Are there secrets to discover in this game? Hmmm, who knows.....</p>
                     </div>
                 </div>
                 <div className={styles.footer}>
-                    <button onClick={openAndCloseMenu} className={styles.closeButton}>
+                    <button onClick={openAndCloseHowToPlay} className={styles.closeButton}>
                         Close
                     </button>
                 </div>

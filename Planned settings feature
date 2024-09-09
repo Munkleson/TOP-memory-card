@@ -1,5 +1,24 @@
 Features
-- Language changing (Eng and JP only)
-- Roadmap
-- Achievements? (Separate more likely)
-- Changelog
+
+-   Language changing (Eng and JP only)
+-   Roadmap
+-   Achievements? (Separate more likely)
+-   Changelog
+-   High scores
+-   Export and import games
+    - Need to encrypt the save game so it can't be edited
+
+
+
+
+- High score structure
+    -scores: 
+        gameMode: 
+            difficulty:
+                normal:
+                    {true}: *Booleans are to check if it is timed or not*
+                    {false): 
+                custom: 
+                    {numberOfPokemon}:
+                        {true{:
+                        {false}:
