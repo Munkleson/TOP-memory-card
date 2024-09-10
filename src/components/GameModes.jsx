@@ -112,7 +112,12 @@ function CustomGame({ props }) {
             </p>
             <form action="" onSubmit={props.customGameStart} className="ballFormDiv">
                 <div className={styles.inputAndButtonHolder}>
-                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} />
+                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} 
+                    onKeyDown={event => {
+                        if (event.key === "."){
+                            event.preventDefault();
+                        }
+                    }}/>
                     <input type="submit" value={"Start game"} className="startGameButton" />
                 </div>
                 <div className="timedModeDiv">

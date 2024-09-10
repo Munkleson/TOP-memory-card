@@ -15,7 +15,6 @@ export default function DisplayHighScores({ openAndCloseHighScores }) {
             setSelected(text)
         }
     }
-
     return (
         <div className={styles.overallContainer}>
             <HighScoreHeader openAndCloseHighScores={openAndCloseHighScores} setSelection={setSelection} selected={selected}/>

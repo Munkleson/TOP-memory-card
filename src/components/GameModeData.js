@@ -36,7 +36,7 @@ gameModeData.standard.instructions = [
     `    - ${gameModeData.standard.difficulties[2]}: 9 cards displayed out of ${GameModeSettings.standard[gameModeData.standard.difficulties[2]].numberOfCards}`, 
     `    - ${gameModeData.standard.difficulties[3]}: 9 cards displayed out of ${GameModeSettings.standard[gameModeData.standard.difficulties[3]].numberOfCards}`, 
     `    - ${gameModeData.standard.difficulties[4]}: 9 cards displayed out of ${GameModeSettings.standard[gameModeData.standard.difficulties[4]].numberOfCards}`, 
-    `    - ${gameModeData.standard.difficulties[5]}: Up to a maximum of 9 cards displayed. You may choose a number from ${GameModeSettings.standard[gameModeData.standard.difficulties[5]].minCards} to ${GameModeSettings.standard[gameModeData.standard.difficulties[5]].maxCards} cards`,          
+    `    - ${gameModeData.standard.difficulties[5]}: The number of cards displayed will range from 3 to 9, depending on the total number of cards that you are playing with. You may choose a number from ${GameModeSettings.standard[gameModeData.standard.difficulties[5]].minCards} to ${GameModeSettings.standard[gameModeData.standard.difficulties[5]].maxCards} cards`,          
     "* There will always be at least one valid card displayed",
     `• Timed mode duration: 5 seconds`,
 ];
