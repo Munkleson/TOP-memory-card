@@ -3,15 +3,15 @@ import styles from "./ModeInstructions.module.css";
 import { gameModeData } from "./GameModeData";
 import { useEffect } from "react";
 
-export default function ModeInstructions({ openAndCloseInstructions }){
+export default function ModeInstructions({ openAndCloseInstructions }) {
     const [selectedMode, setSelectedMode] = useState("");
-    function selectMode(event){
-        if (event.target.innerText === "Fifty-fifty"){
-            setSelectedMode("fiftyFifty")
-        } else {
+    function selectMode(event) {
+        // if (event.target.innerText === "Fifty-fifty") {
+        //     setSelectedMode("fifty-fifty");
+        // } else if (event.target.innerText === "") {
+        // } else {
             setSelectedMode(event.target.innerText.toLowerCase());
-        }
-
+        // }
     }
     useEffect(() => {
         const sideBar = document.querySelector(`.${styles.sideBar}`);
@@ -29,7 +29,7 @@ export default function ModeInstructions({ openAndCloseInstructions }){
     useEffect(() => {
         const contentDiv = document.querySelector(`.${styles.contentDiv}`);
         const touchMoveFunction = (event) => {
-            if (contentDiv.scrollHeight < contentDiv.clientHeight){
+            if (contentDiv.scrollHeight < contentDiv.clientHeight) {
                 event.preventDefault();
                 event.stopPropagation();
                 return false;
@@ -46,49 +46,55 @@ export default function ModeInstructions({ openAndCloseInstructions }){
                 <div className={styles.sideBar}>
                     {Object.keys(gameModeData).map((element, index) => {
                         return (
-                        <>
-                            <DisplayModes key={element} element={element} selectMode={selectMode} selectedMode={selectedMode} index={index}/>
-                        </>)
+                            <>
+                                <DisplayModes key={element} element={element} selectMode={selectMode} selectedMode={selectedMode} index={index} />
+                            </>
+                        );
                     })}
-                    <button onClick={() => {
-                        openAndCloseInstructions();
-                        }} className={styles.closeButton}>Close</button>
+                    <button
+                        onClick={() => {
+                            openAndCloseInstructions();
+                        }}
+                        className={styles.closeButton}
+                    >
+                        Close
+                    </button>
                 </div>
                 <div className={styles.contentDiv}>
-                    {selectedMode ?
-                        <DisplayInstructions selectedMode={selectedMode}/>  
-                    : 
+                    {selectedMode ? (
+                        <DisplayInstructions selectedMode={selectedMode} />
+                    ) : (
                         <>
                             <p className={styles.defaultText}>Select a mode to view its rules</p>
                         </>
-                    }
+                    )}
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-function DisplayModes({ element, selectMode, selectedMode, index}){
-
+function DisplayModes({ element, selectMode, selectedMode, index }) {
     return (
-        <div key={index} onClick={selectMode} className={
-            element === selectedMode ? styles.modeDivSelected : styles.modeDiv
-            }>{gameModeData[element].name}
+        <div key={index} onClick={selectMode} className={element === selectedMode ? styles.modeDivSelected : styles.modeDiv}>
+            {gameModeData[element].name}
             {/* <span className={styles.modeText}>{gameModeData[element].name}</span> */}
         </div>
-    )
+    );
 }
 
-function DisplayInstructions({ selectedMode }){
-
+function DisplayInstructions({ selectedMode }) {
     return (
-        <>              
+        <>
             {gameModeData[selectedMode].instructions.map((element) => {
-                return <>
-                    <p className={styles.instructionsText} key={element} style={{color: (selectedMode === "standard" && element.includes("There will always be at least one valid")) && "#FFCC01", fontWeight: "bold"}}>{element}</p>
-                </>
+                return (
+                    <>
+                        <p className={styles.instructionsText} key={element} style={{ color: (element.includes("There will always be at least one valid") || element.includes("* This mode is timed")) && "#FFCC01", fontWeight: "bold" }}>
+                            {element}
+                        </p>
+                    </>
+                );
             })}
         </>
-    )
+    );
 }
-

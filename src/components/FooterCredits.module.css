@@ -1,0 +1,14 @@
+.creditsDiv {
+    position: absolute;
+    bottom: 0.05%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1em;
+    width: 100%;
+}
+
+@media only screen and (max-aspect-ratio: 1){
+    .creditsDiv {
+        font-size: 0.8em;
+    }
+}

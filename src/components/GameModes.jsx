@@ -1,7 +1,7 @@
-import { gameSettings } from "../gameSettingsVariables";
 import { numberInput } from "./subcomponents/numberInputLogic";
 import styles from "./GameModes.module.css";
 import { gameModeData } from "./GameModeData";
+import GameModeSettings from "./GameModeSettings";
 
 ///// For reference
 //selectGameModeProps = {
@@ -88,31 +88,30 @@ function DifficultySelect({ props }){
                     )
                 })}
             </div>
-            <div className="timedModeDiv">
-                <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-                <span className="timedModeText" onClick={props.timedOrNot}>Timed mode (Optional)</span>
-            </div>
+            {props.gameMode !== "fifty-fifty mix" ? 
+                <div className="timedModeDiv">
+                    <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
+                    <span className="timedModeText" onClick={props.timedOrNot}>Timed mode (Optional)</span>
+                </div>
+            :
+                <p className="timedModeText">Timed mode only</p>
+            }
             <button onClick={props.leaveSelectedMenuMode} className={`${styles.buttons} ${styles.backButton}`}>Back</button>
         </>
     )
 }
 //// should be stored in an object, not here
 function CustomGame({ props }) {
-    if (props.gameMode === "classic"){
-        gameSettings.maxNumberOfPokemon = 30;
-    } else {
-        gameSettings.maxNumberOfPokemon = 99;
-    }
     return (
         <>
             <br />
             <br />
             <p className="ballSecondaryInstructions">
-                You can choose between {gameSettings.minNumberOfPokemon} and {gameSettings.maxNumberOfPokemon} different Pokémon to play with
+                You can choose between {GameModeSettings[props.gameMode].Custom.minCards} and {GameModeSettings[props.gameMode].Custom.maxCards} different Pokémon to play with
             </p>
             <form action="" onSubmit={props.customGameStart} className="ballFormDiv">
                 <div className={styles.inputAndButtonHolder}>
-                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, gameSettings.minNumberOfPokemon, gameSettings.maxNumberOfPokemon)} value={props.customInputValue} 
+                    <input type="number" className="gameLimitNumberInput" placeholder="#" onChange={(event) => numberInput(event.target, props.setcustomInputValue, GameModeSettings[props.gameMode].Custom.minCards, GameModeSettings[props.gameMode].Custom.maxCards)} value={props.customInputValue} 
                     onKeyDown={event => {
                         if (event.key === "."){
                             event.preventDefault();
@@ -120,12 +119,16 @@ function CustomGame({ props }) {
                     }}/>
                     <input type="submit" value={"Start game"} className="startGameButton" />
                 </div>
-                <div className="timedModeDiv">
-                    <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
-                    <span className="timedModeText" onClick={props.timedOrNot}>
-                        Timed mode (Optional)
-                    </span>
-                </div>
+                {props.gameMode !== "fifty-fifty mix" ? 
+                    <div className="timedModeDiv">
+                        <input type="checkbox" className="timedModeInput" onChange={props.timedOrNot} checked={props.timedCheckBoxTicked} />
+                        <span className="timedModeText" onClick={props.timedOrNot}>
+                            Timed mode (Optional)
+                        </span>
+                    </div>
+                :
+                    <p className="timedModeText">Timed mode only</p>
+                }
                 <button onClick={props.setInCustomGameMenuOrNot} className={styles.buttons}>Back</button>
             </form>
         </>

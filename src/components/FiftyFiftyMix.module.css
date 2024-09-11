@@ -1,0 +1,151 @@
+.mainGameBodyDiv {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    flex-direction: column;
+    /* scrollbar-gutter: stable; */
+
+    overflow-x: hidden;
+    overflow-y: visible;
+
+    box-sizing: border-box;
+    background-color: rgb(255,255,255,0);
+}
+
+.separatorDiv {
+    width: 100%;
+    height: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+}
+
+.card {
+    aspect-ratio: 1/1.3828125;
+    position: relative;
+    transform: rotateY(0deg);
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    margin: 0.55vh;
+    font-size: 2.2vh;
+}
+
+.front,
+.back,
+.frontFlipped,
+.backFlipped {
+    border-radius: 10px;
+    inset: 0;
+    position: absolute;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transition: 0.7s ease;
+    transform-origin: center;
+    padding-top: 3%;
+}
+
+.front {
+    background: white;
+    border: 0.22vh black solid;
+    border-radius: inherit;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotateY(0deg);
+    background-size: contain;
+}
+
+.back {
+    background-image: url(./images/pokemonCardBack.webp);
+    background-size: 100%;
+    transform: rotateY(180deg);
+}
+
+.frontFlipped {
+    transform: rotateY(180deg);
+}
+
+.backFlipped {
+    transform: rotateY(0deg);
+}
+
+@media only screen and (min-aspect-ratio: 1/1){
+    .card {
+        height: 35vh;
+        max-height: 55vh;
+    }
+    .mainGameBodyDiv {
+        justify-content: center;
+    }
+    .front:hover {
+        background-color: #3590F3;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+}
+
+/* For iphone XR + on 9/19.5 resolution*/
+/* the taller the screen, the more the sizes should be based on width, and vice versa */
+@media only screen and (max-aspect-ratio: 9/15){ 
+    .card {
+        --cardWidth: 40vw;
+        width: var(--cardWidth);
+
+    }
+    .front{
+        font-size: 3vw;
+    }
+}
+
+/* For iphone 8 and under on 9/16 resolution */
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1/1){
+    .card {
+        /* --cardWidth: 15vw; */
+        /* width: var(--cardWidth); */
+        height: 35vh;
+    }
+
+    .front {
+        font-size: 3vw;
+    }
+}
+
+.counterText {
+    font-weight: bold;
+}
+
+.cardsRemainingText {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin: 0;
+    font-size: 2vh;
+    color: white;
+}
+
+@media only screen and (min-aspect-ratio: 1){
+    .cardsRemainingText{
+        top: -4vh;
+        font-size: 3vh;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-aspect-ratio: 9/15){
+    .cardsRemainingText {
+        top: -3vh;
+    }
+}
+
+@media only screen and (min-aspect-ratio: 9/15) and (max-aspect-ratio: 1){
+    .cardsRemainingText {
+        top: -2.5vh;
+    }
+}

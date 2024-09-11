@@ -12,8 +12,8 @@ import HowToPlay from "./components/HowToPlay.jsx";
 import "./components/css_files/gameSystems.css";
 import ModeInstructions from "./components/ModeInstructions.jsx";
 import HighScoresComponent from "./components/HighScores.jsx";
-import { gameModeData } from "./components/GameModeData.js";
 import localStorageVersionControl from "./components/subcomponents/versionControl.js";
+import FooterCredits from "./components/FooterCredits.jsx";
 
 function App() {
     const [allGenPokemon, setFullPokemonData] = useState([]);
@@ -36,10 +36,10 @@ function App() {
     const [insideCustomGameMenu, setCustomGameMenuModeSelected] = useState(false); //// This is needed because if you start a game and go home, it doesn't go back to the custom game menu, but instead takes you back to the classic game mode selection screen
 
     const [displayHighScoresOpen, setDisplayHighScores] = useState(false);
-    function openAndCloseHighScores (){
+    function openAndCloseHighScores() {
         (!menuOpen || displayHighScoresOpen) && setDisplayHighScores(!displayHighScoresOpen);
-        (!menuOpen && !displayHighScoresOpen) && setMenuOpenState(!menuOpen);
-        (menuOpen && displayHighScoresOpen) && setMenuOpenState(!menuOpen);
+        !menuOpen && !displayHighScoresOpen && setMenuOpenState(!menuOpen);
+        menuOpen && displayHighScoresOpen && setMenuOpenState(!menuOpen);
     }
 
     //// These below are here to stop the generation selector and any other menu from being opened and looking really janky when you are in a particular menu. Just a little bit visually unpleasing, but if it doesn't open when you click it but you can see it it looks really weird too. Could consider just removing it when a menu is opened
@@ -48,18 +48,18 @@ function App() {
     //     setMenuOpenState(!menuOpen);
     // }
 
-    const [howToPlayOpen, setHowToPlayOpen]= useState(false);
-    function openAndCloseHowToPlay(){
+    const [howToPlayOpen, setHowToPlayOpen] = useState(false);
+    function openAndCloseHowToPlay() {
         (!menuOpen || howToPlayOpen) && setHowToPlayOpen(!howToPlayOpen);
-        (!menuOpen && !howToPlayOpen) && setMenuOpenState(!menuOpen);
-        (menuOpen && howToPlayOpen) && setMenuOpenState(!menuOpen);
+        !menuOpen && !howToPlayOpen && setMenuOpenState(!menuOpen);
+        menuOpen && howToPlayOpen && setMenuOpenState(!menuOpen);
     }
 
     const [instructionsOpened, setInstructionsState] = useState(false);
     function openAndCloseInstructions() {
         (!menuOpen || instructionsOpened) && setInstructionsState(!instructionsOpened);
-        (!menuOpen && !instructionsOpened) && setMenuOpenState(!menuOpen);
-        (menuOpen && instructionsOpened) && setMenuOpenState(!menuOpen);
+        !menuOpen && !instructionsOpened && setMenuOpenState(!menuOpen);
+        menuOpen && instructionsOpened && setMenuOpenState(!menuOpen);
     }
 
     useEffect(() => {
@@ -85,7 +85,7 @@ function App() {
         //// for the actual game mode to pass down to gameInitialization
         if (selectedButton.target.innerText === "Fifty-fifty") {
             //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
-            setGameModeAndDifficulty(`fiftyFifty${selectedButton.target.innerText}`);
+            setGameModeAndDifficulty(`fifty-fifty${selectedButton.target.innerText}`);
         } else {
             setGameModeAndDifficulty(`${gameMode}${selectedButton.target.innerText}`);
         }
@@ -97,7 +97,7 @@ function App() {
         //// For menu navigation purposes
         if (selectedButton.target.innerText === "Fifty-fifty") {
             //// Because of how it is displayed it wouldn't work otherwise how it is currently coded
-            setGameMode("fiftyFifty");
+            setGameMode("fifty-fifty");
         } else {
             setGameMode(selectedButton.target.innerText.toLowerCase());
         }
@@ -155,9 +155,9 @@ function App() {
         const playerCustomInput = document.querySelector(".gameLimitNumberInput");
         const playerCustomInputValue = playerCustomInput.value;
 
-        if (playerCustomInputValue > gameSettings.maxNumberOfPokemon || playerCustomInputValue < gameSettings.minNumberOfPokemon) {
+        if (playerCustomInputValue > GameModeSettings[gameMode].Custom.maxCards || playerCustomInputValue < GameModeSettings[gameMode].Custom.minCards) {
             //// Controlling the custom validity
-            playerCustomInput.setCustomValidity(`You must enter a number between ${gameSettings.minNumberOfPokemon} and ${gameSettings.maxNumberOfPokemon}`);
+            playerCustomInput.setCustomValidity(`You must enter a number between ${GameModeSettings[gameMode].Custom.minCards} and ${GameModeSettings[gameMode].Custom.maxCards}`);
             playerCustomInput.reportValidity();
         } else {
             setNumberOfPokemon(playerCustomInputValue * 1);
@@ -207,7 +207,7 @@ function App() {
                     {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
                     {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} />}
                     <button className="highScoresButton" onClick={openAndCloseHighScores}></button>
-                    {displayHighScoresOpen && <HighScoresComponent openAndCloseHighScores={openAndCloseHighScores}/>}
+                    {displayHighScoresOpen && <HighScoresComponent openAndCloseHighScores={openAndCloseHighScores} />}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
                         <div id="centerBallDiv">
@@ -216,8 +216,8 @@ function App() {
                                 <HomePageLoadingAnimation />
                             ) : (
                                 <>
-                                {/* These have to be here otherwise they will appear before the loading screen may have finished loading. All menu items/systems etc should be unless they're not affected (maybe like high scores) */}
-                                {/* menu open is put in Generation Select because it shouldn't function if another menu is open */}
+                                    {/* These have to be here otherwise they will appear before the loading screen may have finished loading. All menu items/systems etc should be unless they're not affected (maybe like high scores) */}
+                                    {/* menu open is put in Generation Select because it shouldn't function if another menu is open */}
                                     <GenerationSelect pokemonData={pokemonData} setPokemonGeneration={setPokemonGeneration} selectedGenForReturn={selectedGenForReturn} pokemonGenerations={gameSettings.pokemonGenerations} menuOpen={menuOpen} />
                                     {enteredModeSelect ? (
                                         <SelectGameMode props={selectGameModeProps} />
@@ -238,10 +238,11 @@ function App() {
                             )}
                         </div>
                     </div>
+                    <FooterCredits />
                 </>
             ) : (
                 <div id="gameBodyDiv">
-                        <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={timedCheckBoxTicked} gameModeAndDifficulty={gameModeAndDifficulty} gameModeAndDifficultyProps={gameModeAndDifficultyProps}/>
+                    <InitializeGame numberOfPokemon={numberOfPokemon} pokemonData={pokemonData} backToHomePage={backToHomePage} timed={gameMode === "fifty-fifty mix" ? true : timedCheckBoxTicked} gameModeAndDifficulty={gameModeAndDifficulty} gameModeAndDifficultyProps={gameModeAndDifficultyProps} />
                 </div>
             )}
         </>

@@ -300,3 +300,15 @@ numberinputlogic;
 // } else {
 //     setcustomInputValue(value);
 // }
+
+GameModes.jsx
+    // if (props.gameMode === "classic"){
+    //     gameSettings.minNumberOfPokemon = 6;
+    //     gameSettings.maxNumberOfPokemon = 30;
+    // } else if (props.gameMode === "fifty-fifty mix"){
+    //     gameSettings.minNumberOfPokemon = 30;
+    //     gameSettings.maxNumberOfPokemon = 99;
+    // } else {
+    //     gameSettings.minNumberOfPokemon = 6,
+    //     gameSettings.maxNumberOfPokemon = 99;
+    // }

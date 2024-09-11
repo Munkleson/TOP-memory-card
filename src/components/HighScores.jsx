@@ -4,20 +4,20 @@ import { gameModeData } from "./GameModeData";
 
 export default function DisplayHighScores({ openAndCloseHighScores }) {
     const [selected, setSelected] = useState("classic");
-    function setSelection(event){
+    function setSelection(event) {
         let text = event.target.innerText;
-        if (text === "Fifty-fifty"){
-            setSelected("fiftyFifty");
+        if (text === "Fifty-fifty") {
+            setSelected("fifty-fifty");
         } else {
             text = text.split("");
             text[0] = text[0].toLowerCase();
             text = text.join("");
-            setSelected(text)
+            setSelected(text);
         }
     }
     return (
         <div className={styles.overallContainer}>
-            <HighScoreHeader openAndCloseHighScores={openAndCloseHighScores} setSelection={setSelection} selected={selected}/>
+            <HighScoreHeader openAndCloseHighScores={openAndCloseHighScores} setSelection={setSelection} selected={selected} />
             <HighScoreContent selected={selected} />
         </div>
     );
@@ -25,13 +25,16 @@ export default function DisplayHighScores({ openAndCloseHighScores }) {
 
 function HighScoreHeader({ openAndCloseHighScores, setSelection, selected }) {
     return (
-    <div className={styles.header}>
-        <h2 className={styles.highScoreText}>High scores</h2>
-        {/* <div className={styles.otherHeaderDiv}> */}
-        <button className={styles.closeButton} onClick={openAndCloseHighScores}>Close</button>
-        <DropdownMenu setSelection={setSelection} selected={selected}/>
-        {/* </div>     */}
-    </div>);
+        <div className={styles.header}>
+            <h2 className={styles.highScoreText}>High scores</h2>
+            {/* <div className={styles.otherHeaderDiv}> */}
+            <button className={styles.closeButton} onClick={openAndCloseHighScores}>
+                Close
+            </button>
+            <DropdownMenu setSelection={setSelection} selected={selected} />
+            {/* </div>     */}
+        </div>
+    );
 }
 
 function HighScoreContent({ selected }) {
@@ -40,8 +43,14 @@ function HighScoreContent({ selected }) {
     const arrayOfDifficulties = Object.keys(gameMode);
     return (
         <div className={styles.contentContainer}>
-            <NotTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
-            <Timed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+            {selected === "fifty-fifty mix" ?
+                <FiftyFiftyMixTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+            :
+            <>
+              <NotTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+              <Timed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />          
+            </>
+            }
         </div>
     );
 }
@@ -52,8 +61,8 @@ function NotTimed({ arrayOfDifficulties, gameMode }) {
         <div className={styles.normalDiv}>
             <h3 className={styles.normalText}>Normal</h3>
             <div className={styles.innerNormalDiv}>
-                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode}/>
-                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={false}/>
+                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={false} />
             </div>
         </div>
     );
@@ -64,43 +73,46 @@ function Timed({ arrayOfDifficulties, gameMode }) {
         <div className={styles.timedDiv}>
             <h3 className={styles.timedText}>Timed</h3>
             <div className={styles.innerTimedDiv}>
-                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode}/>
-                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true}/>
+                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true} />
+            </div>
+        </div>
+    );
+}
+function FiftyFiftyMixTimed({ arrayOfDifficulties, gameMode }) {
+    return (
+        <div className={styles.timedDiv}>
+            <h3 className={styles.fiftyFiftyMixTimedText}>Timed</h3>
+            <div className={styles.innerTimedDiv}>
+                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true} />
             </div>
         </div>
     );
 }
 
-function DifficultyText({ arrayOfDifficulties }){
+function DifficultyText({ arrayOfDifficulties }) {
     return (
         <ul className={styles.difficultyDiv}>
             {arrayOfDifficulties.map((element) => {
-                return (
-                    <>
-                        {element !== "Custom" &&  <li className={styles.difficultyText}>{element}</li>}
-                    </>
-                )
+                return <>{element !== "Custom" && <li className={styles.difficultyText}>{element}</li>}</>;
             })}
         </ul>
-    )
+    );
 }
 
-function Scores({ arrayOfDifficulties, gameMode, timed }){
+function Scores({ arrayOfDifficulties, gameMode, timed }) {
     return (
         <ul className={styles.scoreDiv}>
             {arrayOfDifficulties.map((element) => {
-                return (
-                    <>
-                       {element !== "Custom" && <li className={styles.scoreText}>{gameMode[element][timed]}</li>}
-                    </>
-                )
+                return <>{element !== "Custom" && <li className={styles.scoreText}>{gameMode[element][timed]}</li>}</>;
             })}
         </ul>
-    )
+    );
 }
 
-function DropdownMenu({ setSelection, selected }){
-    const [dropdownMenuActive, setDropdownMenuActive]= useState(false);
+function DropdownMenu({ setSelection, selected }) {
+    const [dropdownMenuActive, setDropdownMenuActive] = useState(false);
     function activateDropdownMenu() {
         setDropdownMenuActive(!dropdownMenuActive);
     }
@@ -112,41 +124,41 @@ function DropdownMenu({ setSelection, selected }){
                 setDropdownMenuActive(false);
             }
         };
-        document.addEventListener("click", clickHandler)
+        document.addEventListener("click", clickHandler);
         return () => {
             document.removeEventListener("click", clickHandler);
-        }
-    }, [])
+        };
+    }, []);
 
     return (
-        <>  
+        <>
             <div className={styles.selectedHolder} onClick={activateDropdownMenu}>
                 <div className={styles.selectedMode}>
                     <span className={styles.selected}>{gameModeData[selected].name}</span>
-                    {dropdownMenuActive ? <div className={`${styles.caret} ${styles['caret-rotate']}`}></div> : <div className={styles.caret}></div>}
-                    {dropdownMenuActive && 
-                    <ul className={`${styles.modeMenu} ${styles.modeMenuOpen}`}>
-                        <DropdownList setSelection={setSelection} selected={selected}/>
-                    </ul>
-                }
+                    {dropdownMenuActive ? <div className={`${styles.caret} ${styles["caret-rotate"]}`}></div> : <div className={styles.caret}></div>}
+                    {dropdownMenuActive && (
+                        <ul className={`${styles.modeMenu} ${styles.modeMenuOpen}`}>
+                            <DropdownList setSelection={setSelection} selected={selected} />
+                        </ul>
+                    )}
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-function DropdownList({ setSelection, selected }){
+function DropdownList({ setSelection, selected }) {
     return (
         <>
-            {
-                Object.keys(gameModeData).map(element => {
-                    return (
-                        <>
-                            <li onClick={setSelection} className={(selected === element) && styles.activeSelection}>{gameModeData[element].name}</li>
-                        </>
-                    )
-                })
-            }
+            {Object.keys(gameModeData).map((element) => {
+                return (
+                    <>
+                        <li onClick={setSelection} className={selected === element && styles.activeSelection}>
+                            {gameModeData[element].name}
+                        </li>
+                    </>
+                );
+            })}
         </>
-    )
+    );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle } from "./subcomponents/gameModeFunctions";
+import { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle, fiftyFiftyMixShuffle } from "./subcomponents/gameModeFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
@@ -8,6 +8,7 @@ import { StandardGame } from "./StandardGameCardFunctions";
 import { FiftyFiftyGame } from "./FiftyFifty";
 import GameModeSettings from "./GameModeSettings";
 import { gameModeData } from "./GameModeData";
+import { FiftyFiftyMixGame } from "./FiftyFiftyMix";
 
 function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameModeAndDifficulty, gameModeAndDifficultyProps }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
@@ -25,6 +26,8 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     const [currentlyDisplayedCards, setCurrentlyDisplayedCards] = useState([]);
     const [cardsRemaining, setCardsRemaining] = useState(numberOfPokemon);
     const cardsRemainingInitialValue = numberOfPokemon;
+
+    const gameMode = gameModeAndDifficultyProps.gameMode;
 
     let maxNumberOfPokemonShown; //// Didn't really work when I used const
     if (gameModeAndDifficulty === "standardCustom") {
@@ -67,6 +70,21 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         };
     }, []);
 
+        //// Fiftyfifty mix states
+        const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(5);
+        const [fiftyFiftyMixBothFalse, setFiftyFiftyMixBothFalse] = useState(false); //// This is needed for the footer function to check if the timer running out should result in lost game or not
+        const fiftyFiftyMixProps = {
+            setCurrentlyDisplayedCards: setCurrentlyDisplayedCards,
+            fiftyFiftyMixShuffle: fiftyFiftyMixShuffle,
+            currentGamePokemon: currentGamePokemon,
+            maxNumberOfPokemonShown: maxNumberOfPokemonShown, 
+            clickedArray: clickedArray,
+            fiftyFiftyMixRngCounter: fiftyFiftyMixRngCounter,
+            setFiftyFiftyMixRngCounter: setFiftyFiftyMixRngCounter,
+            setFiftyFiftyMixBothFalse: setFiftyFiftyMixBothFalse,
+            fiftyFiftyMixBothFalse: fiftyFiftyMixBothFalse,
+        };
+
     // useEffect(() => {
     //     setMaxNumberOfPokemonShown(GameModeSettings[gameModeAndDifficulty.slice(8)].maxShown)
     // }, []);
@@ -103,10 +121,12 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                         if (updatedPoints !== numberOfPokemon) {
                             target.style.backgroundColor = ""; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
                             /////// Card shuffling logic
-                            if (gameModeAndDifficulty.includes("classic")) {
+                            if (gameMode === "classic") {
                                 setCurrentGamePokemon(classicGameShuffle(currentGamePokemon));
                             } else {
-                                if (gameModeAndDifficulty.includes("fiftyFifty")) {
+                                if (gameMode === "fifty-fifty mix") {
+                                    setCurrentlyDisplayedCards(fiftyFiftyMixShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id], fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter, setFiftyFiftyMixBothFalse));
+                                } else if(gameMode === "fifty-fifty"){
                                     setCurrentlyDisplayedCards(fiftyFiftyShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id]));
                                 } else {
                                     setCurrentlyDisplayedCards(standardGameShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id])); //// Clicked array has to be referenced like this, due to state setting being snapshots of when they were called. So in this case clickedArray would not be updated with the new id that was clicked to trigger this parent function
@@ -170,11 +190,12 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             <HeaderBar replayGame={replayGame} highScore={highScore} currentScore={currentScore} backToHomePage={backToHomePage} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />
             {gameOver && <EndingScreen gameResult={gameResult} replayGame={replayGame} />}
 
-            {gameModeAndDifficulty.includes("classic") && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} />}
-            {gameModeAndDifficulty.includes("standard") && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
-            {gameModeAndDifficulty.includes("fiftyFifty") && <FiftyFiftyGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
+            {gameMode === "classic" && <ClassicGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} />}
+            {gameMode === "standard" && <StandardGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
+            {gameMode === "fifty-fifty" && <FiftyFiftyGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
+            {gameMode === "fifty-fifty mix" && <FiftyFiftyMixGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
 
-            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps}/>
+            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} fiftyFiftyMixProps={fiftyFiftyMixProps}/>
         </>
     );
 }

@@ -47,22 +47,22 @@ export default {
             maxCards: 99,
         }
     },
-    fiftyFifty: {
-        timer: 3500,
+    "fifty-fifty": {
+        timer: 3000,
         Easy: {
-            numberOfCards: 6,
+            numberOfCards: 10,
             maxShown: 2,
         },
         Medium: {
-            numberOfCards: 12,
+            numberOfCards: 18,
             maxShown: 2,
         },
         Hard: {
-            numberOfCards: 20,
+            numberOfCards: 28,
             maxShown: 2,
         },
         Insane: {
-            numberOfCards: 30,
+            numberOfCards: 45,
             maxShown: 2,
         },
         Nightmare: {
@@ -74,7 +74,26 @@ export default {
             minCards: 6,
             maxCards: 99,
         }
+    },
+    "fifty-fifty mix": {
+        timer: 3000,
+        Hard: {
+            numberOfCards: 30,
+            maxShown: 2,
+        },
+        Insane: {
+            numberOfCards: 45,
+            maxShown: 2,
+        },
+        Nightmare: {
+            numberOfCards: 99,
+            maxShown: 2,
+        },
+        Custom: {
+            maxShown: 2,
+            minCards: 30,
+            maxCards: 99,
+        }
     }
-
 }
 

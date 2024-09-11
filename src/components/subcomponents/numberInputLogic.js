@@ -5,7 +5,6 @@ function numberInput(target, setcustomInputValue, minNumberOfPokemon, maxNumberO
     const valueToString = target.value;
     input.setCustomValidity("");
     const invalidMessage = `You must enter a number between ${minNumberOfPokemon} and ${maxNumberOfPokemon}`;
-    console.log(typeof target.value)
 
     if ((value < minNumberOfPokemon)){
         if (value.ToString !== "" && value !== 0){
