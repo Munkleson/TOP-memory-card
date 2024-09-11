@@ -34,12 +34,13 @@ function SelectGameMode({ props }) {
 }
 
 function ModeSelectDisplay({ props }) {
+    console.log(props)
     return (
         <>
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
             <div className={styles.modesContainer}>
                 {Object.keys(gameModeData).map((element, index) => {
-                    return <button className={styles.buttons} onClick={props.setGameModeFunction} key={index}>
+                    return <button className={styles.buttons} onClick={props.setGameModeFunction} key={index} style={{padding: element === "fifty-fifty mix" && "0px"}}>
                         {gameModeData[element].name}
                     </button> 
                 })}

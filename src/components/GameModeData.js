@@ -61,8 +61,8 @@ gameModeData["fifty-fifty"].instructions = [
 gameModeData["fifty-fifty mix"].instructions = [
     '* This mode is timed only',
     "• In this game mode, two cards out of all of the cards in the current round will be displayed at a time",
-    `• Like standard "Fifty-fifty" mode, once a card is ${gameSettings.mobileOrNot ? "tapped" : "clicked"}, the deck will shuffle and show you one card that has been ${gameSettings.mobileOrNot ? "tapped" : "clicked"} already and one card that not been ${gameSettings.mobileOrNot ? "tapped" : "clicked"} before`,
-    `• However, in "Fifty-fifty mix", the two cards displayed may both be cards that you have clicked before. In this case, you will have to let the timer expire, at which point the cards will shuffle again and a new pair will be displayed. This mechanic may happen randomly at any time`,
+    `• Like standard "Fifty-fifty" mode, once a card is ${gameSettings.mobileOrNot ? "tapped" : "clicked"}, the deck will shuffle and show you one card that has been ${gameSettings.mobileOrNot ? "tapped" : "clicked"} already and one card that has not been ${gameSettings.mobileOrNot ? "tapped" : "clicked"} before`,
+    `• However, in "Fifty-fifty mix", the two cards displayed may both be cards that you have ${gameSettings.mobileOrNot ? "tapped" : "clicked"} before. In this case, you will have to let the timer expire, at which point the cards will shuffle again and a new pair will be displayed. This mechanic may happen randomly at any time`,
     "• The total number of cards per round will depend on the difficulty level. The settings are as follows:",  
     `    - ${gameModeData["fifty-fifty mix"].difficulties[0]}: ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[0]].numberOfCards} cards`, 
     `    - ${gameModeData["fifty-fifty mix"].difficulties[1]}: ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[1]].numberOfCards} cards`, 
