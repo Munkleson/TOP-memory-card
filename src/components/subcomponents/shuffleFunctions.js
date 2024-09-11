@@ -1,3 +1,5 @@
+import { gameSettings } from "../../gameSettingsVariables";
+
 function whichPokemon(arrayOfPokemon, howManyPokemon) {
     const amountOfPokemon = arrayOfPokemon.length;
     const indexArray = [];
@@ -107,7 +109,7 @@ function fiftyFiftyMixShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray, 
                     shuffledArray.push(arrayOfPokemon[index]);
                 }
             }
-            setFiftyFiftyMixRngCounter(5);
+            setFiftyFiftyMixRngCounter(gameSettings.rngCounterInitial);
             setFiftyFiftyMixBothFalse(true);
         } else {
             //// For when it is just a normal fifty-fifty hand
@@ -144,7 +146,7 @@ function fiftyFiftyMixShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray, 
                     }
                 }
             }
-            setFiftyFiftyMixRngCounter((fiftyFiftyMixRngCounter) => fiftyFiftyMixRngCounter - 0.5);
+            setFiftyFiftyMixRngCounter((fiftyFiftyMixRngCounter) => fiftyFiftyMixRngCounter - gameSettings.rngCounterReducing);
         }
     }
     shuffleFunction();

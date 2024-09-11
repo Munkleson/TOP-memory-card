@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle, fiftyFiftyMixShuffle } from "./subcomponents/gameModeFunctions";
+import { whichPokemon, classicGameShuffle, standardGameShuffle, fiftyFiftyShuffle, fiftyFiftyMixShuffle } from "./subcomponents/shuffleFunctions";
 import { storeInLocalStorage, getHighScore } from "./subcomponents/pointScoring";
 import { HeaderBar, FooterBar } from "./headerFooterBars";
 import { EndingScreen } from "./gameEnd";
@@ -9,6 +9,7 @@ import { FiftyFiftyGame } from "./FiftyFifty";
 import GameModeSettings from "./GameModeSettings";
 import { gameModeData } from "./GameModeData";
 import { FiftyFiftyMixGame } from "./FiftyFiftyMix";
+import { gameSettings } from "../gameSettingsVariables";
 
 function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, gameModeAndDifficulty, gameModeAndDifficultyProps }) {
     const [currentGamePokemon, setCurrentGamePokemon] = useState(whichPokemon(pokemonData, numberOfPokemon));
@@ -72,7 +73,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     currentlyDisplayedCards;
 
     //// Fiftyfifty mix states
-    const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(5);
+    const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(gameSettings.rngCounterInitial);
     const [fiftyFiftyMixBothFalse, setFiftyFiftyMixBothFalse] = useState(false); //// This is needed for the footer function to check if the timer running out should result in lost game or not
     const fiftyFiftyMixProps = {
         setCurrentlyDisplayedCards: setCurrentlyDisplayedCards,
@@ -159,6 +160,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setCardClickedCheckFunction();
         setCardsRemaining(numberOfPokemon);
         setFiftyFiftyMixBothFalse(false);
+        setFiftyFiftyMixRngCounter(gameSettings.rngCounterInitial);
     }
 
     function gameOverFunction(id) {
@@ -168,7 +170,6 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setFlippingStatus(false);
         setGameActive(false);
         setCardClickedCheckFunction();
-        setFiftyFiftyMixBothFalse(false);
     }
 
     function victoryFunction(id) {
@@ -178,7 +179,6 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setFlippingStatus(false);
         setGameActive(false);
         setCardClickedCheckFunction();
-        setFiftyFiftyMixBothFalse(false);
     }
 
     function setCardClickedCheckFunction() {
