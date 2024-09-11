@@ -69,7 +69,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             document.removeEventListener("touchmove", touchMoveFunction);
         };
     }, []);
-    console.log(currentlyDisplayedCards)
+    currentlyDisplayedCards;
 
     //// Fiftyfifty mix states
     const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(5);
@@ -87,7 +87,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
     };
 
     function cardClick(id, target) {
-        console.log(id);
+        id;
         if (allowedToClick) {
             /// Remove this if I want people to be able to spam click/autoclickers
             if (!gameOver) {
@@ -196,7 +196,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             {gameMode === "fifty-fifty" && <FiftyFiftyGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
             {gameMode === "fifty-fifty mix" && <FiftyFiftyMixGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
 
-            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} fiftyFiftyMixProps={fiftyFiftyMixProps} setFlippingStatus={setFlippingStatus}/>
+            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} fiftyFiftyMixProps={fiftyFiftyMixProps} setFlippingStatus={setFlippingStatus} />
         </>
     );
 }

@@ -27,12 +27,10 @@ function HighScoreHeader({ openAndCloseHighScores, setSelection, selected }) {
     return (
         <div className={styles.header}>
             <h2 className={styles.highScoreText}>High scores</h2>
-            {/* <div className={styles.otherHeaderDiv}> */}
             <button className={styles.closeButton} onClick={openAndCloseHighScores}>
                 Close
             </button>
             <DropdownMenu setSelection={setSelection} selected={selected} />
-            {/* </div>     */}
         </div>
     );
 }
@@ -43,14 +41,14 @@ function HighScoreContent({ selected }) {
     const arrayOfDifficulties = Object.keys(gameMode);
     return (
         <div className={styles.contentContainer}>
-            {selected === "fifty-fifty mix" ?
-                <FiftyFiftyMixTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} selected={selected}/>
-            :
-            <>
-              <NotTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
-              <Timed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />          
-            </>
-            }
+            {selected === "fifty-fifty mix" ? (
+                <FiftyFiftyMixTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} selected={selected} />
+            ) : (
+                <>
+                    <NotTimed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+                    <Timed arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
+                </>
+            )}
         </div>
     );
 }
@@ -61,7 +59,7 @@ function NotTimed({ arrayOfDifficulties, gameMode }) {
         <div className={styles.normalDiv}>
             <h3 className={styles.normalText}>Normal</h3>
             <div className={styles.innerNormalDiv}>
-                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode}  />
+                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
                 <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={false} />
             </div>
         </div>
@@ -73,7 +71,7 @@ function Timed({ arrayOfDifficulties, gameMode }) {
         <div className={styles.timedDiv}>
             <h3 className={styles.timedText}>Timed</h3>
             <div className={styles.innerTimedDiv}>
-                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode}  />
+                <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} />
                 <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true} />
             </div>
         </div>
@@ -85,16 +83,16 @@ function FiftyFiftyMixTimed({ arrayOfDifficulties, gameMode, selected }) {
             <h3 className={styles.fiftyFiftyMixTimedText}>Timed</h3>
             <div className={styles.innerTimedDiv}>
                 <DifficultyText arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} selected={selected} />
-                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true} selected={selected}/>
+                <Scores arrayOfDifficulties={arrayOfDifficulties} gameMode={gameMode} timed={true} selected={selected} />
             </div>
         </div>
     );
 }
 
 function DifficultyText({ arrayOfDifficulties, gameMode, selected }) {
-    console.log(gameMode)
+    gameMode;
     return (
-        <ul className={styles.difficultyDiv} style={{padding: selected === 'fifty-fifty mix' && "0px"}}>
+        <ul className={styles.difficultyDiv} style={{ padding: selected === "fifty-fifty mix" && "0px" }}>
             {arrayOfDifficulties.map((element) => {
                 return <>{element !== "Custom" && <li className={styles.difficultyText}>{element}</li>}</>;
             })}
@@ -106,7 +104,15 @@ function Scores({ arrayOfDifficulties, gameMode, timed, selected }) {
     return (
         <ul className={styles.scoreDiv}>
             {arrayOfDifficulties.map((element) => {
-                return <>{element !== "Custom" && <li className={styles.scoreText} style={{textAlign: selected === 'fifty-fifty mix' && "right"}}>{gameMode[element][timed]}</li>}</>;
+                return (
+                    <>
+                        {element !== "Custom" && (
+                            <li className={styles.scoreText} style={{ textAlign: selected === "fifty-fifty mix" && "right" }}>
+                                {gameMode[element][timed]}
+                            </li>
+                        )}
+                    </>
+                );
             })}
         </ul>
     );
