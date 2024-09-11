@@ -28,19 +28,19 @@ function HeaderBar({ backToHomePage, replayGame, highScore, currentScore}) {
     );
 }
 
-function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps, fiftyFiftyMixProps }) {
+function FooterBar({ timed, gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps, fiftyFiftyMixProps, setFlippingStatus }) {
     return (
         <>
             {timed && (
                 <div className="footerBar" style={{ backgroundColor: "rgb(255, 255, 255, 0)" }}>
-                    <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} ffProps={fiftyFiftyMixProps}/>
+                    <TimerBar gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} ffProps={fiftyFiftyMixProps} setFlippingStatus={setFlippingStatus}/>
                 </div>
             )}
         </>
     );
 }
 
-function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps, ffProps }) {
+function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClickedCheckFunction, gameOver, gameModeAndDifficultyProps, ffProps, setFlippingStatus }) {
     const [timerBarSizeElement, setTimerBarSizeElement] = useState(0);
     const [timerBarActive, setTimerBarState] = useState(false);
     const [viewWidth, setViewWidth] = useState(window.innerWidth);
@@ -85,16 +85,21 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
                     setTimerBarSizeElement(0);
                     gameOverFunction();
                 } else {
+                    setFlippingStatus(true);
                     setCardClickedCheckFunction();
                     setTimerBarSizeElement(0);
                     timeWhenTimerStarted = Date.now();
-                    ffProps.setCurrentlyDisplayedCards(ffProps.fiftyFiftyMixShuffle(ffProps.currentGamePokemon, ffProps.maxNumberOfPokemonShown, [...ffProps.clickedArray], ffProps.fiftyFiftyMixRngCounter, ffProps.setFiftyFiftyMixRngCounter, ffProps.setFiftyFiftyMixBothFalse));
-                    ffProps.setFiftyFiftyMixBothFalse(false);
+                    setTimeout(() => {
+                        ffProps.setCurrentlyDisplayedCards(ffProps.fiftyFiftyMixShuffle(ffProps.currentGamePokemon, ffProps.maxNumberOfPokemonShown, [...ffProps.clickedArray], ffProps.fiftyFiftyMixRngCounter, ffProps.setFiftyFiftyMixRngCounter, ffProps.setFiftyFiftyMixBothFalse));
+                        setTimeout(() => {
+                            setFlippingStatus(false);                        
+                        }, 100);
+                    }, 700);
                 }
             }
         }, 10);
         return () => clearInterval(interval);
-    }, [timerBarActive, marginAmount, viewWidth, gameOverFunction, ffProps, setCardClickedCheckFunction]);
+    }, [timerBarActive, marginAmount, viewWidth, gameOverFunction, ffProps, setCardClickedCheckFunction, setFlippingStatus]);
 
     useEffect(() => {
         //// edge case for if someone makes the window smaller. There is a potential issue in that it would trigger another setTimeout though

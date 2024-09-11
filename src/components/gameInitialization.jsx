@@ -69,27 +69,25 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             document.removeEventListener("touchmove", touchMoveFunction);
         };
     }, []);
+    console.log(currentlyDisplayedCards)
 
-        //// Fiftyfifty mix states
-        const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(5);
-        const [fiftyFiftyMixBothFalse, setFiftyFiftyMixBothFalse] = useState(false); //// This is needed for the footer function to check if the timer running out should result in lost game or not
-        const fiftyFiftyMixProps = {
-            setCurrentlyDisplayedCards: setCurrentlyDisplayedCards,
-            fiftyFiftyMixShuffle: fiftyFiftyMixShuffle,
-            currentGamePokemon: currentGamePokemon,
-            maxNumberOfPokemonShown: maxNumberOfPokemonShown, 
-            clickedArray: clickedArray,
-            fiftyFiftyMixRngCounter: fiftyFiftyMixRngCounter,
-            setFiftyFiftyMixRngCounter: setFiftyFiftyMixRngCounter,
-            setFiftyFiftyMixBothFalse: setFiftyFiftyMixBothFalse,
-            fiftyFiftyMixBothFalse: fiftyFiftyMixBothFalse,
-        };
-
-    // useEffect(() => {
-    //     setMaxNumberOfPokemonShown(GameModeSettings[gameModeAndDifficulty.slice(8)].maxShown)
-    // }, []);
+    //// Fiftyfifty mix states
+    const [fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter] = useState(5);
+    const [fiftyFiftyMixBothFalse, setFiftyFiftyMixBothFalse] = useState(false); //// This is needed for the footer function to check if the timer running out should result in lost game or not
+    const fiftyFiftyMixProps = {
+        setCurrentlyDisplayedCards: setCurrentlyDisplayedCards,
+        fiftyFiftyMixShuffle: fiftyFiftyMixShuffle,
+        currentGamePokemon: currentGamePokemon,
+        maxNumberOfPokemonShown: maxNumberOfPokemonShown,
+        clickedArray: clickedArray,
+        fiftyFiftyMixRngCounter: fiftyFiftyMixRngCounter,
+        setFiftyFiftyMixRngCounter: setFiftyFiftyMixRngCounter,
+        setFiftyFiftyMixBothFalse: setFiftyFiftyMixBothFalse,
+        fiftyFiftyMixBothFalse: fiftyFiftyMixBothFalse,
+    };
 
     function cardClick(id, target) {
+        console.log(id);
         if (allowedToClick) {
             /// Remove this if I want people to be able to spam click/autoclickers
             if (!gameOver) {
@@ -126,7 +124,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
                             } else {
                                 if (gameMode === "fifty-fifty mix") {
                                     setCurrentlyDisplayedCards(fiftyFiftyMixShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id], fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter, setFiftyFiftyMixBothFalse));
-                                } else if(gameMode === "fifty-fifty"){
+                                } else if (gameMode === "fifty-fifty") {
                                     setCurrentlyDisplayedCards(fiftyFiftyShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id]));
                                 } else {
                                     setCurrentlyDisplayedCards(standardGameShuffle(currentGamePokemon, maxNumberOfPokemonShown, [...clickedArray, id])); //// Clicked array has to be referenced like this, due to state setting being snapshots of when they were called. So in this case clickedArray would not be updated with the new id that was clicked to trigger this parent function
@@ -160,6 +158,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setClickAllowance(true); /// Remove this if I want people to be able to spam click/autoclickers
         setCardClickedCheckFunction();
         setCardsRemaining(numberOfPokemon);
+        setFiftyFiftyMixBothFalse(false);
     }
 
     function gameOverFunction(id) {
@@ -169,6 +168,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setFlippingStatus(false);
         setGameActive(false);
         setCardClickedCheckFunction();
+        setFiftyFiftyMixBothFalse(false);
     }
 
     function victoryFunction(id) {
@@ -178,6 +178,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
         setFlippingStatus(false);
         setGameActive(false);
         setCardClickedCheckFunction();
+        setFiftyFiftyMixBothFalse(false);
     }
 
     function setCardClickedCheckFunction() {
@@ -195,7 +196,7 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             {gameMode === "fifty-fifty" && <FiftyFiftyGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
             {gameMode === "fifty-fifty mix" && <FiftyFiftyMixGame currentGamePokemon={currentGamePokemon} cardClick={cardClick} finalCard={finalCard} gameResult={gameResult} numberOfPokemon={numberOfPokemon} currentlyFlipping={currentlyFlipping} gameModeAndDifficulty={gameModeAndDifficulty} currentlyDisplayedCards={currentlyDisplayedCards} maxNumberOfPokemonShown={maxNumberOfPokemonShown} cardsRemaining={cardsRemaining} cardsRemainingInitialValue={cardsRemainingInitialValue} />}
 
-            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} fiftyFiftyMixProps={fiftyFiftyMixProps}/>
+            <FooterBar timed={timed} gameOverFunction={gameOverFunction} gameActive={gameActive} cardClickedCheck={cardClickedCheck} setCardClickedCheckFunction={setCardClickedCheckFunction} gameOver={gameOver} gameModeAndDifficultyProps={gameModeAndDifficultyProps} fiftyFiftyMixProps={fiftyFiftyMixProps} setFlippingStatus={setFlippingStatus}/>
         </>
     );
 }

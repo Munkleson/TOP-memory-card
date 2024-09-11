@@ -86,10 +86,10 @@ function fiftyFiftyShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray){
 }
 
 function fiftyFiftyMixShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray, fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter, setFiftyFiftyMixBothFalse){
+    console.log(clickedArray)
     const tempArray = [...arrayOfPokemon];
     const shuffledArray = [];
     let randomClickedId = 0;
-
     function shuffleFunction(){ //// function used so I can utilise closures to make a pseudo-rng generator
         if (Math.floor(Math.random() * fiftyFiftyMixRngCounter) === 0 && clickedArray.length > 2){ //// For when it contains two cards that have been clicked before
             const firstRandomIndex = Math.floor(Math.random() * clickedArray.length);
@@ -109,6 +109,7 @@ function fiftyFiftyMixShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray, 
             setFiftyFiftyMixRngCounter(5);
             setFiftyFiftyMixBothFalse(true);
         } else { //// For when it is just a normal fifty-fifty hand
+            setFiftyFiftyMixBothFalse(false);
             if (clickedArray.length !== 1){
                 randomClickedId = Math.floor(Math.random() * clickedArray.length);
             }
