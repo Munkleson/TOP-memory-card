@@ -47,6 +47,17 @@ function standardGameShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
 }
 
 function fiftyFiftyShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
+    //// for testing
+    // const clickedNames = [];
+    // arrayOfPokemon.forEach(pokemon => {
+    //     for (const id of clickedArray) {
+    //         if (pokemon.id === id){
+    //             clickedNames.push(pokemon.name)
+    //         }
+    //     }
+    // })
+    // console.log(clickedNames)
+
     const tempArray = [...arrayOfPokemon];
     const shuffledArray = [];
     let randomClickedId = 0;
@@ -87,7 +98,17 @@ function fiftyFiftyShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray) {
 }
 
 function fiftyFiftyMixShuffle(arrayOfPokemon, maxNumberOfPokemon, clickedArray, fiftyFiftyMixRngCounter, setFiftyFiftyMixRngCounter, setFiftyFiftyMixBothFalse) {
-    clickedArray;
+    //// for testing
+    // const clickedNames = [];
+    // arrayOfPokemon.forEach(pokemon => {
+    //     for (const id of clickedArray) {
+    //         if (pokemon.id === id){
+    //             clickedNames.push(pokemon.name)
+    //         }
+    //     }
+    // })
+    // console.log(clickedNames)
+
     const tempArray = [...arrayOfPokemon];
     const shuffledArray = [];
     let randomClickedId = 0;

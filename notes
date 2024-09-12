@@ -39,6 +39,7 @@ Things to do (in priority): From 8/31 onwards
 
 **** NEED TO MAKE SURE THAT NO SCROLLING IS NOT DISABLED WHEN THE MODE INSTRUCTIONS MENU IS OPEN
 
+-   Think about whether or not I want a random number generator for the setting rng counter of ff mix, so it's even more variable. I need to not make back to backs happen too often though, but not too rarely as well. Maybe the current value of 8 could be random between 7 and 9 instead, and maybe the reducer could be random too.
 -   Make the generation select screen bigger for mobile
 -   Music
 -   Get Lin to help with the dropdown menu styling

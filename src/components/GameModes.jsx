@@ -34,7 +34,6 @@ function SelectGameMode({ props }) {
 }
 
 function ModeSelectDisplay({ props }) {
-    console.log(props)
     return (
         <>
             <p className={styles.whichGameModeText}>Which game mode would you like to play?</p>
