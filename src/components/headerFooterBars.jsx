@@ -48,7 +48,7 @@ function TimerBar({ gameOverFunction, gameActive, cardClickedCheck, setCardClick
     const [isGameActive, setGameActiveState] = useState(gameActive);
     
     //// Timer retrieved and set below
-    const marginAmount = (timerBarSizeElement / GameModeSettings[gameModeAndDifficultyProps.gameMode].timer) * viewWidth;
+    const marginAmount = (timerBarSizeElement / (GameModeSettings[gameModeAndDifficultyProps.gameMode].timer * 1000)) * viewWidth;
 
     if (gameActive && !isGameActive) {
         setTimerBarState(true);

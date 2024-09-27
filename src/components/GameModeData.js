@@ -55,7 +55,7 @@ gameModeData["fifty-fifty"].instructions = [
     `    - ${gameModeData["fifty-fifty"].difficulties[3]}: ${GameModeSettings["fifty-fifty"][gameModeData["fifty-fifty"].difficulties[3]].numberOfCards} cards`, 
     `    - ${gameModeData["fifty-fifty"].difficulties[4]}: ${GameModeSettings["fifty-fifty"][gameModeData["fifty-fifty"].difficulties[4]].numberOfCards} cards`, 
     `    - ${gameModeData["fifty-fifty"].difficulties[5]}: You may choose a number from ${GameModeSettings["fifty-fifty"][gameModeData["fifty-fifty"].difficulties[5]].minCards} to ${GameModeSettings["fifty-fifty"][gameModeData["fifty-fifty"].difficulties[5]].maxCards} cards`,  
-    `• Timed mode duration: ${GameModeSettings["fifty-fifty"].timer/1000} seconds`,
+    `• Timed mode duration: ${GameModeSettings["fifty-fifty"].timer} seconds`,
 ]
 
 gameModeData["fifty-fifty mix"].instructions = [
@@ -68,7 +68,7 @@ gameModeData["fifty-fifty mix"].instructions = [
     `    - ${gameModeData["fifty-fifty mix"].difficulties[1]}: ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[1]].numberOfCards} cards`, 
     `    - ${gameModeData["fifty-fifty mix"].difficulties[2]}: ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[2]].numberOfCards} cards`, 
     `    - ${gameModeData["fifty-fifty mix"].difficulties[3]}: You may choose a number from ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[3]].minCards} to ${GameModeSettings["fifty-fifty mix"][gameModeData["fifty-fifty mix"].difficulties[3]].maxCards} cards`,  
-    `• Timed mode duration: ${GameModeSettings["fifty-fifty mix"].timer/1000} seconds`,
+    `• Timed mode duration: ${GameModeSettings["fifty-fifty mix"].timer} seconds`,
 ]
 
 export { gameModeData };

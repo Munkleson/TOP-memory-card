@@ -49,7 +49,7 @@ function ModeSelectDisplay({ props }) {
             </button>
             <button className={styles.instructionsButton} onClick={() => {
                 props.openAndCloseInstructions();
-            }}>?</button>
+            }} title="Instructions">?</button>
         </>
     );
 }

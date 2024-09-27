@@ -93,10 +93,10 @@ function InitializeGame({ numberOfPokemon, pokemonData, backToHomePage, timed, g
             /// Remove this if I want people to be able to spam click/autoclickers
             if (!gameOver) {
                 target.style.backgroundColor = "#3590F3"; //// This couldn't be just set to hover because hover function interacts weirdly with mobile, and I wanted a bit of indication of what card you chose on mobile
-                //// checks if the same pokemon has been clicked already
-                setGameActive(true);
+                setGameActive(true); //// Needed for the timed bar
                 setCardClickedCheck(true);
                 setClickAllowance(false);
+                //// checks if the same pokemon has been clicked already
                 if (!clickedArray.includes(id)) {
                     setClickedArray([...clickedArray, id]);
                     const updatedPoints = currentScore + 1;

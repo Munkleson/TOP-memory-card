@@ -1,7 +1,7 @@
 import { gameSettings } from "../../gameSettingsVariables";
 
-function whichPokemon(arrayOfPokemon, howManyPokemon) {
-    const amountOfPokemon = arrayOfPokemon.length;
+function whichPokemon(selectedGeneration, howManyPokemon) {
+    const amountOfPokemon = selectedGeneration.length;
     const indexArray = [];
 
     while (indexArray.length < howManyPokemon) {
@@ -10,7 +10,7 @@ function whichPokemon(arrayOfPokemon, howManyPokemon) {
             indexArray.push(randomNumber);
         }
     }
-    return indexArray.map((index) => arrayOfPokemon[index]);
+    return indexArray.map((index) => selectedGeneration[index]);
 }
 
 function classicGameShuffle(arrayOfPokemon) {

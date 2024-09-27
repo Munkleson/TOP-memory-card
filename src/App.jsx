@@ -206,7 +206,7 @@ function App() {
                     {/* How to Play and Mode Instructions is set here so the touch move on mobile disabling scrolling doesn't affect it */}
                     {howToPlayOpen && <HowToPlay openAndCloseHowToPlay={openAndCloseHowToPlay} />}
                     {instructionsOpened && <ModeInstructions openAndCloseInstructions={openAndCloseInstructions} />}
-                    <button className="highScoresButton" onClick={openAndCloseHighScores}></button>
+                    <button className="highScoresButton" onClick={openAndCloseHighScores} title="High scores"></button>
                     {displayHighScoresOpen && <HighScoresComponent openAndCloseHighScores={openAndCloseHighScores} />}
                     <div id="wholeBodyDiv">
                         <div className="pokemonLogo"></div>
